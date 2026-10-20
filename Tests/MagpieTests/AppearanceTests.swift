@@ -517,11 +517,24 @@ final class StatusIconTests: XCTestCase {
     }
 
     /// Nothing may be drawn outside the canvas: AppKit clips it, which is how a
-    /// mark silently loses an edge.
-    func testBothCardsSitInsideTheCanvas() {
+    /// mark silently loses an edge. Leaning in included.
+    func testTheMagpieSitsInsideTheCanvas() {
         let canvas = NSRect(x: 0, y: 0, width: StatusIcon.side, height: StatusIcon.side)
-        XCTAssertTrue(canvas.contains(StatusIcon.frontCard), "front card is clipped")
-        XCTAssertTrue(canvas.contains(StatusIcon.backCard), "back card is clipped")
+        for dropping in [false, true] {
+            let ink = StatusIcon.inkBounds(dropping: dropping)
+            XCTAssertTrue(canvas.insetBy(dx: -0.25, dy: -0.25).contains(ink),
+                          "the magpie is clipped by the menu-bar canvas (dropping: \(dropping)): \(ink)")
+        }
+    }
+
+    /// The bird's white is a hole the bar shows through, as the paper does on
+    /// the shelf: the eye at least must read at 18 points.
+    func testTheEyeIsOpenOnTheBar() throws {
+        let rep = try pixels(StatusIcon.image(dropping: false, awake: false))
+        let scale = CGFloat(rep.pixelsWide) / StatusIcon.side
+        let eye = MascotDrawing.eyeCenter.applying(StatusIcon.transform(lean: 0))
+        let alpha = rep.colorAt(x: Int(eye.x * scale), y: Int(eye.y * scale))?.alphaComponent ?? 1
+        XCTAssertLessThan(alpha, 0.5, "the magpie's eye is filled in; at menu-bar size it reads as a blob")
     }
 }
 

@@ -61,11 +61,8 @@ if [ -d "Sources/${BIN_NAME}/Resources" ]; then
   cp -R "Sources/${BIN_NAME}/Resources/." "${APP_DIR}/Contents/Resources/" 2>/dev/null || true
 fi
 
-if [ ! -f "Sources/${BIN_NAME}/Resources/AppIcon.icns" ]; then
-  ICONSET_TMP="$(mktemp -d)/AppIcon.iconset"
-  swift scripts/make-icon.swift "${ICONSET_TMP}"
-  iconutil -c icns -o "${APP_DIR}/Contents/Resources/AppIcon.icns" "${ICONSET_TMP}"
-  rm -rf "${ICONSET_TMP%/*}"
+if [ ! -f "Sources/${BIN_NAME}/Resources/Assets.car" ]; then
+  scripts/make-icon.sh "${APP_DIR}/Contents/Resources"
 fi
 
 SPARKLE_FRAMEWORK_SRC=".build/artifacts/sparkle/Sparkle/Sparkle.xcframework/macos-arm64_x86_64/Sparkle.framework"

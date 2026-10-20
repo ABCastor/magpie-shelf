@@ -1,84 +1,98 @@
 import AppKit
 
-/// The menu-bar mark.
+/// The menu-bar mark: the magpie alone, in one colour.
 ///
-/// This is the only part of Magpie that is on screen all the time, so it is
-/// the app's whole visual identity — and for most of a session it is the *only*
-/// evidence the app exists. A real screenshot of the running app showed the
-/// incumbent glyph (a rounded-square outline with a 4pt pip parked in the
-/// corner) resolving to a featureless dot, indistinguishable from any other
-/// small status item on the bar.
-///
-/// The replacement is two offset cards: literally what the shelf shows when it
-/// holds something, and a silhouette that survives being 18 points wide. A
-/// filled front card reads at menu-bar size where a thin stroke does not; the
-/// back card is stroked, and a cleared gap between them keeps the two shapes
-/// legible as two rather than merging into one blob.
+/// It is the app's only permanent presence, so it is the same bird that
+/// stands on the shelves, drawn the way macOS draws menu-bar icons: a template
+/// image, ink where the bird is black and holes where it is white (belly, wing
+/// patch, eye), so the bar's own colour shows through as the paper does on
+/// the shelf. AppKit recolours it for the bar's appearance, the menu-open
+/// highlight and Increase Contrast.
 ///
 /// Drawing lives here as a pure function of its two state flags so it can be
 /// rendered and asserted in tests. `AppDelegate` only assigns the result.
 enum StatusIcon {
 
-    /// Canvas side. `NSStatusItem` scales anything else, and scaling a 1.4pt
-    /// stroke is what turns a mark into a smudge.
+    /// Canvas side. `NSStatusItem` scales anything else.
     static let side: CGFloat = 18
 
+    /// The part of the drawing the mark frames: the bird from its crown to the
+    /// tip of its tail, in the drawing's own y-down units.
+    static let frame = CGRect(x: 20, y: 28, width: 430, height: 562)
+
     /// - Parameters:
-    ///   - dropping: a drag is currently over a shelf.
-    ///   - awake: keep-awake is on.
+    ///   - dropping: a drag is currently over a shelf. The bird leans in, the
+    ///     way it does on the shelf when files come toward it.
+    ///   - awake: keep-awake is on. The bird is drawn solid, patches filled,
+    ///     eye still open: "active" at a glance in a single colour.
     static func image(dropping: Bool, awake: Bool) -> NSImage {
-        let image = NSImage(size: NSSize(width: side, height: side), flipped: false) { _ in
+        let image = NSImage(size: NSSize(width: side, height: side), flipped: true) { _ in
             draw(dropping: dropping, awake: awake)
             return true
         }
-        // Template: AppKit recolours it for the bar's appearance, for the
-        // menu-open highlight, and for Increase Contrast. A non-template
-        // status image is the usual reason an icon looks wrong in Light.
         image.isTemplate = true
         return image
     }
 
-    /// The two card rects, in AppKit's bottom-left origin space. The offset is
-    /// deliberately large: at 18 points a small offset leaves the back card as
-    /// a hairline crescent that disappears on the bar, which is the failure the
-    /// incumbent glyph had.
-    static let backCard = NSRect(x: 7.0, y: 5.0, width: 9.0, height: 11.0)
-    static let frontCard = NSRect(x: 2.0, y: 2.0, width: 9.0, height: 11.0)
-    static let cardRadius: CGFloat = 2.0
+    /// Drawing units to the canvas, y-down, centred.
+    static func transform(lean: CGFloat) -> CGAffineTransform {
+        let s = side / frame.height
+        let dx = (side - frame.width * s) / 2
+        let pivot = MascotDrawing.Pivot.lean
+        let turn = CGAffineTransform(translationX: pivot.x, y: pivot.y)
+            .rotated(by: lean * .pi / 180)
+            .translatedBy(x: -pivot.x, y: -pivot.y)
+        return turn
+            .concatenating(CGAffineTransform(translationX: -frame.minX, y: -frame.minY))
+            .concatenating(CGAffineTransform(scaleX: s, y: s))
+            .concatenating(CGAffineTransform(translationX: dx, y: 0))
+    }
 
-    /// Width of the cleared channel that keeps the front card readable as a
-    /// separate shape where it crosses the back one.
-    static let separation: CGFloat = 1.3
+    /// The mark's ink, in canvas points: every black part of the bird.
+    static func inkBounds(dropping: Bool) -> CGRect {
+        var t = transform(lean: dropping ? MascotBehaviour.curiousLean : 0)
+        let path = CGMutablePath()
+        for d in [MascotDrawing.body, MascotDrawing.tail, MascotDrawing.legFront, MascotDrawing.legBack] {
+            path.addPath(MascotDrawing.path(d))
+        }
+        return path.copy(using: &t)?.boundingBoxOfPath ?? .null
+    }
 
     static func draw(dropping: Bool, awake: Bool) {
-        let backStroke: CGFloat = dropping ? 2.0 : 1.4
-
-        let back = NSBezierPath(
-            roundedRect: backCard.insetBy(dx: backStroke / 2, dy: backStroke / 2),
-            xRadius: cardRadius,
-            yRadius: cardRadius
-        )
-        if awake {
-            // Both cards solid reads as "active" at a glance, without needing a
-            // second colour the menu bar will not give a template image.
-            NSColor.black.setFill()
-            NSBezierPath(roundedRect: backCard, xRadius: cardRadius, yRadius: cardRadius).fill()
-        } else {
-            back.lineWidth = backStroke
-            NSColor.black.setStroke()
-            back.stroke()
+        guard let cg = NSGraphicsContext.current?.cgContext else { return }
+        let legs = transform(lean: 0)
+        let bird = transform(lean: dropping ? MascotBehaviour.curiousLean : 0)
+        func fill(_ d: String, _ t: CGAffineTransform) {
+            var t = t
+            if let p = MascotDrawing.path(d).copy(using: &t) { cg.addPath(p); cg.fillPath() }
         }
+        cg.setFillColor(NSColor.black.cgColor)
+        fill(MascotDrawing.legFront, legs)
+        fill(MascotDrawing.legBack, legs)
+        fill(MascotDrawing.tail, bird)
+        fill(MascotDrawing.body, bird)
 
-        // Punch the channel, then lay the front card into it.
-        NSGraphicsContext.current?.compositingOperation = .clear
-        NSBezierPath(
-            roundedRect: frontCard.insetBy(dx: -separation, dy: -separation),
-            xRadius: cardRadius + separation,
-            yRadius: cardRadius + separation
-        ).fill()
-        NSGraphicsContext.current?.compositingOperation = .sourceOver
-
-        NSColor.black.setFill()
-        NSBezierPath(roundedRect: frontCard, xRadius: cardRadius, yRadius: cardRadius).fill()
+        // The white of the bird is the bar showing through.
+        cg.setBlendMode(.clear)
+        if !awake {
+            fill(MascotDrawing.belly, bird)
+            // The wing patch, inset by its own outline so it stays a shape of
+            // its own rather than merging with the belly.
+            var t = bird
+            if let wing = MascotDrawing.path(MascotDrawing.wing).copy(using: &t) {
+                cg.addPath(wing)
+                cg.fillPath()
+                cg.setBlendMode(.normal)
+                cg.addPath(wing)
+                cg.setStrokeColor(NSColor.black.cgColor)
+                cg.setLineWidth(MascotDrawing.wingOutline * side / frame.height * 2.2)
+                cg.strokePath()
+                cg.setBlendMode(.clear)
+            }
+        }
+        let c = MascotDrawing.eyeCenter.applying(bird)
+        let r = max(1.1, MascotDrawing.eyeRadius * side / frame.height * 1.6)
+        cg.fillEllipse(in: CGRect(x: c.x - r, y: c.y - r, width: r * 2, height: r * 2))
+        cg.setBlendMode(.normal)
     }
 }

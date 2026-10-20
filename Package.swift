@@ -15,10 +15,10 @@ let package = Package(
                 .product(name: "Sparkle", package: "Sparkle"),
             ],
             path: "Sources/Magpie",
-            // The .icns is consumed only by the packaged .app bundle (copied
+            // The .icns and Assets.car are consumed only by the packaged .app bundle (copied
             // by scripts/build-dmg.sh). Excluding it here keeps SwiftPM
             // quiet and avoids embedding it in the SPM module's bundle.
-            exclude: ["Resources/AppIcon.icns"],
+            exclude: ["Resources/AppIcon.icns", "Resources/Assets.car"],
             resources: [
                 .process("Resources"),
             ]

@@ -42,11 +42,8 @@ echo "==> Cleaning dist/"
 rm -rf dist
 mkdir -p "${APP_DIR}/Contents/MacOS" "${APP_DIR}/Contents/Resources"
 
-echo "==> Regenerating AppIcon.icns"
-ICONSET_TMP="$(mktemp -d)/AppIcon.iconset"
-swift scripts/make-icon.swift "${ICONSET_TMP}"
-iconutil -c icns -o "Sources/${BIN_NAME}/Resources/AppIcon.icns" "${ICONSET_TMP}"
-rm -rf "${ICONSET_TMP%/*}"
+echo "==> Regenerating the app icon (light and dark)"
+scripts/make-icon.sh "Sources/${BIN_NAME}/Resources"
 
 echo "==> Building release binary"
 swift build -c release

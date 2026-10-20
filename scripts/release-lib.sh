@@ -51,6 +51,7 @@ write_info_plist() {
   <key>CFBundleDisplayName</key><string>${APP_NAME}</string>
   <key>CFBundleExecutable</key><string>${APP_NAME}</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
+  <key>CFBundleIconName</key><string>AppIcon</string>
   <key>CFBundleIdentifier</key><string>${BUNDLE_ID}</string>
   <key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
   <key>CFBundleName</key><string>${APP_NAME}</string>
