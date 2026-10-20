@@ -1,0 +1,26 @@
+# Build output
+.build/
+dist/
+*.dmg
+.swiftpm/
+Packages/
+
+# Xcode and Finder droppings
+.DS_Store
+xcuserdata/
+*.xcworkspace
+
+# The Sparkle public key belongs to one release machine. Each generates its
+# own; see "Releasing a new version" in the README.
+scripts/.sparkle-public-key
+
+# Local tooling state and working notes. None of this is part of the product,
+# and none of it should reach anyone who clones the repository.
+.claude/
+.impeccable/
+AGENTS.md
+CHANGES.log
+
+# Superseded design snapshot. Sources/Magpie/DesignTokens.swift is the live
+# system; this described the state before it existed and is wrong in specifics.
+DESIGN.md

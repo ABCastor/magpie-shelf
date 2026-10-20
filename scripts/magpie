@@ -1,0 +1,94 @@
+#!/bin/sh
+# magpie — put files on the Magpie shelf from a script or an agent.
+#
+#   magpie add <path>...        add files or folders to the current shelf
+#
+# Fires magpie://add?path=…, which Magpie handles by calling addFile and
+# showing the panel. That is all a magpie:// URL can ever do; there is no
+# verb that runs anything.
+#
+# POSIX sh, no dependencies beyond od/tr/dirname/basename/open. Works whether
+# or not Magpie is already running — `open` launches it and the URL is
+# delivered once the delegate is up.
+
+set -eu
+LC_ALL=C
+export LC_ALL
+
+# Matches MagpieURL.maxPaths. Refusing here means a caller gets a real error
+# instead of a link the app refuses wholesale.
+MAX_PATHS=32
+
+usage() {
+    echo "usage: magpie add <path>..." >&2
+    exit 2
+}
+
+# Percent-encode one argument, byte by byte, keeping the RFC 3986 unreserved
+# set plus "/" literal so the URL stays readable. Everything else — spaces,
+# &, #, %, +, ?, =, quotes, and every non-ASCII byte of a UTF-8 filename —
+# is encoded, because `open` will not parse a URL containing them raw.
+urlencode() {
+    printf '%s' "$1" | od -An -v -to1 | tr ' ' '\n' | while IFS= read -r byte; do
+        [ -n "$byte" ] || continue
+        char=$(printf "\\$byte")
+        case "$char" in
+            [abcdefghijklmnopqrstuvwxyz]) printf '%s' "$char" ;;
+            [ABCDEFGHIJKLMNOPQRSTUVWXYZ]) printf '%s' "$char" ;;
+            [0123456789]) printf '%s' "$char" ;;
+            -|.|_|~|/) printf '%s' "$char" ;;
+            *) printf '%%%02X' "$((0$byte))" ;;
+        esac
+    done
+}
+
+# Absolutize. THE bug this exists to prevent: Magpie's working directory is
+# not the shell's, so "./out.pdf" sent as-is would resolve against "/" and
+# name a file that does not exist. `cd` + `pwd` also canonicalizes "." and
+# ".." away, which the app refuses in a path.
+abspath() {
+    if [ -d "$1" ]; then
+        (cd -- "$1" && pwd)
+    else
+        dir=$(dirname -- "$1")
+        base=$(basename -- "$1")
+        dir=$(cd -- "$dir" && pwd) || return 1
+        case "$dir" in
+            */) printf '%s%s\n' "$dir" "$base" ;;
+            *) printf '%s/%s\n' "$dir" "$base" ;;
+        esac
+    fi
+}
+
+cmd_add() {
+    [ "$#" -gt 0 ] || usage
+    if [ "$#" -gt "$MAX_PATHS" ]; then
+        echo "magpie: $# paths, at most $MAX_PATHS per call — add the folder instead" >&2
+        exit 1
+    fi
+
+    url="magpie://add"
+    separator="?"
+    for arg do
+        if [ ! -e "$arg" ]; then
+            echo "magpie: no such file or folder: $arg" >&2
+            exit 1
+        fi
+        absolute=$(abspath "$arg")
+        url="${url}${separator}path=$(urlencode "$absolute")"
+        separator="&"
+    done
+
+    open "$url" || {
+        echo "magpie: could not open $url — is Magpie installed?" >&2
+        exit 1
+    }
+}
+
+[ "$#" -gt 0 ] || usage
+subcommand=$1
+shift
+case "$subcommand" in
+    add) cmd_add "$@" ;;
+    *) usage ;;
+esac

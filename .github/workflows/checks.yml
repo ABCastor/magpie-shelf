@@ -1,0 +1,63 @@
+name: checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - name: Show toolchain
+        run: swift --version
+      # Warnings are not fatal here on purpose: this repo builds against
+      # AppKit APIs that Apple deprecates faster than the minimum target can
+      # move, and a job that fails on somebody else's deprecation notice gets
+      # switched off within a month.
+      - name: Build
+        run: swift build 2>&1 | tee build.log
+      # Matches on ": warning:" rather than anchoring to the start of the
+      # line. The first version anchored with ^\S+ and could never fire on a
+      # checkout whose path contains a space, which is exactly where it was
+      # written. Deprecations are excluded by tag, not by wording.
+      - name: Fail on a Swift warning we introduced
+        run: |
+          grep -E ': warning: ' build.log \
+            | grep -v 'DeprecatedDeclaration' > new-warnings.txt || true
+          if [ -s new-warnings.txt ]; then
+            echo "::error::new compiler warning, fix it or justify it in the diff"
+            cat new-warnings.txt
+            exit 1
+          fi
+
+  test:
+    name: Tests
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      # The suite is the claim. It exercises the drag decisions, the file
+      # safety invariant, the nine localisation tables and the keyboard model,
+      # so a green badge here means the behaviour the README describes was
+      # checked and not just that the code compiles.
+      - name: Test
+        run: swift test
+
+  leaks:
+    name: Leak check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The commit-trailer check reads history, which a shallow clone
+          # does not have.
+          fetch-depth: 0
+      - name: Leak check
+        run: ./scripts/leak-check.sh

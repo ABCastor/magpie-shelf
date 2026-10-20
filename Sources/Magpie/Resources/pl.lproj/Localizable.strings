@@ -1,0 +1,348 @@
+/* Polish (pl) translations */
+
+/* Settings window */
+"Settings" = "Ustawienia";
+"Magpie Settings" = "Ustawienia Magpie";
+"Auto-delete shelves" = "Automatyczne usuwanie półek";
+"Never" = "Nigdy";
+"After 1 day" = "Po 1 dniu";
+"After 7 days" = "Po 7 dniach";
+"After 10 days" = "Po 10 dniach";
+"After 30 days" = "Po 30 dniach";
+"settings.expiry.description" = "Usuwane są tylko pliki zapisane na półce. Przypięte półki nigdy nie wygasają.";
+"Park new shelves at the top-right corner" = "Parkuj nowe półki w prawym górnym rogu";
+"settings.park.description" = "Po pierwszym upuszczeniu na nową półkę, półka przesuwa się do prawego górnego rogu ekranu i schodzi z drogi. Nowe półki układają się pionowo poniżej.";
+"Collapse expanded shelf when clicking outside" = "Zwijaj rozwiniętą półkę po kliknięciu poza nią";
+"settings.collapse.description" = "Gdy półka jest w widoku rozwiniętym i klikniesz w innym miejscu, zwija się do małej pigułki. Pigułka pozostaje na miejscu — zwinięte półki nie są zmieniane.";
+"Clear the shelf after dragging out" = "Opróżnij półkę po przeciągnięciu";
+"settings.clear-after-drag.description" = "Gdy przeciągniesz coś z półki, a miejsce docelowe to przyjmie, przeciągnięte karty także znikną z półki — a półka opróżniona w ten sposób sama się zamknie. Twoje pliki pozostają nietknięte: znika tylko odwołanie półki. Porzucone przeciągnięcia niczego nie zmieniają.";
+/* Wyzwalacze */
+"Triggers" = "Wyzwalacze";
+"Shake while dragging" = "Potrząśnij podczas przeciągania";
+"settings.trigger.shake.description" = "Potrząśnij myszą na boki podczas przeciągania plików, a pod kursorem pojawi się półka. Na gładziku wykrywanie działa zawodnie — dlatego istnieją pozostałe wyzwalacze.";
+"Keyboard shortcut" = "Skrót klawiszowy";
+"settings.trigger.hotkey.description" = "Naciśnij skrót, aby otworzyć półkę przy kursorze. Naciśnięty podczas przeciągania działa jak potrząśnięcie; naciśnięty samodzielnie zostawia półkę do czasu jej zamknięcia. Nie wymaga uprawnień.";
+"Summon at the screen edge" = "Przywołaj przy krawędzi ekranu";
+"settings.trigger.edge.description" = "Podczas przeciągania przytrzymaj kursor przy wybranej krawędzi ekranu przez chwilę, a pojawi się półka gotowa na upuszczenie plików. Jeśli nic na niej nie zostawisz, zniknie sama.";
+"Click the menu bar icon" = "Kliknięcie ikony na pasku menu";
+"settings.trigger.menubar.description" = "Kliknij lewym przyciskiem ikonę na pasku menu, aby pokazać lub ukryć półkę. Prawy przycisk zawsze otwiera to menu, niezależnie od tego ustawienia.";
+"edge.right" = "Prawa krawędź";
+"edge.left" = "Lewa krawędź";
+"toast.hotkey-unavailable" = "Skrót %@ jest niedostępny —\ninna aplikacja może już go używać.";
+"Launch at login" = "Uruchamiaj przy logowaniu";
+"settings.launch.description" = "Uruchamia Magpie automatycznie przy logowaniu. Instalujemy LaunchAgent w ~/Library/LaunchAgents — działa zarówno z wersją pakietową, jak i niepodpisaną wersją deweloperską.";
+"Couldn't Update Login Items" = "Nie udało się zaktualizować elementów logowania";
+
+"Language" = "Język";
+"language.system" = "Domyślny systemu";
+"settings.language.description" = "Zastępuje język systemowy macOS tylko dla tej aplikacji.";
+"Takes effect on next launch." = "Zostanie zastosowane przy następnym uruchomieniu.";
+"Quit & Reopen" = "Zamknij i otwórz ponownie";
+
+"Keep Mac Awake" = "Nie usypiaj Maca";
+"Activate for" = "Aktywuj na";
+"Indefinitely" = "Bezterminowo";
+"5 minutes" = "5 minut";
+"10 minutes" = "10 minut";
+"15 minutes" = "15 minut";
+"20 minutes" = "20 minut";
+"1 hour" = "1 godzinę";
+"2 hours" = "2 godziny";
+"3 hours" = "3 godziny";
+"5 hours" = "5 godzin";
+"New Shelf" = "Nowa półka";
+"New Shelf From Clipboard" = "Nowa półka ze schowka";
+"Recent Shelves" = "Ostatnie półki";
+"No Recent Shelves" = "Brak ostatnich półek";
+"Clear Recent Shelves" = "Wyczyść ostatnie półki";
+"Settings…" = "Ustawienia…";
+"Quit" = "Zakończ";
+
+/* Auto-update */
+"Check for Updates…" = "Sprawdź aktualizacje…";
+"Updates" = "Aktualizacje";
+"Automatically check for updates" = "Automatycznie sprawdzaj aktualizacje";
+"settings.updates.description" = "Magpie sprawdza nowe wydania w tle raz dziennie. Nowe wersje są pobierane, weryfikowane i instalowane po kliknięciu „Zainstaluj i uruchom ponownie”.";
+
+"Open With" = "Otwórz w";
+"Show in Finder" = "Pokaż w Finderze";
+"Quick Look" = "Szybki podgląd";
+"AirDrop" = "AirDrop";
+"Messages" = "Wiadomości";
+"Add From Clipboard" = "Dodaj ze schowka";
+"Copy" = "Kopiuj";
+"Copy %lld Files" = "Kopiuj %lld plików";
+"All Actions" = "Wszystkie akcje";
+"Shelf" = "Półka";
+"Undo" = "Cofnij";
+"Clear Shelf" = "Wyczyść półkę";
+"Rename Shelf…" = "Zmień nazwę półki…";
+"Name Shelf…" = "Nazwij półkę…";
+"Pin Shelf" = "Przypnij półkę";
+"Unpin Shelf" = "Odepnij półkę";
+"Accent" = "Akcent";
+"None" = "Brak";
+"Red" = "Czerwony";
+"Orange" = "Pomarańczowy";
+"Yellow" = "Żółty";
+"Green" = "Zielony";
+"Blue" = "Niebieski";
+"Purple" = "Fioletowy";
+"Pick Emoji…" = "Wybierz emoji…";
+"Get Info" = "Informacje";
+"Batch Rename…" = "Zmień nazwę grupowo…";
+"Create ZIP Archive…" = "Utwórz archiwum ZIP…";
+"Copy Path" = "Skopiuj ścieżkę";
+"Move to Trash" = "Przenieś do Kosza";
+"menu.trash-count" = "Przenieś %lld plików do Kosza";
+"menu.remove-count-from-shelf" = "Usuń %lld plików z półki";
+"No Applications" = "Brak aplikacji";
+"openwith.default.suffix" = " (domyślne)";
+
+"Share…" = "Udostępnij…";
+"Rename…" = "Zmień nazwę…";
+"Open" = "Otwórz";
+"Duplicate" = "Duplikuj";
+"Remove from Shelf" = "Usuń z półki";
+"No File" = "Brak pliku";
+"Convert to" = "Konwertuj na";
+"Convert %lld Items to" = "Konwertuj %lld elementów na";
+"Image Actions" = "Akcje na obrazie";
+"General Actions" = "Akcje ogólne";
+"Resize…" = "Zmień rozmiar…";
+"Compress…" = "Skompresuj…";
+"Remove Metadata" = "Usuń metadane";
+"Create PDF" = "Utwórz PDF";
+
+"OK" = "OK";
+"Cancel" = "Anuluj";
+"Save" = "Zapisz";
+"Set" = "Ustaw";
+"Resize" = "Zmień rozmiar";
+"Compress" = "Skompresuj";
+"Rename" = "Zmień nazwę";
+"Rename Shelf" = "Zmień nazwę półki";
+"Set Accent Emoji" = "Ustaw emoji akcentu";
+"Batch Rename" = "Zmiana nazwy grupowo";
+"Action Failed" = "Akcja nie powiodła się";
+"Couldn't rename" = "Nie udało się zmienić nazwy";
+"Archive Failed" = "Archiwizacja nie powiodła się";
+"Batch Rename Failed" = "Grupowa zmiana nazwy nie powiodła się";
+"Resize Image" = "Zmień rozmiar obrazu";
+"Compress Image" = "Skompresuj obraz";
+"alert.shelf-rename.body" = "Pozostaw puste, aby usunąć niestandardową nazwę.";
+"alert.emoji.body" = "Wpisz lub wklej pojedyncze emoji.";
+"alert.batch-rename.body" = "Użyj # jako symbolu zastępczego dla numeru kolejnego.";
+"alert.rename.body" = "Wprowadź nową nazwę pliku (z rozszerzeniem).";
+"alert.action-failed.body" = "Nie udało się przetworzyć obrazu.";
+"alert.resize.body" = "Maksymalny wymiar w pikselach. Proporcje są zachowane.";
+"alert.compress.body" = "Jakość JPEG (10% – 100%). Niższa = mniejszy plik.";
+"alert.batch-renamed.title" = "Zmieniono %1$lld, nie powiodło się %2$lld";
+"alert.zip.staging-failed" = "Nie udało się utworzyć katalogu pomocniczego: %@";
+"alert.zip.stage-failed" = "Nie udało się przygotować %1$@: %2$@";
+"alert.zip.launch-failed" = "Nie udało się uruchomić zip: %@";
+"alert.zip.exit-status" = "zip zakończył działanie z kodem %lld.";
+
+"Make Searchable" = "Zrób przeszukiwalny";
+"Make %lld Searchable" = "Zrób %lld przeszukiwalnymi";
+"Extract Text" = "Wyodrębnij tekst";
+"Extract Text from %lld Items" = "Wyodrębnij tekst z %lld elementów";
+
+"Merge %lld PDFs…" = "Scal %lld plików PDF…";
+"merge.order.label" = "Strony w tej kolejności:";
+"alert.merge.unreadable" = "Nie udało się odczytać „%@”, więc nic nie scalono. Uszkodzony lub chroniony hasłem plik PDF trzeba najpierw otworzyć.";
+
+"ocr.error.source-missing" = "OCR nie powiodło się: plik źródłowy już nie istnieje.";
+"ocr.error.source-unreadable" = "OCR nie powiodło się: nie udało się odczytać źródła.";
+"ocr.error.destination-unwritable" = "OCR nie powiodło się: nie udało się zapisać na dysku.";
+"ocr.error.recognition-failed" = "OCR nie powiodło się: %@";
+"ocr.error.no-text" = "OCR nie znalazło tekstu.";
+"ocr.error.cancelled" = "OCR anulowane.";
+
+"conversion.error.source-missing" = "Konwersja nie powiodła się: plik źródłowy już nie istnieje.";
+"conversion.error.source-unreadable" = "Konwersja nie powiodła się: nie udało się odczytać źródła.";
+"conversion.error.destination-unwritable" = "Konwersja nie powiodła się: nie udało się zapisać na dysku.";
+"conversion.error.encoding-failed" = "Konwersja nie powiodła się: %@";
+"conversion.error.cancelled" = "Konwersja anulowana.";
+
+"Drop files here" = "Upuść pliki tutaj";
+"Drop or shake here" = "Upuść lub potrząśnij tutaj";
+"empty.summon-hint" = "%@ przywołuje półkę";
+"Loading…" = "Wczytywanie…";
+"Empty folder" = "Pusty folder";
+"Reveal in Finder" = "Pokaż w Finderze";
+"Select All" = "Zaznacz wszystko";
+"Deselect All" = "Odznacz wszystko";
+"Folder" = "Folder";
+"File" = "Plik";
+"shelf.default-name" = "Półka";
+"%lld Files" = "%lld plików";
+"1 file" = "1 plik";
+"%lld files" = "%lld plików";
+"1 File" = "1 plik";
+"selection.of-total" = "%1$lld z %2$lld";
+"toast.duplicate" = "Co najmniej jeden element\njuż znajduje się na półce";
+"toast.concealed-clipboard" = "Elementy z menedżera haseł\nnie są dodawane do półki";
+
+"rename.error.item-not-found" = "Nie znaleziono elementu.";
+"rename.error.missing-url" = "Element nie ma adresu URL pliku.";
+"rename.error.source-missing" = "Źródło już nie istnieje: %@";
+"rename.error.destination-exists" = "Plik już istnieje pod nazwą %@.";
+"rename.error.no-effect" = "Zmiana nazwy zgłosiła powodzenie, ale plik się nie przeniósł.";
+
+"undo.clear-shelf" = "Cofnij wyczyszczenie półki";
+"undo.move-to-trash" = "Cofnij przeniesienie do Kosza";
+"undo.move-to-trash-count" = "Cofnij przeniesienie do Kosza (%lld)";
+
+"handoff.ingest" = "Wyślij do Claude do uporządkowania";
+"handoff.staging-failed" = "Nie udało się przygotować folderu przekazania.\nNic nie wysłano.";
+"handoff.nothing-to-send" = "Nie ma czego wysłać —\nbrak plików na półce.";
+"handoff.no-claude" = "Nie udało się otworzyć Claude.\nŚcieżka folderu jest w schowku.";
+"handoff.no-receipt" = "Claude nie potwierdził przekazania.\nŚcieżka folderu jest w schowku.";
+
+/* Copy for chat — półka jako blok do wklejenia */
+"toast.chat-copied" = "Skopiowano półkę — naciśnij ⌘V w czacie.";
+"toast.chat-copy-empty" = "Nie ma czego kopiować —\npółka jest pusta.";
+/* Accessibility labels, hints and tooltips */
+"a11y.close-shelf" = "Zamknij półkę";
+"a11y.collapse-shelf" = "Zwiń półkę";
+"a11y.back" = "Wstecz";
+"a11y.dock-shelf" = "Zadokuj półkę";
+"a11y.expand-shelf" = "Rozwiń półkę";
+"a11y.open-shelf" = "Otwórz półkę";
+"a11y.pinned" = "Przypięta";
+"a11y.grid-view" = "Widok siatki";
+"a11y.list-view" = "Widok listy";
+"a11y.open-folder" = "Otwórz folder";
+"a11y.kind.image" = "Obraz";
+"a11y.kind.text" = "Tekst";
+"a11y.item.hint" = "Przeciągnij poza półkę, aby skopiować lub przenieść ten element.";
+"a11y.stack.hint" = "Przeciągnij poza półkę, aby skopiować lub przenieść całą jej zawartość.";
+"a11y.shelf-actions" = "Działania półki";
+"a11y.action.show-menu" = "Pokaż działania";
+"a11y.action.toggle-selection" = "Przełącz zaznaczenie";
+
+/* Inbound magpie:// links */
+"toast.link-refused" = "Nic nie zostało dodane.\nMagpie nie mógł użyć tego odnośnika";
+"toast.link-rate-limited" = "Zbyt wiele odnośników naraz.\nMagpie zignorował resztę";
+
+/* Trasy — pliki z półki przekazane komendzie, którą sam napisałeś */
+"routes.menu" = "Trasy";
+"routes.finished" = "%@ zakończono.";
+"routes.failed.title" = "Trasa nie powiodła się";
+"routes.failed.exit" = "„%1$@” zakończyła się kodem wyjścia %2$lld.";
+"routes.failed.timeout" = "„%1$@” wciąż działała po %2$lld s, więc Magpie ją zatrzymała.";
+"routes.failed.launch" = "Magpie nie mogła uruchomić „%1$@”. Sprawdź, czy %2$@ istnieje i da się uruchomić.";
+"routes.failed.secret" = "„%1$@” potrzebuje sekretu o nazwie %2$@, którego nie ma jeszcze w pęku kluczy. Dodaj go w Ustawieniach.";
+"routes.failed.no-detail" = "Komenda nie wypisała nic, co tłumaczyłoby przyczynę.";
+"routes.error.unreadable" = "Magpie nie mogła odczytać routes.json.";
+"routes.error.invalid-json" = "routes.json nie jest poprawnym JSON-em — zwykle brakuje przecinka albo nawias nie został zamknięty.";
+"routes.error.shape" = "routes.json musi być obiektem zawierającym listę „routes”.";
+"routes.error.version" = "routes.json podaje wersję %1$lld; ta wersja Magpie czyta wersję %2$lld.";
+"routes.error.bad-field" = "Trasa „%1$@” potrzebuje poprawnego pola „%2$@”.";
+"routes.error.relative-command" = "Trasa „%1$@” potrzebuje pełnej ścieżki do swojej komendy, zaczynającej się od „/”. Jest tam „%2$@”.";
+"routes.error.duplicate-id" = "Dwie trasy mają to samo id „%@”. Każda trasa potrzebuje własnego.";
+"routes.error.files-token" = "Trasa „%1$@” umieszcza {files} wewnątrz dłuższego argumentu. Daj {files} osobny argument.";
+"settings.routes.empty" = "Nie ma jeszcze tras. Otwórz plik — zaczyna się od listy wszystkich pól i dwóch wyłączonych przykładów.";
+"settings.routes.reveal" = "Pokaż plik tras";
+"settings.routes.reload" = "Wczytaj trasy ponownie";
+"settings.routes.description" = "Trasa przekazuje pliki z półki komendzie, którą napisałeś, i odkłada na półkę to, co powstanie. Własne trasy dodajesz, edytując routes.json. Trasa nigdy nie przenosi, nie zmienia nazw ani nie usuwa twoich plików i uruchamia się wyłącznie z menu, które kliknąłeś.";
+"settings.secrets.title" = "Sekrety";
+"settings.secrets.empty" = "Nie zapisano żadnych sekretów.";
+"settings.secrets.add" = "Dodaj sekret…";
+"settings.secrets.delete" = "Usuń";
+"settings.secrets.failed" = "Nie udało się zapisać w pęku kluczy.";
+"settings.secrets.description" = "Klucze potrzebne twoim trasom leżą w pęku kluczy macOS. Magpie podaje każdy z nich komendzie jako zmienną środowiskową o tej samej nazwie i nigdy nie pokazuje ani nie zapisuje w logu zapisanej wartości.";
+"alert.secret.body" = "Nazwij go dokładnie tak, jak wymaga trasa, na przykład GEMINI_API_KEY. Wartość trafia prosto do pęku kluczy i nigdy więcej nie jest pokazywana.";
+
+/* Wyślij do agenta — półka prosto w otwartym czacie */
+"agent.section" = "Wyślij do agenta";
+"agent.none-installed" = "Na tym Macu nie ma żadnej aplikacji agenta, którą Magpie zna.";
+"agent.auto-paste" = "Wklejaj automatycznie w otwartym czacie";
+"agent.auto-paste.description" = "Dodatkowo przenosi aplikację na wierzch i wpisuje ⌘V. Wymaga uprawnienia Dostępności.";
+"agent.toast.pasted" = "Wklejono w %@.";
+"agent.toast.not-installed" = "Nie ma %@ na tym Macu.\nPółka jest w schowku.";
+"agent.toast.no-accessibility" = "Magpie potrzebuje uprawnienia Dostępność, aby wkleić.\nPółka jest w schowku.";
+"agent.toast.could-not-paste" = "Nie udało się wkleić w %@.\nPółka jest w schowku.";
+"agent.toast.modifiers-held" = "Puść klawisze skrótu i spróbuj ponownie.\nPółka jest w schowku.";
+
+/* Klawiatura: paleta akcji (⌘K) i cofnięcie, które zostawia ⌫ */
+"palette.title" = "Akcje";
+"palette.placeholder" = "Szukaj akcji";
+"palette.no-matches" = "Brak pasującej akcji.";
+"undo.remove-from-shelf" = "Cofnij usunięcie z półki";
+"undo.remove-from-shelf-count" = "Cofnij usunięcie z półki (%lld)";
+
+/* Appearance override — the shelf follows the system by default. */
+"Appearance" = "Wygląd";
+"System" = "System";
+"Light" = "Jasny";
+"Dark" = "Ciemny";
+"settings.appearance.description" = "Półka podąża za ustawieniem jasnym lub ciemnym twojego Maca. Przypnij ją, jeśli wolisz, by wyglądała zawsze tak samo.";
+
+
+/* Menu-bar visibility. Hiding is safe only because reopening the app opens Settings. */
+"Show Magpie in the menu bar" = "Pokazuj na pasku menu";
+"Quit Magpie" = "Zakończ Magpie";
+"settings.menubar.description" = "Magpie działa dalej i wszystkie skróty pozostają aktywne. Otwórz go ponownie z Aplikacji, aby tu wrócić.";
+
+/* Settings search: lens field at the top of the pane, focused by Cmd-F. */
+"settings.search.placeholder" = "Szukaj w ustawieniach";
+"settings.search.no-results" = "Brak pasujących ustawień.";
+"settings.search.clear" = "Wyczyść wyszukiwanie";
+
+/* Shown when the bundle carries no Sparkle public key. */
+"updates.unavailable" = "Ta kompilacja nie ma klucza podpisu, więc nie może sprawdzać aktualizacji.";
+
+
+/* The store finally speaks: what a load found, said once per event. */
+"store.alert.quarantined.title" = "Magpie nie mógł odczytać twoich półek";
+"store.alert.quarantined.body" = "Plik, w którym Magpie trzyma twoje półki, był uszkodzony, więc Magpie odłożył go na bok i zaczął nowy. Nic nie zostało usunięte — stary plik nadal jest na twoim Macu, a twoich własnych plików nic nie ruszyło.";
+"store.alert.read-only.title" = "Magpie niczego teraz nie zapisuje";
+"store.alert.read-only.body" = "Twoje półki zostały ostatnio zapisane przez nowszą wersję Magpie niż ta. Ta wersja nie zmieni tego pliku, więc nic z tego, co teraz zrobisz, nie zostanie zachowane. Zainstaluj nowszą wersję, aby wrócić do tego, na czym skończyłeś.";
+"store.alert.unreadable.title" = "Magpie nie mógł otworzyć twoich półek";
+"store.alert.unreadable.body" = "Magpie nie mógł odczytać pliku z twoimi półkami ani odłożyć go na bok. Półki się nie pokażą, a nic z tego, co teraz zrobisz, nie zostanie zapisane. Twoich własnych plików nic nie ruszyło.";
+
+/* Diagnostics: version, the data folder, and a blob to paste into an issue. */
+"settings.diagnostics" = "Diagnostyka";
+"settings.diagnostics.version" = "Wersja";
+"settings.diagnostics.title" = "Wsparcie";
+"settings.diagnostics.reveal" = "Pokaż folder danych";
+"settings.diagnostics.copy" = "Kopiuj diagnostykę";
+"settings.diagnostics.copied" = "Skopiowano";
+"settings.diagnostics.description" = "Kopiowanie diagnostyki umieszcza w schowku krótkie podsumowanie tej wersji i tych ustawień, do wklejenia w zgłoszeniu błędu. Nie zawiera nazw plików, nazw półek ani niczego, co zapisałeś. W folderze danych Magpie trzyma własne pliki; przeczytaj wszystko, co z niego weźmiesz, zanim to wyślesz.";
+"settings.cache.title" = "Zarządzana pamięć podręczna";
+"settings.cache.clear" = "Wyczyść pamięć podręczną";
+"settings.cache.description" = "Pliki przeciągnięte z lokalizacji tymczasowych są kopiowane do folderu danych, aby przetrwały czyszczenie systemu. Wyczyszczenie pamięci podręcznej usuwa kopie, których nie pokazuje już żadna półka; kopie wciąż obecne na półce zostają, a Twoje własne pliki nigdy nie są ruszane.";
+"diagnostics.logs-hint" = "Aby zobaczyć, co Magpie robił ostatnio, uruchom to w Terminalu:";
+"diagnostics.review-warning" = "Przeczytaj to w całości, zanim gdziekolwiek wkleisz.";
+
+/* Stale drag: the drag was refused because no source file is reachable. */
+"toast.drag-missing.one" = "Tego pliku nie ma już na dysku,\nwięc nie ma czego przeciągnąć.";
+"toast.drag-missing.many" = "Tych %lld plików nie ma już na dysku,\nwięc nie ma czego przeciągnąć.";
+"toast.drag-unavailable.one" = "Ten plik jest teraz niedostępny.\nJego dysk może być odłączony.";
+"toast.drag-unavailable.many" = "Tych %lld plików jest teraz niedostępnych.\nIch dysk może być odłączony.";
+
+/* Clear Recent Shelves: confirmation and its undo. */
+"alert.clear-all.title" = "Wyczyścić ostatnie półki?";
+"alert.clear-all.body" = "Do usunięcia: %1$@ (łącznie %2$@). Przypięte półki zostają, nic nie znika z dysku, a Cofnij (⌘Z) przywraca półki.";
+"shelf-count.one" = "1 półka";
+"shelf-count.many" = "%lld półek";
+"undo.clear-all-shelves" = "Cofnij wyczyszczenie ostatnich półek";
+
+/* Edit menu: key equivalents for the text fields (palette query, Settings search). */
+"Redo" = "Ponów";
+"Cut" = "Wytnij";
+"Paste" = "Wklej";
+/* A drop that is still landing: the panel-level progress bar with its cancel. */
+"ingest.importing" = "Importowanie…";
+
+/* Drag out of the shelf: which way this drag will land, and how to change it. */
+"drag.mode.copying" = "Kopiowanie";
+"drag.mode.moving" = "Przenoszenie";
+"drag.mode.hold-command" = "Przytrzymaj ⌘, by przenieść";
+"drag.mode.release-command" = "Zwolnij ⌘, by skopiować";
+
+/* Drag out with ⌘ held: the destination took a copy and the original stayed put. */
+"toast.drag-copied-instead.one" = "Miejsce docelowe skopiowało ten plik, zamiast go przenieść.";
+"toast.drag-copied-instead.many" = "Miejsce docelowe skopiowało te %lld plików, zamiast je przenieść.";

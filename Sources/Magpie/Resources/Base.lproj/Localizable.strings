@@ -1,0 +1,353 @@
+/* Base development-language strings — same as en.lproj. Used as the
+   ultimate fallback when neither the user's language nor English is
+   available. */
+
+/* Settings window */
+"Magpie Settings" = "Magpie Settings";
+"Shelves" = "Shelves";
+"Summoning" = "Summoning";
+"Routes and Secrets" = "Routes and Secrets";
+"Shortcut" = "Shortcut";
+"Edge" = "Edge";
+"Copy shelf shortcut" = "Copy shelf shortcut";
+"Agent app" = "Agent app";
+"Auto-delete shelves" = "Auto-delete shelves";
+"Never" = "Never";
+"After 1 day" = "After 1 day";
+"After 7 days" = "After 7 days";
+"After 10 days" = "After 10 days";
+"After 30 days" = "After 30 days";
+"settings.expiry.description" = "Only files staged inside the shelf are deleted. Pinned shelves never expire.";
+"Park new shelves at the top-right corner" = "Auto-park new shelves";
+"settings.park.description" = "After the first item lands on a freshly-created shelf, the shelf slides up to the top-right of the screen and out of the way. New shelves stack vertically below it.";
+"Collapse expanded shelf when clicking outside" = "Collapse on outside click";
+"settings.collapse.description" = "When a shelf is in its expanded detail view and you click somewhere else, it folds back to the small pill. The pill stays put — collapsed shelves are unaffected.";
+"Clear the shelf after dragging out" = "Clear shelf after dragging out";
+"settings.clear-after-drag.description" = "After you drag something off a shelf and a destination takes it, the cards you dragged leave the shelf too — and a shelf emptied that way closes itself. Your files are untouched: only the shelf's reference to them goes. Abandoned drags change nothing.";
+/* Summoning */
+"Shake while dragging" = "Shake while dragging";
+"settings.trigger.shake.description" = "Shake the mouse from side to side while dragging files and a shelf appears under the cursor. Detection is unreliable on a trackpad, which is why the other triggers exist.";
+"Keyboard shortcut" = "Keyboard shortcut";
+"settings.trigger.hotkey.description" = "Press the shortcut to open a shelf at the cursor. Pressed mid-drag it behaves like a shake; pressed on its own the shelf stays until you close it. No permissions needed.";
+"Summon at the screen edge" = "Screen edge";
+"settings.trigger.edge.description" = "While dragging, hold the cursor against the chosen screen edge for a moment and a shelf appears to catch the drop. If you drop nothing on it, it disappears by itself.";
+"Click the menu bar icon" = "Menu bar click";
+"settings.trigger.menubar.description" = "Left-click the menu bar icon to show or hide the shelf. Right-click always opens this menu, whether or not this is on.";
+"edge.right" = "Right edge";
+"edge.left" = "Left edge";
+"toast.hotkey-unavailable" = "The %@ shortcut is unavailable —\nanother app may already use it.";
+"Launch at login" = "Launch at login";
+"settings.launch.description" = "Starts Shelf automatically when you log in. We install a LaunchAgent in ~/Library/LaunchAgents — works for both packaged and unsigned dev builds.";
+"Couldn't Update Login Items" = "Couldn't Update Login Items";
+
+"Language" = "Language";
+"language.system" = "System Default";
+"settings.language.description" = "Overrides the macOS system language for this app only.";
+"Takes effect on next launch." = "Takes effect on next launch.";
+"Quit & Reopen" = "Quit & Reopen";
+
+"Keep Mac Awake" = "Keep Mac Awake";
+"Activate for" = "Activate for";
+"Indefinitely" = "Indefinitely";
+"5 minutes" = "5 minutes";
+"10 minutes" = "10 minutes";
+"15 minutes" = "15 minutes";
+"20 minutes" = "20 minutes";
+"1 hour" = "1 hour";
+"2 hours" = "2 hours";
+"3 hours" = "3 hours";
+"5 hours" = "5 hours";
+"New Shelf" = "New Shelf";
+"New Shelf From Clipboard" = "New Shelf From Clipboard";
+"Recent Shelves" = "Recent Shelves";
+"No Recent Shelves" = "No Recent Shelves";
+"Clear Recent Shelves" = "Clear Recent Shelves";
+"Settings…" = "Settings…";
+"Quit" = "Quit";
+
+"Open With" = "Open With";
+"Show in Finder" = "Show in Finder";
+"Quick Look" = "Quick Look";
+"AirDrop" = "AirDrop";
+"Messages" = "Messages";
+"Add From Clipboard" = "Add From Clipboard";
+"Copy" = "Copy";
+"Copy %lld Files" = "Copy %lld Files";
+"All Actions" = "All Actions";
+"Shelf" = "Shelf";
+"Undo" = "Undo";
+"Clear Shelf" = "Clear Shelf";
+"Rename Shelf…" = "Rename Shelf…";
+"Name Shelf…" = "Name Shelf…";
+"Pin Shelf" = "Pin Shelf";
+"Unpin Shelf" = "Unpin Shelf";
+"Accent" = "Accent";
+"None" = "None";
+"Red" = "Red";
+"Orange" = "Orange";
+"Yellow" = "Yellow";
+"Green" = "Green";
+"Blue" = "Blue";
+"Purple" = "Purple";
+"Pick Emoji…" = "Pick Emoji…";
+"Get Info" = "Get Info";
+"Batch Rename…" = "Batch Rename…";
+"Create ZIP Archive…" = "Create ZIP Archive…";
+"Copy Path" = "Copy Path";
+"Move to Trash" = "Move to Trash";
+"menu.trash-count" = "Move %lld Files to Trash";
+"menu.remove-count-from-shelf" = "Remove %lld Files from Shelf";
+"No Applications" = "No Applications";
+"openwith.default.suffix" = " (default)";
+
+"Share…" = "Share…";
+"Rename…" = "Rename…";
+"Open" = "Open";
+"Duplicate" = "Duplicate";
+"Remove from Shelf" = "Remove from Shelf";
+"No File" = "No File";
+"Convert to" = "Convert to";
+"Convert %lld Items to" = "Convert %lld Items to";
+"Image Actions" = "Image Actions";
+"General Actions" = "General Actions";
+"Resize…" = "Resize…";
+"Compress…" = "Compress…";
+"Remove Metadata" = "Remove Metadata";
+"Create PDF" = "Create PDF";
+
+"OK" = "OK";
+"Cancel" = "Cancel";
+"Save" = "Save";
+"Set" = "Set";
+"Resize" = "Resize";
+"Compress" = "Compress";
+"Rename" = "Rename";
+"Rename Shelf" = "Rename Shelf";
+"Set Accent Emoji" = "Set Accent Emoji";
+"Batch Rename" = "Batch Rename";
+"Action Failed" = "Action Failed";
+"Couldn't rename" = "Couldn't rename";
+"Archive Failed" = "Archive Failed";
+"Batch Rename Failed" = "Batch Rename Failed";
+"Resize Image" = "Resize Image";
+"Compress Image" = "Compress Image";
+"alert.shelf-rename.body" = "Leave blank to clear the custom name.";
+"alert.emoji.body" = "Type or paste a single emoji.";
+"alert.batch-rename.body" = "Use # as a placeholder for the sequence number.";
+"alert.rename.body" = "Enter the new file name (extension included).";
+"alert.action-failed.body" = "The image could not be processed.";
+"alert.resize.body" = "Max dimension in pixels. Aspect ratio is preserved.";
+"alert.compress.body" = "JPEG quality (10% – 100%). Lower = smaller file.";
+"alert.batch-renamed.title" = "Renamed %1$lld, %2$lld failed";
+"alert.zip.staging-failed" = "Could not create a staging directory: %@";
+"alert.zip.stage-failed" = "Could not stage %1$@: %2$@";
+"alert.zip.launch-failed" = "Failed to launch zip: %@";
+"alert.zip.exit-status" = "zip exited with status %lld.";
+
+"Make Searchable" = "Make Searchable";
+"Make %lld Searchable" = "Make %lld Searchable";
+"Extract Text" = "Extract Text";
+"Extract Text from %lld Items" = "Extract Text from %lld Items";
+
+"Merge %lld PDFs…" = "Merge %lld PDFs…";
+"merge.order.label" = "Pages in this order:";
+"alert.merge.unreadable" = "Couldn't read “%@”, so nothing was merged. A damaged or password-protected PDF has to be opened first.";
+
+"ocr.error.source-missing" = "OCR failed: source file no longer exists.";
+"ocr.error.source-unreadable" = "OCR failed: could not read the source.";
+"ocr.error.destination-unwritable" = "OCR failed: could not write to disk.";
+"ocr.error.recognition-failed" = "OCR failed: %@";
+"ocr.error.no-text" = "OCR found no text.";
+"ocr.error.cancelled" = "OCR cancelled.";
+
+"conversion.error.source-missing" = "Conversion failed: source file no longer exists.";
+"conversion.error.source-unreadable" = "Conversion failed: could not read the source.";
+"conversion.error.destination-unwritable" = "Conversion failed: could not write to disk.";
+"conversion.error.encoding-failed" = "Conversion failed: %@";
+"conversion.error.cancelled" = "Conversion cancelled.";
+
+"Drop files here" = "Drop files here";
+"Drop or shake here" = "Drop or shake here";
+"empty.summon-hint" = "%@ summons a shelf";
+"Loading…" = "Loading…";
+"Empty folder" = "Empty folder";
+"Reveal in Finder" = "Reveal in Finder";
+"Select All" = "Select All";
+"Deselect All" = "Deselect All";
+"Folder" = "Folder";
+"File" = "File";
+"shelf.default-name" = "Shelf";
+"%lld Files" = "%lld Files";
+"1 file" = "1 file";
+"%lld files" = "%lld files";
+"1 File" = "1 File";
+"selection.of-total" = "%1$lld of %2$lld";
+"toast.duplicate" = "One or more items is\nalready present in the shelf";
+"toast.concealed-clipboard" = "Items from a password manager\naren't added to the shelf";
+
+"rename.error.item-not-found" = "Item not found.";
+"rename.error.missing-url" = "Item has no file URL.";
+"rename.error.source-missing" = "Source no longer exists: %@";
+"rename.error.destination-exists" = "A file already exists at %@.";
+"rename.error.no-effect" = "Rename reported success but the file did not move.";
+
+"undo.clear-shelf" = "Undo Clear Shelf";
+"undo.move-to-trash" = "Undo Move to Trash";
+"undo.move-to-trash-count" = "Undo Move to Trash (%lld)";
+
+"handoff.ingest" = "Send to Claude for Filing";
+"handoff.staging-failed" = "Couldn't prepare the drop folder.\nNothing was sent.";
+"handoff.nothing-to-send" = "Nothing to send —\nno files on the shelf.";
+"handoff.no-claude" = "Couldn't open Claude.\nThe drop folder path is on your clipboard.";
+"handoff.no-receipt" = "Claude didn't confirm the drop.\nThe folder path is on your clipboard.";
+
+/* Copy for chat — the shelf as a pasteable block */
+"toast.chat-copied" = "Shelf copied — ⌘V in your chat.";
+"toast.chat-copy-empty" = "Nothing to copy —\nthe shelf is empty.";
+/* Accessibility labels, hints and tooltips */
+"a11y.close-shelf" = "Close Shelf";
+"a11y.collapse-shelf" = "Collapse Shelf";
+"a11y.back" = "Back";
+"a11y.dock-shelf" = "Dock Shelf";
+"a11y.expand-shelf" = "Expand Shelf";
+"a11y.open-shelf" = "Open Shelf";
+"a11y.pinned" = "Pinned";
+"a11y.grid-view" = "Grid View";
+"a11y.list-view" = "List View";
+"a11y.open-folder" = "Open Folder";
+"a11y.kind.image" = "Image";
+"a11y.kind.text" = "Text";
+"a11y.item.hint" = "Drag out to copy or move this item.";
+"a11y.stack.hint" = "Drag out to copy or move everything on the shelf.";
+"a11y.shelf-actions" = "Shelf actions";
+"a11y.action.show-menu" = "Show Actions";
+"a11y.action.toggle-selection" = "Toggle Selection";
+
+/* Inbound magpie:// links */
+"toast.link-refused" = "Nothing was added.\nMagpie could not use that link";
+"toast.link-rate-limited" = "Too many links at once.\nMagpie ignored the rest";
+
+/* Routes — the files on a shelf, handed to a command you wrote */
+"routes.menu" = "Routes";
+"routes.finished" = "%@ finished.";
+"routes.failed.title" = "Route Failed";
+"routes.failed.exit" = "“%1$@” stopped with exit code %2$lld.";
+"routes.failed.timeout" = "“%1$@” was still running after %2$lld seconds, so Magpie stopped it.";
+"routes.failed.launch" = "Magpie couldn't start “%1$@”. Check that %2$@ exists and can be run.";
+"routes.failed.secret" = "“%1$@” needs a secret called %2$@, which isn't in your Keychain yet. Add it in Settings.";
+"routes.failed.no-detail" = "The command printed nothing to explain why.";
+"routes.error.unreadable" = "Magpie couldn't read routes.json.";
+"routes.error.invalid-json" = "routes.json isn't valid JSON — a missing comma or an unclosed bracket is the usual cause.";
+"routes.error.shape" = "routes.json has to be an object with a “routes” list in it.";
+"routes.error.version" = "routes.json says version %1$lld; this version of Magpie reads version %2$lld.";
+"routes.error.bad-field" = "The route “%1$@” needs a valid “%2$@”.";
+"routes.error.relative-command" = "The route “%1$@” needs the full path to its command, starting with “/”. It says “%2$@”.";
+"routes.error.duplicate-id" = "Two routes share the id “%@”. Each route needs its own.";
+"routes.error.files-token" = "The route “%1$@” puts {files} inside a longer argument. Give {files} an argument of its own.";
+"settings.routes.empty" = "No routes configured.";
+"settings.routes.reveal" = "Reveal";
+"settings.routes.reload" = "Reload";
+"settings.routes.description" = "Routes run your commands on shelf files and return the output.";
+"settings.secrets.title" = "Secrets";
+"settings.secrets.empty" = "No secrets stored.";
+"settings.secrets.add" = "Add Secret…";
+"settings.secrets.delete" = "Delete";
+"settings.secrets.failed" = "Couldn't save to the Keychain.";
+"settings.secrets.description" = "Stored in Keychain and passed to routes as environment variables.";
+"alert.secret.body" = "Name it exactly as the route asks for it, for example GEMINI_API_KEY. The value goes straight into your Keychain and is never shown again.";
+
+/* Send to agent — the shelf, landed in the chat you are already in */
+"agent.section" = "Sending to an agent";
+"agent.none-installed" = "No supported agent app is installed.";
+"agent.auto-paste" = "Paste automatically";
+"agent.auto-paste.description" = "Also brings the app forward and types ⌘V. Needs Accessibility permission.";
+"agent.toast.pasted" = "Pasted into %@.";
+"agent.toast.not-installed" = "%@ isn't on this Mac.\nThe shelf is on your clipboard.";
+"agent.toast.no-accessibility" = "Magpie needs Accessibility permission to paste.\nThe shelf is on your clipboard.";
+"agent.toast.could-not-paste" = "Couldn't paste into %@.\nThe shelf is on your clipboard.";
+"agent.toast.modifiers-held" = "Let go of the shortcut keys and try again.\nThe shelf is on your clipboard.";
+
+/* Keyboard: the ⌘K action palette, and the undo ⌫ leaves behind */
+"palette.title" = "Actions";
+"palette.placeholder" = "Search actions";
+"palette.no-matches" = "No matching action.";
+"undo.remove-from-shelf" = "Undo Remove from Shelf";
+"undo.remove-from-shelf-count" = "Undo Remove from Shelf (%lld)";
+
+/* Appearance override — the shelf follows the system by default. */
+"Appearance" = "Appearance";
+"System" = "System";
+"Light" = "Light";
+"Dark" = "Dark";
+"settings.appearance.description" = "The shelf follows your Mac's Light or Dark setting. Pin it if you would rather it stayed one way whatever the system does.";
+
+
+/* Menu-bar visibility. Hiding is safe only because reopening the app opens Settings. */
+"Show Magpie in the menu bar" = "Show Magpie in the menu bar";
+"Quit Magpie" = "Quit Magpie";
+"settings.menubar.description" = "Magpie keeps running. Reopen it from Applications to return to Settings.";
+
+"Updates" = "Updates";
+"Automatically check for updates" = "Automatically check for updates";
+"settings.updates.description" = "Magpie checks for new releases in the background once a day. New versions are downloaded, verified, and installed when you click \"Install and Relaunch\".";
+
+/* Settings search: lens field at the top of the pane, focused by Cmd-F. */
+"settings.search.placeholder" = "Search settings";
+"settings.search.no-results" = "No settings match that.";
+"settings.search.clear" = "Clear search";
+
+/* Shown when the bundle carries no Sparkle public key. */
+"updates.unavailable" = "This build has no update signing key, so it cannot check for updates.";
+
+
+/* The store finally speaks: what a load found, said once per event. */
+"store.alert.quarantined.title" = "Magpie couldn't read your shelves";
+"store.alert.quarantined.body" = "The file Magpie keeps your shelves in was damaged, so Magpie set it aside and started a fresh one. Nothing was deleted — the old file is still on your Mac, and your own files were never touched.";
+"store.alert.read-only.title" = "Magpie isn't saving anything";
+"store.alert.read-only.body" = "Your shelves were last saved by a newer version of Magpie than this one. This version won't change that file, so nothing you do now will be kept. Install the newer version to carry on where you left off.";
+"store.alert.unreadable.title" = "Magpie couldn't open your shelves";
+"store.alert.unreadable.body" = "Magpie couldn't read the file it keeps your shelves in, and couldn't set it aside either. Your shelves aren't showing, and nothing you do now will be saved. Your own files were never touched.";
+
+/* Diagnostics: version, the data folder, and a blob to paste into an issue. */
+"settings.diagnostics" = "Diagnostics";
+"settings.diagnostics.version" = "Version";
+"settings.diagnostics.title" = "Support";
+"settings.diagnostics.reveal" = "Reveal data folder";
+"settings.diagnostics.copy" = "Copy diagnostics";
+"settings.diagnostics.copied" = "Copied";
+"settings.diagnostics.description" = "Copy diagnostics puts a short summary of this build and these settings on your clipboard, to paste into a bug report. It carries no file names, no shelf names and nothing you have saved. The data folder is where Magpie keeps its own files; read anything you take out of it before you send it on.";
+"settings.cache.title" = "Managed cache";
+"settings.cache.clear" = "Clear Cache";
+"settings.cache.description" = "Files dropped from temporary locations are copied into the data folder so they survive the system's cleanup. Clear Cache removes the copies no shelf shows any more; copies still on a shelf are kept, and your own files are never touched.";
+"diagnostics.logs-hint" = "To see what Magpie did recently, run this in Terminal:";
+"diagnostics.review-warning" = "Read this through before pasting it anywhere.";
+
+/* Stale drag: the drag was refused because no source file is reachable. */
+"toast.drag-missing.one" = "This file is no longer on disk,\nso there is nothing to drag.";
+"toast.drag-missing.many" = "These %lld files are no longer on disk,\nso there is nothing to drag.";
+"toast.drag-unavailable.one" = "This file is not available right now.\nIts disk may be disconnected.";
+"toast.drag-unavailable.many" = "These %lld files are not available right now.\nTheir disk may be disconnected.";
+
+/* Clear Recent Shelves: confirmation and its undo. */
+"alert.clear-all.title" = "Clear Recent Shelves?";
+"alert.clear-all.body" = "This removes %1$@ holding %2$@. Pinned shelves stay, nothing is deleted from your disk, and Undo (⌘Z) brings the shelves back.";
+"shelf-count.one" = "1 shelf";
+"shelf-count.many" = "%lld shelves";
+"undo.clear-all-shelves" = "Undo Clear Recent Shelves";
+
+/* Edit menu: key equivalents for the text fields (palette query, Settings search). */
+"Redo" = "Redo";
+"Cut" = "Cut";
+"Paste" = "Paste";
+/* A drop that is still landing: the panel-level progress bar with its cancel. */
+"ingest.importing" = "Importing…";
+
+/* Drag out of the shelf: which way this drag will land, and how to change it. */
+"drag.mode.copying" = "Copying";
+"drag.mode.moving" = "Moving";
+"drag.mode.hold-command" = "Hold ⌘ to move";
+"drag.mode.release-command" = "Release ⌘ to copy";
+
+/* Drag out with ⌘ held: the destination took a copy and the original stayed put. */
+"toast.drag-copied-instead.one" = "The destination copied this file instead of moving it.";
+"toast.drag-copied-instead.many" = "The destination copied these %lld files instead of moving them.";

@@ -1,0 +1,347 @@
+/* Chinese, Simplified (zh-Hans) translations */
+
+"Settings" = "设置";
+"Magpie Settings" = "Magpie 设置";
+"Auto-delete shelves" = "自动删除搁架";
+"Never" = "从不";
+"After 1 day" = "1 天后";
+"After 7 days" = "7 天后";
+"After 10 days" = "10 天后";
+"After 30 days" = "30 天后";
+"settings.expiry.description" = "只会删除存放在搁架内的文件。已固定的搁架永不过期。";
+"Park new shelves at the top-right corner" = "将新搁架停靠到右上角";
+"settings.park.description" = "当第一项内容落到新建搁架后,搁架会向上滑动到屏幕右上角让出位置。新搁架会在其下方垂直堆叠。";
+"Collapse expanded shelf when clicking outside" = "点击外部时收起展开的搁架";
+"settings.collapse.description" = "当搁架处于展开详情视图,你点击其他位置时,它会折叠回小药丸状态。药丸保持原位 — 已收起的搁架不会受影响。";
+"Clear the shelf after dragging out" = "拖出后清空搁架";
+"settings.clear-after-drag.description" = "当你把内容从搁架拖出、并且目标接收了它之后,被拖动的卡片也会离开搁架 — 以这种方式清空的搁架会自动关闭。你的文件不受影响:离开的只是搁架的引用。放弃的拖动不会改变任何东西。";
+/* 触发方式 */
+"Triggers" = "触发方式";
+"Shake while dragging" = "拖拽时晃动";
+"settings.trigger.shake.description" = "拖拽文件时左右晃动鼠标，光标下方就会出现一个搁架。在触控板上检测并不可靠，因此还提供了其他触发方式。";
+"Keyboard shortcut" = "键盘快捷键";
+"settings.trigger.hotkey.description" = "按下快捷键即可在光标处打开搁架。拖拽过程中按下的效果与晃动相同；单独按下时，搁架会一直保留到你关闭它。无需任何权限。";
+"Summon at the screen edge" = "在屏幕边缘呼出";
+"settings.trigger.edge.description" = "拖拽时把光标抵住所选的屏幕边缘片刻，就会出现一个搁架接住你放下的文件。如果什么都没放，它会自动消失。";
+"Click the menu bar icon" = "点击菜单栏图标";
+"settings.trigger.menubar.description" = "左键点击菜单栏图标可显示或隐藏搁架。无论此项是否开启，右键点击始终打开此菜单。";
+"edge.right" = "右边缘";
+"edge.left" = "左边缘";
+"toast.hotkey-unavailable" = "快捷键 %@ 不可用 —\n可能已被其他应用占用。";
+"Launch at login" = "登录时启动";
+"settings.launch.description" = "登录时自动启动 Magpie。我们会在 ~/Library/LaunchAgents 中安装一个 LaunchAgent — 对打包版本和未签名的开发版本都有效。";
+"Couldn't Update Login Items" = "无法更新登录项";
+
+"Language" = "语言";
+"language.system" = "系统默认";
+"settings.language.description" = "仅为本应用覆盖 macOS 的系统语言。";
+"Takes effect on next launch." = "下次启动时生效。";
+"Quit & Reopen" = "退出并重新打开";
+
+"Keep Mac Awake" = "保持 Mac 唤醒";
+"Activate for" = "持续时间";
+"Indefinitely" = "无限制";
+"5 minutes" = "5 分钟";
+"10 minutes" = "10 分钟";
+"15 minutes" = "15 分钟";
+"20 minutes" = "20 分钟";
+"1 hour" = "1 小时";
+"2 hours" = "2 小时";
+"3 hours" = "3 小时";
+"5 hours" = "5 小时";
+"New Shelf" = "新建搁架";
+"New Shelf From Clipboard" = "从剪贴板新建搁架";
+"Recent Shelves" = "最近的搁架";
+"No Recent Shelves" = "没有最近的搁架";
+"Clear Recent Shelves" = "清除最近的搁架";
+"Settings…" = "设置…";
+"Quit" = "退出";
+
+/* Auto-update */
+"Check for Updates…" = "检查更新…";
+"Updates" = "更新";
+"Automatically check for updates" = "自动检查更新";
+"settings.updates.description" = "Magpie 每天在后台检查一次新版本。点击\"安装并重新启动\"后，新版本会被下载、验证并安装。";
+
+"Open With" = "打开方式";
+"Show in Finder" = "在 Finder 中显示";
+"Quick Look" = "快速查看";
+"AirDrop" = "隔空投送";
+"Messages" = "信息";
+"Add From Clipboard" = "从剪贴板添加";
+"Copy" = "拷贝";
+"Copy %lld Files" = "拷贝 %lld 个文件";
+"All Actions" = "所有操作";
+"Shelf" = "搁架";
+"Undo" = "撤销";
+"Clear Shelf" = "清空搁架";
+"Rename Shelf…" = "重命名搁架…";
+"Name Shelf…" = "命名搁架…";
+"Pin Shelf" = "固定搁架";
+"Unpin Shelf" = "取消固定";
+"Accent" = "强调";
+"None" = "无";
+"Red" = "红色";
+"Orange" = "橙色";
+"Yellow" = "黄色";
+"Green" = "绿色";
+"Blue" = "蓝色";
+"Purple" = "紫色";
+"Pick Emoji…" = "选择表情符号…";
+"Get Info" = "显示简介";
+"Batch Rename…" = "批量重命名…";
+"Create ZIP Archive…" = "创建 ZIP 归档…";
+"Copy Path" = "拷贝路径";
+"Move to Trash" = "移到废纸篓";
+"menu.trash-count" = "将 %lld 个文件移到废纸篓";
+"menu.remove-count-from-shelf" = "从搁架移除 %lld 个文件";
+"No Applications" = "无可用应用";
+"openwith.default.suffix" = "(默认)";
+
+"Share…" = "共享…";
+"Rename…" = "重命名…";
+"Open" = "打开";
+"Duplicate" = "复制";
+"Remove from Shelf" = "从搁架移除";
+"No File" = "无文件";
+"Convert to" = "转换为";
+"Convert %lld Items to" = "将 %lld 项转换为";
+"Image Actions" = "图像操作";
+"General Actions" = "常规操作";
+"Resize…" = "调整尺寸…";
+"Compress…" = "压缩…";
+"Remove Metadata" = "移除元数据";
+"Create PDF" = "创建 PDF";
+
+"OK" = "好";
+"Cancel" = "取消";
+"Save" = "存储";
+"Set" = "设定";
+"Resize" = "调整尺寸";
+"Compress" = "压缩";
+"Rename" = "重命名";
+"Rename Shelf" = "重命名搁架";
+"Set Accent Emoji" = "设定强调表情";
+"Batch Rename" = "批量重命名";
+"Action Failed" = "操作失败";
+"Couldn't rename" = "无法重命名";
+"Archive Failed" = "归档失败";
+"Batch Rename Failed" = "批量重命名失败";
+"Resize Image" = "调整图像尺寸";
+"Compress Image" = "压缩图像";
+"alert.shelf-rename.body" = "留空可清除自定义名称。";
+"alert.emoji.body" = "输入或粘贴一个表情符号。";
+"alert.batch-rename.body" = "使用 # 作为序号占位符。";
+"alert.rename.body" = "输入新文件名(包含扩展名)。";
+"alert.action-failed.body" = "无法处理该图像。";
+"alert.resize.body" = "最大像素尺寸,长宽比保持不变。";
+"alert.compress.body" = "JPEG 质量(10% – 100%)。越低 = 文件越小。";
+"alert.batch-renamed.title" = "已重命名 %1$lld 项,%2$lld 项失败";
+"alert.zip.staging-failed" = "无法创建暂存目录:%@";
+"alert.zip.stage-failed" = "无法暂存 %1$@:%2$@";
+"alert.zip.launch-failed" = "无法启动 zip:%@";
+"alert.zip.exit-status" = "zip 退出,状态码为 %lld。";
+
+"Make Searchable" = "使可搜索";
+"Make %lld Searchable" = "使 %lld 项可搜索";
+"Extract Text" = "提取文本";
+"Extract Text from %lld Items" = "从 %lld 项中提取文本";
+
+"Merge %lld PDFs…" = "合并 %lld 个 PDF…";
+"merge.order.label" = "按此顺序排列页面：";
+"alert.merge.unreadable" = "无法读取“%@”，因此未进行合并。损坏或受密码保护的 PDF 需要先打开。";
+
+"ocr.error.source-missing" = "OCR 失败:源文件已不存在。";
+"ocr.error.source-unreadable" = "OCR 失败:无法读取源文件。";
+"ocr.error.destination-unwritable" = "OCR 失败:无法写入磁盘。";
+"ocr.error.recognition-failed" = "OCR 失败:%@";
+"ocr.error.no-text" = "OCR 未找到文本。";
+"ocr.error.cancelled" = "OCR 已取消。";
+
+"conversion.error.source-missing" = "转换失败:源文件已不存在。";
+"conversion.error.source-unreadable" = "转换失败:无法读取源文件。";
+"conversion.error.destination-unwritable" = "转换失败:无法写入磁盘。";
+"conversion.error.encoding-failed" = "转换失败:%@";
+"conversion.error.cancelled" = "已取消转换。";
+
+"Drop files here" = "将文件拖放到此处";
+"Drop or shake here" = "拖放或摇动";
+"empty.summon-hint" = "按 %@ 呼出搁架";
+"Loading…" = "载入中…";
+"Empty folder" = "空文件夹";
+"Reveal in Finder" = "在 Finder 中显示";
+"Select All" = "全选";
+"Deselect All" = "取消全选";
+"Folder" = "文件夹";
+"File" = "文件";
+"shelf.default-name" = "搁架";
+"%lld Files" = "%lld 个文件";
+"1 file" = "1 个文件";
+"%lld files" = "%lld 个文件";
+"1 File" = "1 个文件";
+"selection.of-total" = "已选 %1$lld/%2$lld";
+"toast.duplicate" = "搁架中已存在\n一个或多个项目";
+"toast.concealed-clipboard" = "来自密码管理器的项目\n不会添加到搁架";
+
+"rename.error.item-not-found" = "未找到项目。";
+"rename.error.missing-url" = "项目没有文件 URL。";
+"rename.error.source-missing" = "源文件已不存在:%@";
+"rename.error.destination-exists" = "%@ 处已存在文件。";
+"rename.error.no-effect" = "重命名报告成功,但文件并未移动。";
+
+"undo.clear-shelf" = "撤销清空搁架";
+"undo.move-to-trash" = "撤销移到废纸篓";
+"undo.move-to-trash-count" = "撤销移到废纸篓 (%lld)";
+
+"handoff.ingest" = "发送到 Claude 归档";
+"handoff.staging-failed" = "无法准备移交文件夹。\n未发送任何内容。";
+"handoff.nothing-to-send" = "没有可发送的内容 —\n搁架中没有文件。";
+"handoff.no-claude" = "无法打开 Claude。\n文件夹路径已复制到剪贴板。";
+"handoff.no-receipt" = "Claude 未确认接收。\n文件夹路径已复制到剪贴板。";
+
+/* Copy for chat — 把搁架变成可粘贴的文本块 */
+"toast.chat-copied" = "已复制搁架 — 在聊天中按 ⌘V。";
+"toast.chat-copy-empty" = "没有可复制的内容 —\n搁架是空的。";
+/* Accessibility labels, hints and tooltips */
+"a11y.close-shelf" = "关闭搁架";
+"a11y.collapse-shelf" = "收起搁架";
+"a11y.back" = "返回";
+"a11y.dock-shelf" = "将搁架停靠到屏幕边缘";
+"a11y.expand-shelf" = "展开搁架";
+"a11y.open-shelf" = "打开搁架";
+"a11y.pinned" = "已固定";
+"a11y.grid-view" = "网格视图";
+"a11y.list-view" = "列表视图";
+"a11y.open-folder" = "打开文件夹";
+"a11y.kind.image" = "图像";
+"a11y.kind.text" = "文本";
+"a11y.item.hint" = "拖出以复制或移动此项目。";
+"a11y.stack.hint" = "拖出以复制或移动搁架中的全部内容。";
+"a11y.shelf-actions" = "搁架操作";
+"a11y.action.show-menu" = "显示操作";
+"a11y.action.toggle-selection" = "切换选择";
+
+/* Inbound magpie:// links */
+"toast.link-refused" = "未添加任何内容。\nMagpie 无法使用该链接";
+"toast.link-rate-limited" = "链接过多。\nMagpie 已忽略其余部分";
+
+/* 路由 —— 把架子上的文件交给你自己写的命令 */
+"routes.menu" = "路由";
+"routes.finished" = "%@ 已完成。";
+"routes.failed.title" = "路由失败";
+"routes.failed.exit" = "“%1$@”以退出码 %2$lld 结束。";
+"routes.failed.timeout" = "“%1$@”在 %2$lld 秒后仍在运行，Magpie 已将其停止。";
+"routes.failed.launch" = "Magpie 无法启动“%1$@”。请检查 %2$@ 是否存在且可执行。";
+"routes.failed.secret" = "“%1$@”需要名为 %2$@ 的密钥，但它还不在你的钥匙串里。请在设置中添加。";
+"routes.failed.no-detail" = "该命令没有输出任何说明原因的信息。";
+"routes.error.unreadable" = "Magpie 无法读取 routes.json。";
+"routes.error.invalid-json" = "routes.json 不是有效的 JSON——通常是漏了逗号或括号没有闭合。";
+"routes.error.shape" = "routes.json 必须是一个包含“routes”列表的对象。";
+"routes.error.version" = "routes.json 写的是版本 %1$lld；此版本的 Magpie 读取版本 %2$lld。";
+"routes.error.bad-field" = "路由“%1$@”需要有效的“%2$@”。";
+"routes.error.relative-command" = "路由“%1$@”需要以“/”开头的命令完整路径。它现在写的是“%2$@”。";
+"routes.error.duplicate-id" = "两条路由共用了 id“%@”。每条路由都需要自己的 id。";
+"routes.error.files-token" = "路由“%1$@”把 {files} 放进了更长的参数里。请让 {files} 单独作为一个参数。";
+"settings.routes.empty" = "还没有路由。打开这个文件——开头列出了全部字段，还有两个已关闭的示例。";
+"settings.routes.reveal" = "显示路由文件";
+"settings.routes.reload" = "重新加载路由";
+"settings.routes.description" = "路由把架子上的文件交给你写的命令，并把命令产出的文件放回架子。编辑 routes.json 即可添加自己的路由。路由绝不会移动、重命名或删除你的文件，而且只会从你点击的菜单启动。";
+"settings.secrets.title" = "密钥";
+"settings.secrets.empty" = "尚未保存任何密钥。";
+"settings.secrets.add" = "添加密钥…";
+"settings.secrets.delete" = "删除";
+"settings.secrets.failed" = "无法保存到钥匙串。";
+"settings.secrets.description" = "路由需要的密钥保存在 macOS 钥匙串中。Magpie 只会把它们作为同名环境变量传给命令，绝不显示或记录已保存的值。";
+"alert.secret.body" = "名字要和路由要求的完全一致，例如 GEMINI_API_KEY。值会直接存入钥匙串，之后不再显示。";
+
+/* 发送给智能体 —— 把搁架直接送进正在进行的对话 */
+"agent.section" = "发送给智能体";
+"agent.none-installed" = "这台 Mac 上没有安装 Magpie 支持的智能体应用。";
+"agent.auto-paste" = "自动粘贴到当前对话";
+"agent.auto-paste.description" = "并将该 App 调至前台并键入 ⌘V。需要「辅助功能」权限。";
+"agent.toast.pasted" = "已粘贴到 %@。";
+"agent.toast.not-installed" = "这台 Mac 上没有 %@。\n搁架已复制到剪贴板。";
+"agent.toast.no-accessibility" = "粘贴需要“辅助功能”权限。\n搁架已复制到剪贴板。";
+"agent.toast.could-not-paste" = "无法粘贴到 %@。\n搁架已复制到剪贴板。";
+"agent.toast.modifiers-held" = "松开快捷键后再试一次。\n搁架已复制到剪贴板。";
+
+/* 键盘：⌘K 操作面板，以及 ⌫ 留下的撤销 */
+"palette.title" = "操作";
+"palette.placeholder" = "搜索操作";
+"palette.no-matches" = "没有匹配的操作。";
+"undo.remove-from-shelf" = "撤销“从架子移除”";
+"undo.remove-from-shelf-count" = "撤销“从架子移除”(%lld)";
+
+/* Appearance override — the shelf follows the system by default. */
+"Appearance" = "外观";
+"System" = "跟随系统";
+"Light" = "浅色";
+"Dark" = "深色";
+"settings.appearance.description" = "搁架跟随 Mac 的浅色或深色设置。如果希望它始终保持一致，可以固定下来。";
+
+
+/* Menu-bar visibility. Hiding is safe only because reopening the app opens Settings. */
+"Show Magpie in the menu bar" = "在菜单栏中显示";
+"Quit Magpie" = "退出 Magpie";
+"settings.menubar.description" = "Magpie 会继续运行，所有唤出方式照常可用。想回到这里，请从「应用程序」重新打开。";
+
+/* Settings search: lens field at the top of the pane, focused by Cmd-F. */
+"settings.search.placeholder" = "搜索设置";
+"settings.search.no-results" = "没有匹配的设置。";
+"settings.search.clear" = "清除搜索";
+
+/* Shown when the bundle carries no Sparkle public key. */
+"updates.unavailable" = "此版本没有更新签名密钥，因此无法检查更新。";
+
+
+/* The store finally speaks: what a load found, said once per event. */
+"store.alert.quarantined.title" = "Magpie 无法读取你的搁架";
+"store.alert.quarantined.body" = "存放搁架的文件已损坏，Magpie 把它移到一边并重新建了一份。没有删除任何东西：旧文件仍在你的 Mac 上，你自己的文件也从未被动过。";
+"store.alert.read-only.title" = "Magpie 现在不会保存任何内容";
+"store.alert.read-only.body" = "你的搁架上一次是由比当前更新的 Magpie 保存的。当前版本不会改动那个文件，所以你现在做的一切都不会保留。安装更新的版本，就能接着上次继续。";
+"store.alert.unreadable.title" = "Magpie 无法打开你的搁架";
+"store.alert.unreadable.body" = "Magpie 既读不了存放搁架的文件，也无法把它移到一边。搁架不会显示，你现在做的一切也不会保存。你自己的文件从未被动过。";
+
+/* Diagnostics: version, the data folder, and a blob to paste into an issue. */
+"settings.diagnostics" = "诊断信息";
+"settings.diagnostics.version" = "版本";
+"settings.diagnostics.title" = "支持";
+"settings.diagnostics.reveal" = "显示数据文件夹";
+"settings.diagnostics.copy" = "复制诊断信息";
+"settings.diagnostics.copied" = "已复制";
+"settings.diagnostics.description" = "复制诊断信息会把这个版本和这些设置的简要概况放到剪贴板，供你粘贴到问题反馈里。其中不含文件名、搁架名，也不含你保存过的任何内容。数据文件夹是 Magpie 存放自己文件的地方；从里面取出的东西，发出去之前先看一遍。";
+"settings.cache.title" = "托管缓存";
+"settings.cache.clear" = "清除缓存";
+"settings.cache.description" = "从临时位置拖入的文件会被复制到数据文件夹，以免被系统清理掉。清除缓存只会删除不再出现在任何搁架上的副本；仍在搁架上的副本会保留，你自己的文件绝不会被改动。";
+"diagnostics.logs-hint" = "想知道 Magpie 刚才做了什么，在终端里运行：";
+"diagnostics.review-warning" = "粘贴到任何地方之前，先把内容读一遍。";
+
+/* Stale drag: the drag was refused because no source file is reachable. */
+"toast.drag-missing.one" = "这个文件已不在磁盘上，\n没有可拖动的内容。";
+"toast.drag-missing.many" = "这 %lld 个文件已不在磁盘上，\n没有可拖动的内容。";
+"toast.drag-unavailable.one" = "这个文件目前不可用，\n它所在的磁盘可能未连接。";
+"toast.drag-unavailable.many" = "这 %lld 个文件目前不可用，\n它们所在的磁盘可能未连接。";
+
+/* Clear Recent Shelves: confirmation and its undo. */
+"alert.clear-all.title" = "清除最近的搁架？";
+"alert.clear-all.body" = "此操作将移除 %1$@（共 %2$@）。已固定的搁架会保留，磁盘上的文件不会被删除，撤销（⌘Z）可以找回这些搁架。";
+"shelf-count.one" = "1 个搁架";
+"shelf-count.many" = "%lld 个搁架";
+"undo.clear-all-shelves" = "撤销清除最近的搁架";
+
+/* Edit menu: key equivalents for the text fields (palette query, Settings search). */
+"Redo" = "重做";
+"Cut" = "剪切";
+"Paste" = "粘贴";
+/* A drop that is still landing: the panel-level progress bar with its cancel. */
+"ingest.importing" = "正在导入…";
+
+/* Drag out of the shelf: which way this drag will land, and how to change it. */
+"drag.mode.copying" = "复制";
+"drag.mode.moving" = "移动";
+"drag.mode.hold-command" = "按住 ⌘ 移动";
+"drag.mode.release-command" = "松开 ⌘ 复制";
+
+/* Drag out with ⌘ held: the destination took a copy and the original stayed put. */
+"toast.drag-copied-instead.one" = "目标位置复制了此文件，而不是移动它。";
+"toast.drag-copied-instead.many" = "目标位置复制了这 %lld 个文件，而不是移动它们。";

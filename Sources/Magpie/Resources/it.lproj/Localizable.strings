@@ -1,0 +1,347 @@
+/* Italian (it) translations */
+
+"Settings" = "Impostazioni";
+"Magpie Settings" = "Impostazioni Magpie";
+"Auto-delete shelves" = "Elimina automaticamente le mensole";
+"Never" = "Mai";
+"After 1 day" = "Dopo 1 giorno";
+"After 7 days" = "Dopo 7 giorni";
+"After 10 days" = "Dopo 10 giorni";
+"After 30 days" = "Dopo 30 giorni";
+"settings.expiry.description" = "Vengono eliminati solo i file salvati nella mensola. Le mensole fissate non scadono mai.";
+"Park new shelves at the top-right corner" = "Parcheggia le nuove mensole in alto a destra";
+"settings.park.description" = "Dopo il primo elemento aggiunto a una mensola appena creata, la mensola scivola in alto a destra dello schermo per non essere d’impiccio. Le nuove mensole si impilano verticalmente sotto.";
+"Collapse expanded shelf when clicking outside" = "Riduci la mensola espansa al clic fuori";
+"settings.collapse.description" = "Quando una mensola è in vista dettagliata e fai clic altrove, si ripiega in una piccola pillola. La pillola resta — le mensole ridotte non vengono toccate.";
+"Clear the shelf after dragging out" = "Svuota la mensola dopo il trascinamento";
+"settings.clear-after-drag.description" = "Quando trascini qualcosa fuori da una mensola e una destinazione lo accetta, le schede trascinate lasciano anche la mensola — e una mensola svuotata così si chiude da sola. I tuoi file restano intatti: se ne va solo il riferimento della mensola. I trascinamenti abbandonati non cambiano nulla.";
+/* Attivazione */
+"Triggers" = "Attivazione";
+"Shake while dragging" = "Scuoti mentre trascini";
+"settings.trigger.shake.description" = "Scuoti il mouse da un lato all’altro mentre trascini dei file e sotto il cursore appare una mensola. Sul trackpad il rilevamento è poco affidabile: per questo esistono gli altri metodi.";
+"Keyboard shortcut" = "Scorciatoia da tastiera";
+"settings.trigger.hotkey.description" = "Premi la scorciatoia per aprire una mensola in corrispondenza del cursore. Durante un trascinamento si comporta come lo scuotimento; premuta da sola, la mensola resta finché non la chiudi. Non servono permessi.";
+"Summon at the screen edge" = "Richiama al bordo dello schermo";
+"settings.trigger.edge.description" = "Mentre trascini, tieni il cursore contro il bordo scelto per un istante e appare una mensola pronta a ricevere il rilascio. Se non ci lasci nulla, sparisce da sola.";
+"Click the menu bar icon" = "Clic sull’icona nella barra dei menu";
+"settings.trigger.menubar.description" = "Fai clic con il tasto sinistro sull’icona nella barra dei menu per mostrare o nascondere la mensola. Il tasto destro apre sempre questo menu, che l’opzione sia attiva o no.";
+"edge.right" = "Bordo destro";
+"edge.left" = "Bordo sinistro";
+"toast.hotkey-unavailable" = "La scorciatoia %@ non è disponibile —\npotrebbe essere già usata da un’altra app.";
+"Launch at login" = "Avvia all’accesso";
+"settings.launch.description" = "Avvia Magpie automaticamente all’accesso. Installiamo un LaunchAgent in ~/Library/LaunchAgents — funziona sia con build pacchettizzate sia con build di sviluppo non firmate.";
+"Couldn't Update Login Items" = "Impossibile aggiornare gli elementi all’avvio";
+
+"Language" = "Lingua";
+"language.system" = "Predefinita di sistema";
+"settings.language.description" = "Sostituisce la lingua di sistema macOS solo per quest’app.";
+"Takes effect on next launch." = "Si applica al prossimo avvio.";
+"Quit & Reopen" = "Esci e riapri";
+
+"Keep Mac Awake" = "Tieni sveglio il Mac";
+"Activate for" = "Attiva per";
+"Indefinitely" = "A tempo indeterminato";
+"5 minutes" = "5 minuti";
+"10 minutes" = "10 minuti";
+"15 minutes" = "15 minuti";
+"20 minutes" = "20 minuti";
+"1 hour" = "1 ora";
+"2 hours" = "2 ore";
+"3 hours" = "3 ore";
+"5 hours" = "5 ore";
+"New Shelf" = "Nuova mensola";
+"New Shelf From Clipboard" = "Nuova mensola dagli Appunti";
+"Recent Shelves" = "Mensole recenti";
+"No Recent Shelves" = "Nessuna mensola recente";
+"Clear Recent Shelves" = "Pulisci mensole recenti";
+"Settings…" = "Impostazioni…";
+"Quit" = "Esci";
+
+/* Auto-update */
+"Check for Updates…" = "Cerca aggiornamenti…";
+"Updates" = "Aggiornamenti";
+"Automatically check for updates" = "Cerca automaticamente aggiornamenti";
+"settings.updates.description" = "Magpie controlla la presenza di nuove versioni in background una volta al giorno. Le nuove versioni vengono scaricate, verificate e installate quando fai clic su «Installa e riavvia».";
+
+"Open With" = "Apri con";
+"Show in Finder" = "Mostra nel Finder";
+"Quick Look" = "Visualizzazione rapida";
+"AirDrop" = "AirDrop";
+"Messages" = "Messaggi";
+"Add From Clipboard" = "Aggiungi dagli Appunti";
+"Copy" = "Copia";
+"Copy %lld Files" = "Copia %lld file";
+"All Actions" = "Tutte le azioni";
+"Shelf" = "Mensola";
+"Undo" = "Annulla";
+"Clear Shelf" = "Svuota mensola";
+"Rename Shelf…" = "Rinomina mensola…";
+"Name Shelf…" = "Dai un nome alla mensola…";
+"Pin Shelf" = "Blocca mensola";
+"Unpin Shelf" = "Sblocca mensola";
+"Accent" = "Accento";
+"None" = "Nessuno";
+"Red" = "Rosso";
+"Orange" = "Arancione";
+"Yellow" = "Giallo";
+"Green" = "Verde";
+"Blue" = "Blu";
+"Purple" = "Viola";
+"Pick Emoji…" = "Scegli emoji…";
+"Get Info" = "Ottieni informazioni";
+"Batch Rename…" = "Rinomina in batch…";
+"Create ZIP Archive…" = "Crea archivio ZIP…";
+"Copy Path" = "Copia percorso";
+"Move to Trash" = "Sposta nel Cestino";
+"menu.trash-count" = "Sposta %lld file nel Cestino";
+"menu.remove-count-from-shelf" = "Rimuovi %lld file dalla mensola";
+"No Applications" = "Nessuna applicazione";
+"openwith.default.suffix" = " (predefinita)";
+
+"Share…" = "Condividi…";
+"Rename…" = "Rinomina…";
+"Open" = "Apri";
+"Duplicate" = "Duplica";
+"Remove from Shelf" = "Rimuovi dalla mensola";
+"No File" = "Nessun file";
+"Convert to" = "Converti in";
+"Convert %lld Items to" = "Converti %lld elementi in";
+"Image Actions" = "Azioni immagine";
+"General Actions" = "Azioni generali";
+"Resize…" = "Ridimensiona…";
+"Compress…" = "Comprimi…";
+"Remove Metadata" = "Rimuovi metadati";
+"Create PDF" = "Crea PDF";
+
+"OK" = "OK";
+"Cancel" = "Annulla";
+"Save" = "Salva";
+"Set" = "Imposta";
+"Resize" = "Ridimensiona";
+"Compress" = "Comprimi";
+"Rename" = "Rinomina";
+"Rename Shelf" = "Rinomina mensola";
+"Set Accent Emoji" = "Imposta emoji d’accento";
+"Batch Rename" = "Rinomina in batch";
+"Action Failed" = "Azione non riuscita";
+"Couldn't rename" = "Impossibile rinominare";
+"Archive Failed" = "Archiviazione non riuscita";
+"Batch Rename Failed" = "Rinomina in batch non riuscita";
+"Resize Image" = "Ridimensiona immagine";
+"Compress Image" = "Comprimi immagine";
+"alert.shelf-rename.body" = "Lascia vuoto per rimuovere il nome personalizzato.";
+"alert.emoji.body" = "Digita o incolla un singolo emoji.";
+"alert.batch-rename.body" = "Usa # come segnaposto per il numero di sequenza.";
+"alert.rename.body" = "Inserisci il nuovo nome del file (estensione inclusa).";
+"alert.action-failed.body" = "Impossibile elaborare l’immagine.";
+"alert.resize.body" = "Dimensione massima in pixel. Le proporzioni vengono mantenute.";
+"alert.compress.body" = "Qualità JPEG (10 % – 100 %). Più bassa = file più piccolo.";
+"alert.batch-renamed.title" = "%1$lld rinominati, %2$lld non riusciti";
+"alert.zip.staging-failed" = "Impossibile creare la directory di preparazione: %@";
+"alert.zip.stage-failed" = "Impossibile preparare %1$@: %2$@";
+"alert.zip.launch-failed" = "Impossibile avviare zip: %@";
+"alert.zip.exit-status" = "zip terminato con stato %lld.";
+
+"Make Searchable" = "Rendi ricercabile";
+"Make %lld Searchable" = "Rendi %lld ricercabili";
+"Extract Text" = "Estrai testo";
+"Extract Text from %lld Items" = "Estrai testo da %lld elementi";
+
+"Merge %lld PDFs…" = "Unisci %lld PDF…";
+"merge.order.label" = "Pagine in quest’ordine:";
+"alert.merge.unreadable" = "Impossibile leggere «%@», quindi non è stato unito nulla. Un PDF danneggiato o protetto da password va aperto prima.";
+
+"ocr.error.source-missing" = "OCR non riuscito: il file di origine non esiste più.";
+"ocr.error.source-unreadable" = "OCR non riuscito: impossibile leggere la sorgente.";
+"ocr.error.destination-unwritable" = "OCR non riuscito: impossibile scrivere su disco.";
+"ocr.error.recognition-failed" = "OCR non riuscito: %@";
+"ocr.error.no-text" = "OCR non ha trovato testo.";
+"ocr.error.cancelled" = "OCR annullato.";
+
+"conversion.error.source-missing" = "Conversione non riuscita: il file di origine non esiste più.";
+"conversion.error.source-unreadable" = "Conversione non riuscita: impossibile leggere la sorgente.";
+"conversion.error.destination-unwritable" = "Conversione non riuscita: impossibile scrivere su disco.";
+"conversion.error.encoding-failed" = "Conversione non riuscita: %@";
+"conversion.error.cancelled" = "Conversione annullata.";
+
+"Drop files here" = "Trascina i file qui";
+"Drop or shake here" = "Trascina o scuoti qui";
+"empty.summon-hint" = "%@ richiama una mensola";
+"Loading…" = "Caricamento…";
+"Empty folder" = "Cartella vuota";
+"Reveal in Finder" = "Mostra nel Finder";
+"Select All" = "Seleziona tutto";
+"Deselect All" = "Deseleziona tutto";
+"Folder" = "Cartella";
+"File" = "File";
+"shelf.default-name" = "Mensola";
+"%lld Files" = "%lld file";
+"1 file" = "1 file";
+"%lld files" = "%lld file";
+"1 File" = "1 file";
+"selection.of-total" = "%1$lld di %2$lld";
+"toast.duplicate" = "Uno o più elementi sono già\npresenti nella mensola";
+"toast.concealed-clipboard" = "Gli elementi dei gestori di password\nnon vengono aggiunti alla mensola";
+
+"rename.error.item-not-found" = "Elemento non trovato.";
+"rename.error.missing-url" = "L’elemento non ha un URL di file.";
+"rename.error.source-missing" = "La sorgente non esiste più: %@";
+"rename.error.destination-exists" = "Esiste già un file con nome %@.";
+"rename.error.no-effect" = "La rinomina ha riportato successo ma il file non è stato spostato.";
+
+"undo.clear-shelf" = "Annulla svuota mensola";
+"undo.move-to-trash" = "Annulla sposta nel Cestino";
+"undo.move-to-trash-count" = "Annulla sposta nel Cestino (%lld)";
+
+"handoff.ingest" = "Invia a Claude per l’archiviazione";
+"handoff.staging-failed" = "Impossibile preparare la cartella di consegna.\nNon è stato inviato nulla.";
+"handoff.nothing-to-send" = "Niente da inviare —\nnessun file nella mensola.";
+"handoff.no-claude" = "Impossibile aprire Claude.\nIl percorso della cartella è negli appunti.";
+"handoff.no-receipt" = "Claude non ha confermato la consegna.\nIl percorso della cartella è negli appunti.";
+
+/* Copy for chat — la mensola come blocco da incollare */
+"toast.chat-copied" = "Mensola copiata — ⌘V nella chat.";
+"toast.chat-copy-empty" = "Niente da copiare —\nla mensola è vuota.";
+/* Accessibility labels, hints and tooltips */
+"a11y.close-shelf" = "Chiudi mensola";
+"a11y.collapse-shelf" = "Riduci mensola";
+"a11y.back" = "Indietro";
+"a11y.dock-shelf" = "Aggancia mensola";
+"a11y.expand-shelf" = "Espandi mensola";
+"a11y.open-shelf" = "Apri mensola";
+"a11y.pinned" = "Bloccato";
+"a11y.grid-view" = "Vista a griglia";
+"a11y.list-view" = "Vista a elenco";
+"a11y.open-folder" = "Apri cartella";
+"a11y.kind.image" = "Immagine";
+"a11y.kind.text" = "Testo";
+"a11y.item.hint" = "Trascina fuori per copiare o spostare questo elemento.";
+"a11y.stack.hint" = "Trascina fuori per copiare o spostare tutto il contenuto della mensola.";
+"a11y.shelf-actions" = "Azioni mensola";
+"a11y.action.show-menu" = "Mostra azioni";
+"a11y.action.toggle-selection" = "Seleziona o deseleziona";
+
+/* Inbound magpie:// links */
+"toast.link-refused" = "Non è stato aggiunto nulla.\nMagpie non ha potuto usare quel link";
+"toast.link-rate-limited" = "Troppi link insieme.\nMagpie ha ignorato il resto";
+
+/* Percorsi — i file di una mensola, affidati a un comando scritto da te */
+"routes.menu" = "Percorsi";
+"routes.finished" = "%@ ha finito.";
+"routes.failed.title" = "Percorso non riuscito";
+"routes.failed.exit" = "«%1$@» si è chiuso con codice di uscita %2$lld.";
+"routes.failed.timeout" = "«%1$@» era ancora in esecuzione dopo %2$lld secondi, così Magpie l'ha fermato.";
+"routes.failed.launch" = "Magpie non è riuscita ad avviare «%1$@». Controlla che %2$@ esista e sia eseguibile.";
+"routes.failed.secret" = "«%1$@» ha bisogno di un segreto chiamato %2$@, che non è ancora nel portachiavi. Aggiungilo nelle Impostazioni.";
+"routes.failed.no-detail" = "Il comando non ha stampato nulla che spieghi il motivo.";
+"routes.error.unreadable" = "Magpie non è riuscita a leggere routes.json.";
+"routes.error.invalid-json" = "routes.json non è JSON valido: di solito manca una virgola o una parentesi non è chiusa.";
+"routes.error.shape" = "routes.json deve essere un oggetto con dentro un elenco «routes».";
+"routes.error.version" = "routes.json dichiara la versione %1$lld; questa versione di Magpie legge la versione %2$lld.";
+"routes.error.bad-field" = "Il percorso «%1$@» ha bisogno di un «%2$@» valido.";
+"routes.error.relative-command" = "Il percorso «%1$@» ha bisogno del percorso completo del suo comando, che inizi con «/». Adesso dice «%2$@».";
+"routes.error.duplicate-id" = "Due percorsi hanno lo stesso id «%@». Ogni percorso ne vuole uno suo.";
+"routes.error.files-token" = "Il percorso «%1$@» mette {files} dentro un argomento più lungo. Dai a {files} un argomento tutto suo.";
+"settings.routes.empty" = "Ancora nessun percorso. Apri il file: inizia con l'elenco dei campi e due esempi disattivati.";
+"settings.routes.reveal" = "Mostra il file dei percorsi";
+"settings.routes.reload" = "Ricarica i percorsi";
+"settings.routes.description" = "Un percorso affida i file di una mensola a un comando che hai scritto tu e rimette sulla mensola quello che produce. Aggiungi i tuoi modificando routes.json. Un percorso non sposta, rinomina o elimina mai i tuoi file, e parte solo da un menu su cui hai cliccato.";
+"settings.secrets.title" = "Segreti";
+"settings.secrets.empty" = "Nessun segreto salvato.";
+"settings.secrets.add" = "Aggiungi segreto…";
+"settings.secrets.delete" = "Elimina";
+"settings.secrets.failed" = "Impossibile salvare nel portachiavi.";
+"settings.secrets.description" = "Le chiavi che servono ai tuoi percorsi restano nel portachiavi di macOS. Magpie le passa al comando come variabili d'ambiente con lo stesso nome e non mostra né registra mai un valore salvato.";
+"alert.secret.body" = "Chiamalo esattamente come lo chiede il percorso, per esempio GEMINI_API_KEY. Il valore va dritto nel portachiavi e non viene più mostrato.";
+
+/* Invia a un agente — la mensola, dritta nella chat che hai già aperta */
+"agent.section" = "Invia a un agente";
+"agent.none-installed" = "Su questo Mac non c’è nessuna app di agente che Magpie conosca.";
+"agent.auto-paste" = "Incolla automaticamente nella chat aperta";
+"agent.auto-paste.description" = "Porta anche l'app in primo piano e digita ⌘V. Richiede il permesso Accessibilità.";
+"agent.toast.pasted" = "Incollata in %@.";
+"agent.toast.not-installed" = "%@ non c’è su questo Mac.\nLa mensola è negli appunti.";
+"agent.toast.no-accessibility" = "A Magpie serve il permesso di Accessibilità per incollare.\nLa mensola è negli appunti.";
+"agent.toast.could-not-paste" = "Impossibile incollare in %@.\nLa mensola è negli appunti.";
+"agent.toast.modifiers-held" = "Lascia i tasti della scorciatoia e riprova.\nLa mensola è negli appunti.";
+
+/* Tastiera: la palette delle azioni (⌘K) e l’annulla che lascia ⌫ */
+"palette.title" = "Azioni";
+"palette.placeholder" = "Cerca azioni";
+"palette.no-matches" = "Nessuna azione corrispondente.";
+"undo.remove-from-shelf" = "Annulla rimozione dalla mensola";
+"undo.remove-from-shelf-count" = "Annulla rimozione dalla mensola (%lld)";
+
+/* Appearance override — the shelf follows the system by default. */
+"Appearance" = "Aspetto";
+"System" = "Sistema";
+"Light" = "Chiaro";
+"Dark" = "Scuro";
+"settings.appearance.description" = "La mensola segue l'impostazione Chiaro o Scuro del tuo Mac. Bloccala se preferisci che resti sempre uguale.";
+
+
+/* Menu-bar visibility. Hiding is safe only because reopening the app opens Settings. */
+"Show Magpie in the menu bar" = "Mostra nella barra dei menu";
+"Quit Magpie" = "Esci da Magpie";
+"settings.menubar.description" = "Magpie resta attivo e tutte le scorciatoie funzionano. Riaprilo da Applicazioni per tornare qui.";
+
+/* Settings search: lens field at the top of the pane, focused by Cmd-F. */
+"settings.search.placeholder" = "Cerca nelle impostazioni";
+"settings.search.no-results" = "Nessuna impostazione corrisponde.";
+"settings.search.clear" = "Cancella ricerca";
+
+/* Shown when the bundle carries no Sparkle public key. */
+"updates.unavailable" = "Questa build non ha una chiave di firma, quindi non può cercare aggiornamenti.";
+
+
+/* The store finally speaks: what a load found, said once per event. */
+"store.alert.quarantined.title" = "Magpie non è riuscito a leggere le tue mensole";
+"store.alert.quarantined.body" = "Il file in cui Magpie salva le tue mensole era danneggiato, quindi Magpie lo ha messo da parte e ne ha creato uno nuovo. Non è stato cancellato nulla: il vecchio file è ancora sul tuo Mac e i tuoi file non sono mai stati toccati.";
+"store.alert.read-only.title" = "Magpie non sta salvando nulla";
+"store.alert.read-only.body" = "Le tue mensole sono state salvate l'ultima volta da una versione di Magpie più recente di questa. Questa versione non modificherà quel file, quindi nulla di ciò che fai adesso verrà conservato. Installa la versione più recente per riprendere da dove eri rimasto.";
+"store.alert.unreadable.title" = "Magpie non è riuscito ad aprire le tue mensole";
+"store.alert.unreadable.body" = "Magpie non è riuscito a leggere il file in cui salva le tue mensole, né a metterlo da parte. Le tue mensole non compaiono e nulla di ciò che fai adesso verrà salvato. I tuoi file non sono mai stati toccati.";
+
+/* Diagnostics: version, the data folder, and a blob to paste into an issue. */
+"settings.diagnostics" = "Diagnostica";
+"settings.diagnostics.version" = "Versione";
+"settings.diagnostics.title" = "Assistenza";
+"settings.diagnostics.reveal" = "Mostra cartella dati";
+"settings.diagnostics.copy" = "Copia diagnostica";
+"settings.diagnostics.copied" = "Copiato";
+"settings.diagnostics.description" = "Copia diagnostica mette negli appunti un breve riepilogo di questa versione e di queste impostazioni, da incollare in una segnalazione. Non contiene nomi di file, nomi di mensole né nulla di ciò che hai salvato. Nella cartella dati Magpie tiene i propri file; rileggi qualsiasi cosa ne tiri fuori prima di inviarla.";
+"settings.cache.title" = "Cache gestita";
+"settings.cache.clear" = "Svuota la cache";
+"settings.cache.description" = "I file trascinati da posizioni temporanee vengono copiati nella cartella dati, così sopravvivono alle pulizie del sistema. Svuota la cache rimuove le copie che nessuna mensola mostra più; le copie ancora su una mensola restano, e i tuoi file non vengono mai toccati.";
+"diagnostics.logs-hint" = "Per vedere cosa ha fatto Magpie di recente, esegui questo nel Terminale:";
+"diagnostics.review-warning" = "Rileggi tutto prima di incollarlo da qualche parte.";
+
+/* Stale drag: the drag was refused because no source file is reachable. */
+"toast.drag-missing.one" = "Questo file non è più sul disco,\nquindi non c’è nulla da trascinare.";
+"toast.drag-missing.many" = "Questi %lld file non sono più sul disco,\nquindi non c’è nulla da trascinare.";
+"toast.drag-unavailable.one" = "Questo file al momento non è disponibile.\nIl suo disco potrebbe essere scollegato.";
+"toast.drag-unavailable.many" = "Questi %lld file al momento non sono disponibili.\nIl loro disco potrebbe essere scollegato.";
+
+/* Clear Recent Shelves: confirmation and its undo. */
+"alert.clear-all.title" = "Pulire le mensole recenti?";
+"alert.clear-all.body" = "Questa azione rimuove %1$@ con %2$@. Le mensole fissate restano, nulla viene eliminato dal disco, e Annulla (⌘Z) riporta le mensole.";
+"shelf-count.one" = "1 mensola";
+"shelf-count.many" = "%lld mensole";
+"undo.clear-all-shelves" = "Annulla pulizia mensole recenti";
+
+/* Edit menu: key equivalents for the text fields (palette query, Settings search). */
+"Redo" = "Ripristina";
+"Cut" = "Taglia";
+"Paste" = "Incolla";
+/* A drop that is still landing: the panel-level progress bar with its cancel. */
+"ingest.importing" = "Importazione…";
+
+/* Drag out of the shelf: which way this drag will land, and how to change it. */
+"drag.mode.copying" = "Copia";
+"drag.mode.moving" = "Spostamento";
+"drag.mode.hold-command" = "Tieni premuto ⌘ per spostare";
+"drag.mode.release-command" = "Rilascia ⌘ per copiare";
+
+/* Drag out with ⌘ held: the destination took a copy and the original stayed put. */
+"toast.drag-copied-instead.one" = "La destinazione ha copiato questo file invece di spostarlo.";
+"toast.drag-copied-instead.many" = "La destinazione ha copiato questi %lld file invece di spostarli.";

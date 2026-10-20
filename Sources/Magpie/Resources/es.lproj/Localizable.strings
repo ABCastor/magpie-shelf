@@ -1,0 +1,347 @@
+/* Spanish (es) translations */
+
+"Settings" = "Ajustes";
+"Magpie Settings" = "Ajustes de Magpie";
+"Auto-delete shelves" = "Eliminar estantes automáticamente";
+"Never" = "Nunca";
+"After 1 day" = "Después de 1 día";
+"After 7 days" = "Después de 7 días";
+"After 10 days" = "Después de 10 días";
+"After 30 days" = "Después de 30 días";
+"settings.expiry.description" = "Solo se eliminan los archivos guardados dentro de la estantería. Las fijadas nunca caducan.";
+"Park new shelves at the top-right corner" = "Aparcar nuevos estantes en la esquina superior derecha";
+"settings.park.description" = "Tras el primer elemento añadido a un estante recién creado, el estante se desplaza a la esquina superior derecha y se aparta. Los nuevos estantes se apilan verticalmente debajo.";
+"Collapse expanded shelf when clicking outside" = "Contraer estante expandido al hacer clic fuera";
+"settings.collapse.description" = "Cuando un estante está en vista detallada y haces clic en otro lugar, se pliega a una pequeña píldora. La píldora se mantiene — los estantes contraídos no se ven afectados.";
+"Clear the shelf after dragging out" = "Vaciar el estante al arrastrar fuera";
+"settings.clear-after-drag.description" = "Cuando arrastras algo fuera de un estante y un destino lo acepta, las tarjetas arrastradas también salen del estante — y un estante vaciado así se cierra solo. Tus archivos no se tocan: solo se va la referencia del estante. Los arrastres abandonados no cambian nada.";
+/* Activadores */
+"Triggers" = "Activadores";
+"Shake while dragging" = "Agitar al arrastrar";
+"settings.trigger.shake.description" = "Agita el ratón de lado a lado mientras arrastras archivos y aparecerá un estante bajo el cursor. La detección es poco fiable en un trackpad; por eso existen los demás activadores.";
+"Keyboard shortcut" = "Atajo de teclado";
+"settings.trigger.hotkey.description" = "Pulsa el atajo para abrir un estante en el cursor. Durante un arrastre se comporta como la sacudida; por sí solo, el estante permanece hasta que lo cierras. No requiere permisos.";
+"Summon at the screen edge" = "Invocar en el borde de la pantalla";
+"settings.trigger.edge.description" = "Mientras arrastras, mantén el cursor contra el borde elegido un momento y aparecerá un estante para recibir lo que sueltes. Si no sueltas nada, desaparece solo.";
+"Click the menu bar icon" = "Clic en el icono de la barra de menús";
+"settings.trigger.menubar.description" = "Haz clic izquierdo en el icono de la barra de menús para mostrar u ocultar el estante. El clic derecho siempre abre este menú, esté activado o no.";
+"edge.right" = "Borde derecho";
+"edge.left" = "Borde izquierdo";
+"toast.hotkey-unavailable" = "El atajo %@ no está disponible —\nes posible que otra app ya lo use.";
+"Launch at login" = "Abrir al iniciar sesión";
+"settings.launch.description" = "Inicia Magpie automáticamente al iniciar sesión. Instalamos un LaunchAgent en ~/Library/LaunchAgents — funciona tanto con compilaciones empaquetadas como con builds de desarrollo sin firmar.";
+"Couldn't Update Login Items" = "No se han podido actualizar los ítems de inicio";
+
+"Language" = "Idioma";
+"language.system" = "Predeterminado del sistema";
+"settings.language.description" = "Sustituye el idioma del sistema macOS solo para esta app.";
+"Takes effect on next launch." = "Se aplicará en el próximo arranque.";
+"Quit & Reopen" = "Salir y reabrir";
+
+"Keep Mac Awake" = "Mantener el Mac activo";
+"Activate for" = "Activar durante";
+"Indefinitely" = "Indefinidamente";
+"5 minutes" = "5 minutos";
+"10 minutes" = "10 minutos";
+"15 minutes" = "15 minutos";
+"20 minutes" = "20 minutos";
+"1 hour" = "1 hora";
+"2 hours" = "2 horas";
+"3 hours" = "3 horas";
+"5 hours" = "5 horas";
+"New Shelf" = "Nuevo estante";
+"New Shelf From Clipboard" = "Nuevo estante desde portapapeles";
+"Recent Shelves" = "Estantes recientes";
+"No Recent Shelves" = "Sin estantes recientes";
+"Clear Recent Shelves" = "Borrar estantes recientes";
+"Settings…" = "Ajustes…";
+"Quit" = "Salir";
+
+/* Auto-update */
+"Check for Updates…" = "Buscar actualizaciones…";
+"Updates" = "Actualizaciones";
+"Automatically check for updates" = "Buscar actualizaciones automáticamente";
+"settings.updates.description" = "Magpie busca nuevas versiones en segundo plano una vez al día. Las nuevas versiones se descargan, verifican e instalan al hacer clic en «Instalar y reiniciar».";
+
+"Open With" = "Abrir con";
+"Show in Finder" = "Mostrar en el Finder";
+"Quick Look" = "Vista rápida";
+"AirDrop" = "AirDrop";
+"Messages" = "Mensajes";
+"Add From Clipboard" = "Añadir desde portapapeles";
+"Copy" = "Copiar";
+"Copy %lld Files" = "Copiar %lld archivos";
+"All Actions" = "Todas las acciones";
+"Shelf" = "Estante";
+"Undo" = "Deshacer";
+"Clear Shelf" = "Vaciar estante";
+"Rename Shelf…" = "Renombrar estante…";
+"Name Shelf…" = "Nombrar estante…";
+"Pin Shelf" = "Fijar estante";
+"Unpin Shelf" = "Soltar estante";
+"Accent" = "Acento";
+"None" = "Ninguno";
+"Red" = "Rojo";
+"Orange" = "Naranja";
+"Yellow" = "Amarillo";
+"Green" = "Verde";
+"Blue" = "Azul";
+"Purple" = "Morado";
+"Pick Emoji…" = "Elegir emoji…";
+"Get Info" = "Obtener información";
+"Batch Rename…" = "Renombrar por lotes…";
+"Create ZIP Archive…" = "Crear archivo ZIP…";
+"Copy Path" = "Copiar ruta";
+"Move to Trash" = "Mover a la papelera";
+"menu.trash-count" = "Mover %lld archivos a la papelera";
+"menu.remove-count-from-shelf" = "Quitar %lld archivos del estante";
+"No Applications" = "Sin aplicaciones";
+"openwith.default.suffix" = " (predeterminado)";
+
+"Share…" = "Compartir…";
+"Rename…" = "Renombrar…";
+"Open" = "Abrir";
+"Duplicate" = "Duplicar";
+"Remove from Shelf" = "Quitar del estante";
+"No File" = "Sin archivo";
+"Convert to" = "Convertir a";
+"Convert %lld Items to" = "Convertir %lld ítems a";
+"Image Actions" = "Acciones de imagen";
+"General Actions" = "Acciones generales";
+"Resize…" = "Cambiar tamaño…";
+"Compress…" = "Comprimir…";
+"Remove Metadata" = "Eliminar metadatos";
+"Create PDF" = "Crear PDF";
+
+"OK" = "OK";
+"Cancel" = "Cancelar";
+"Save" = "Guardar";
+"Set" = "Establecer";
+"Resize" = "Cambiar tamaño";
+"Compress" = "Comprimir";
+"Rename" = "Renombrar";
+"Rename Shelf" = "Renombrar estante";
+"Set Accent Emoji" = "Establecer emoji de acento";
+"Batch Rename" = "Renombrar por lotes";
+"Action Failed" = "Acción fallida";
+"Couldn't rename" = "No se pudo renombrar";
+"Archive Failed" = "Archivado fallido";
+"Batch Rename Failed" = "Renombrado por lotes fallido";
+"Resize Image" = "Cambiar tamaño de imagen";
+"Compress Image" = "Comprimir imagen";
+"alert.shelf-rename.body" = "Déjalo en blanco para borrar el nombre personalizado.";
+"alert.emoji.body" = "Escribe o pega un único emoji.";
+"alert.batch-rename.body" = "Usa # como marcador del número de secuencia.";
+"alert.rename.body" = "Introduce el nuevo nombre de archivo (extensión incluida).";
+"alert.action-failed.body" = "No se ha podido procesar la imagen.";
+"alert.resize.body" = "Dimensión máxima en píxeles. Se conserva la relación de aspecto.";
+"alert.compress.body" = "Calidad JPEG (10 % – 100 %). Menor = archivo más pequeño.";
+"alert.batch-renamed.title" = "%1$lld renombrados, %2$lld fallidos";
+"alert.zip.staging-failed" = "No se pudo crear el directorio de preparación: %@";
+"alert.zip.stage-failed" = "No se pudo preparar %1$@: %2$@";
+"alert.zip.launch-failed" = "No se pudo iniciar zip: %@";
+"alert.zip.exit-status" = "zip ha terminado con código %lld.";
+
+"Make Searchable" = "Hacer buscable";
+"Make %lld Searchable" = "Hacer %lld buscables";
+"Extract Text" = "Extraer texto";
+"Extract Text from %lld Items" = "Extraer texto de %lld ítems";
+
+"Merge %lld PDFs…" = "Combinar %lld PDF…";
+"merge.order.label" = "Páginas en este orden:";
+"alert.merge.unreadable" = "No se pudo leer «%@», así que no se combinó nada. Un PDF dañado o protegido con contraseña debe abrirse primero.";
+
+"ocr.error.source-missing" = "OCR fallido: el archivo origen ya no existe.";
+"ocr.error.source-unreadable" = "OCR fallido: no se pudo leer la fuente.";
+"ocr.error.destination-unwritable" = "OCR fallido: no se pudo escribir en disco.";
+"ocr.error.recognition-failed" = "OCR fallido: %@";
+"ocr.error.no-text" = "OCR no encontró texto.";
+"ocr.error.cancelled" = "OCR cancelado.";
+
+"conversion.error.source-missing" = "Conversión fallida: el archivo origen ya no existe.";
+"conversion.error.source-unreadable" = "Conversión fallida: no se pudo leer la fuente.";
+"conversion.error.destination-unwritable" = "Conversión fallida: no se pudo escribir en disco.";
+"conversion.error.encoding-failed" = "Conversión fallida: %@";
+"conversion.error.cancelled" = "Conversión cancelada.";
+
+"Drop files here" = "Suelta archivos aquí";
+"Drop or shake here" = "Suelta o agita aquí";
+"empty.summon-hint" = "%@ invoca un estante";
+"Loading…" = "Cargando…";
+"Empty folder" = "Carpeta vacía";
+"Reveal in Finder" = "Mostrar en el Finder";
+"Select All" = "Seleccionar todo";
+"Deselect All" = "Anular selección";
+"Folder" = "Carpeta";
+"File" = "Archivo";
+"shelf.default-name" = "Estante";
+"%lld Files" = "%lld archivos";
+"1 file" = "1 archivo";
+"%lld files" = "%lld archivos";
+"1 File" = "1 archivo";
+"selection.of-total" = "%1$lld de %2$lld";
+"toast.duplicate" = "Uno o más elementos\nya están en el estante";
+"toast.concealed-clipboard" = "Los elementos de un gestor de\ncontraseñas no se añaden al estante";
+
+"rename.error.item-not-found" = "Elemento no encontrado.";
+"rename.error.missing-url" = "El elemento no tiene URL de archivo.";
+"rename.error.source-missing" = "La fuente ya no existe: %@";
+"rename.error.destination-exists" = "Ya existe un archivo en %@.";
+"rename.error.no-effect" = "El renombrado dijo que tuvo éxito, pero el archivo no se movió.";
+
+"undo.clear-shelf" = "Deshacer vaciar estante";
+"undo.move-to-trash" = "Deshacer mover a la papelera";
+"undo.move-to-trash-count" = "Deshacer mover a la papelera (%lld)";
+
+"handoff.ingest" = "Enviar a Claude para archivar";
+"handoff.staging-failed" = "No se pudo preparar la carpeta de entrega.\nNo se envió nada.";
+"handoff.nothing-to-send" = "Nada que enviar —\nno hay archivos en el estante.";
+"handoff.no-claude" = "No se pudo abrir Claude.\nLa ruta de la carpeta está en el portapapeles.";
+"handoff.no-receipt" = "Claude no confirmó la entrega.\nLa ruta de la carpeta está en el portapapeles.";
+
+/* Copy for chat — el estante como bloque pegable */
+"toast.chat-copied" = "Estante copiado — pulsa ⌘V en tu chat.";
+"toast.chat-copy-empty" = "Nada que copiar —\nel estante está vacío.";
+/* Accessibility labels, hints and tooltips */
+"a11y.close-shelf" = "Cerrar estante";
+"a11y.collapse-shelf" = "Contraer estante";
+"a11y.back" = "Atrás";
+"a11y.dock-shelf" = "Acoplar estante";
+"a11y.expand-shelf" = "Expandir estante";
+"a11y.open-shelf" = "Abrir estante";
+"a11y.pinned" = "Fijado";
+"a11y.grid-view" = "Vista de cuadrícula";
+"a11y.list-view" = "Vista de lista";
+"a11y.open-folder" = "Abrir carpeta";
+"a11y.kind.image" = "Imagen";
+"a11y.kind.text" = "Texto";
+"a11y.item.hint" = "Arrastra fuera para copiar o mover este elemento.";
+"a11y.stack.hint" = "Arrastra fuera para copiar o mover todo el estante.";
+"a11y.shelf-actions" = "Acciones de la estantería";
+"a11y.action.show-menu" = "Mostrar acciones";
+"a11y.action.toggle-selection" = "Alternar selección";
+
+/* Inbound magpie:// links */
+"toast.link-refused" = "No se añadió nada.\nMagpie no pudo usar ese enlace";
+"toast.link-rate-limited" = "Demasiados enlaces a la vez.\nMagpie ignoró el resto";
+
+/* Rutas — los archivos de un estante, entregados a un comando que tú escribiste */
+"routes.menu" = "Rutas";
+"routes.finished" = "%@ ha terminado.";
+"routes.failed.title" = "La ruta falló";
+"routes.failed.exit" = "«%1$@» terminó con el código de salida %2$lld.";
+"routes.failed.timeout" = "«%1$@» seguía ejecutándose tras %2$lld segundos, así que Magpie lo detuvo.";
+"routes.failed.launch" = "Magpie no pudo iniciar «%1$@». Comprueba que %2$@ existe y se puede ejecutar.";
+"routes.failed.secret" = "«%1$@» necesita un secreto llamado %2$@, que aún no está en tu Llavero. Añádelo en Ajustes.";
+"routes.failed.no-detail" = "El comando no imprimió nada que explique el motivo.";
+"routes.error.unreadable" = "Magpie no pudo leer routes.json.";
+"routes.error.invalid-json" = "routes.json no es JSON válido: casi siempre falta una coma o queda un corchete sin cerrar.";
+"routes.error.shape" = "routes.json debe ser un objeto con una lista «routes».";
+"routes.error.version" = "routes.json indica la versión %1$lld; esta versión de Magpie lee la versión %2$lld.";
+"routes.error.bad-field" = "La ruta «%1$@» necesita un «%2$@» válido.";
+"routes.error.relative-command" = "La ruta «%1$@» necesita la ruta completa de su comando, empezando por «/». Ahí pone «%2$@».";
+"routes.error.duplicate-id" = "Dos rutas comparten el id «%@». Cada ruta necesita el suyo.";
+"routes.error.files-token" = "La ruta «%1$@» pone {files} dentro de un argumento más largo. Dale a {files} un argumento propio.";
+"settings.routes.empty" = "Todavía no hay rutas. Abre el archivo: empieza con la lista de campos y dos ejemplos desactivados.";
+"settings.routes.reveal" = "Mostrar el archivo de rutas";
+"settings.routes.reload" = "Recargar rutas";
+"settings.routes.description" = "Una ruta entrega los archivos de un estante a un comando que tú escribiste y devuelve al estante lo que ese comando produzca. Añade las tuyas editando routes.json. Una ruta nunca mueve, renombra ni elimina tus archivos, y solo se ejecuta desde un menú que has pulsado.";
+"settings.secrets.title" = "Secretos";
+"settings.secrets.empty" = "No hay secretos guardados.";
+"settings.secrets.add" = "Añadir secreto…";
+"settings.secrets.delete" = "Eliminar";
+"settings.secrets.failed" = "No se pudo guardar en el Llavero.";
+"settings.secrets.description" = "Las claves que necesitan tus rutas se guardan en el Llavero de macOS. Magpie pasa cada una al comando como variable de entorno con el mismo nombre, y nunca muestra ni registra un valor guardado.";
+"alert.secret.body" = "Ponle exactamente el nombre que pide la ruta, por ejemplo GEMINI_API_KEY. El valor va directo a tu Llavero y no se vuelve a mostrar.";
+
+/* Enviar a un agente — el estante, directo en el chat que ya tienes abierto */
+"agent.section" = "Enviar a un agente";
+"agent.none-installed" = "En este Mac no hay ninguna app de agente que Magpie reconozca.";
+"agent.auto-paste" = "Pegar automáticamente en el chat abierto";
+"agent.auto-paste.description" = "Además trae la app al frente y escribe ⌘V. Requiere permiso de Accesibilidad.";
+"agent.toast.pasted" = "Pegado en %@.";
+"agent.toast.not-installed" = "%@ no está en este Mac.\nEl estante está en el portapapeles.";
+"agent.toast.no-accessibility" = "Magpie necesita el permiso de Accesibilidad para pegar.\nEl estante está en el portapapeles.";
+"agent.toast.could-not-paste" = "No se pudo pegar en %@.\nEl estante está en el portapapeles.";
+"agent.toast.modifiers-held" = "Suelta las teclas del atajo e inténtalo de nuevo.\nEl estante está en el portapapeles.";
+
+/* Teclado: la paleta de acciones (⌘K) y el deshacer que deja ⌫ */
+"palette.title" = "Acciones";
+"palette.placeholder" = "Buscar acciones";
+"palette.no-matches" = "Ninguna acción coincide.";
+"undo.remove-from-shelf" = "Deshacer quitar del estante";
+"undo.remove-from-shelf-count" = "Deshacer quitar del estante (%lld)";
+
+/* Appearance override — the shelf follows the system by default. */
+"Appearance" = "Apariencia";
+"System" = "Sistema";
+"Light" = "Claro";
+"Dark" = "Oscuro";
+"settings.appearance.description" = "La estantería sigue el ajuste Claro u Oscuro de tu Mac. Fíjala si prefieres que se mantenga igual pase lo que pase.";
+
+
+/* Menu-bar visibility. Hiding is safe only because reopening the app opens Settings. */
+"Show Magpie in the menu bar" = "Mostrar en la barra de menús";
+"Quit Magpie" = "Salir de Magpie";
+"settings.menubar.description" = "Magpie sigue funcionando y todos los atajos siguen activos. Ábrelo de nuevo desde Aplicaciones para volver aquí.";
+
+/* Settings search: lens field at the top of the pane, focused by Cmd-F. */
+"settings.search.placeholder" = "Buscar en ajustes";
+"settings.search.no-results" = "Ningún ajuste coincide.";
+"settings.search.clear" = "Borrar búsqueda";
+
+/* Shown when the bundle carries no Sparkle public key. */
+"updates.unavailable" = "Esta compilación no tiene clave de firma, por lo que no puede buscar actualizaciones.";
+
+
+/* The store finally speaks: what a load found, said once per event. */
+"store.alert.quarantined.title" = "Magpie no ha podido leer tus estantes";
+"store.alert.quarantined.body" = "El archivo donde Magpie guarda tus estantes estaba dañado, así que lo ha apartado y ha empezado uno nuevo. No se ha borrado nada: el archivo antiguo sigue en tu Mac y tus propios archivos no se han tocado.";
+"store.alert.read-only.title" = "Magpie no está guardando nada";
+"store.alert.read-only.body" = "Tus estantes se guardaron por última vez con una versión de Magpie más nueva que esta. Esta versión no va a modificar ese archivo, así que nada de lo que hagas ahora se conservará. Instala la versión más nueva para seguir donde lo dejaste.";
+"store.alert.unreadable.title" = "Magpie no ha podido abrir tus estantes";
+"store.alert.unreadable.body" = "Magpie no ha podido leer el archivo donde guarda tus estantes, ni tampoco apartarlo. Tus estantes no aparecen y nada de lo que hagas ahora se guardará. Tus propios archivos no se han tocado.";
+
+/* Diagnostics: version, the data folder, and a blob to paste into an issue. */
+"settings.diagnostics" = "Diagnóstico";
+"settings.diagnostics.version" = "Versión";
+"settings.diagnostics.title" = "Soporte";
+"settings.diagnostics.reveal" = "Mostrar carpeta de datos";
+"settings.diagnostics.copy" = "Copiar diagnóstico";
+"settings.diagnostics.copied" = "Copiado";
+"settings.diagnostics.description" = "Copiar diagnóstico pone en el portapapeles un breve resumen de esta versión y de estos ajustes, para pegarlo en un informe de error. No incluye nombres de archivo, ni nombres de estantes, ni nada de lo que hayas guardado. En la carpeta de datos Magpie guarda sus propios archivos; revisa lo que saques de ahí antes de enviarlo.";
+"settings.cache.title" = "Caché gestionada";
+"settings.cache.clear" = "Vaciar caché";
+"settings.cache.description" = "Los archivos arrastrados desde ubicaciones temporales se copian en la carpeta de datos para que sobrevivan a la limpieza del sistema. Vaciar caché elimina las copias que ya no muestra ningún estante; las copias que siguen en un estante se conservan, y tus propios archivos nunca se tocan.";
+"diagnostics.logs-hint" = "Para ver lo que ha hecho Magpie hace poco, ejecuta esto en Terminal:";
+"diagnostics.review-warning" = "Léelo entero antes de pegarlo en ningún sitio.";
+
+/* Stale drag: the drag was refused because no source file is reachable. */
+"toast.drag-missing.one" = "Este archivo ya no está en el disco,\nasí que no hay nada que arrastrar.";
+"toast.drag-missing.many" = "Estos %lld archivos ya no están en el disco,\nasí que no hay nada que arrastrar.";
+"toast.drag-unavailable.one" = "Este archivo no está disponible ahora.\nSu disco puede estar desconectado.";
+"toast.drag-unavailable.many" = "Estos %lld archivos no están disponibles ahora.\nSu disco puede estar desconectado.";
+
+/* Clear Recent Shelves: confirmation and its undo. */
+"alert.clear-all.title" = "¿Borrar los estantes recientes?";
+"alert.clear-all.body" = "Esto quita %1$@ con %2$@. Los estantes fijados se conservan, no se borra nada del disco, y Deshacer (⌘Z) recupera los estantes.";
+"shelf-count.one" = "1 estante";
+"shelf-count.many" = "%lld estantes";
+"undo.clear-all-shelves" = "Deshacer borrar estantes recientes";
+
+/* Edit menu: key equivalents for the text fields (palette query, Settings search). */
+"Redo" = "Rehacer";
+"Cut" = "Cortar";
+"Paste" = "Pegar";
+/* A drop that is still landing: the panel-level progress bar with its cancel. */
+"ingest.importing" = "Importando…";
+
+/* Drag out of the shelf: which way this drag will land, and how to change it. */
+"drag.mode.copying" = "Copiando";
+"drag.mode.moving" = "Moviendo";
+"drag.mode.hold-command" = "Mantén ⌘ para mover";
+"drag.mode.release-command" = "Suelta ⌘ para copiar";
+
+/* Drag out with ⌘ held: the destination took a copy and the original stayed put. */
+"toast.drag-copied-instead.one" = "El destino copió este archivo en lugar de moverlo.";
+"toast.drag-copied-instead.many" = "El destino copió estos %lld archivos en lugar de moverlos.";

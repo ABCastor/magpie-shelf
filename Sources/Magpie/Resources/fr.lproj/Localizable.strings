@@ -1,0 +1,347 @@
+/* French (fr) translations */
+
+"Settings" = "Réglages";
+"Magpie Settings" = "Réglages de Magpie";
+"Auto-delete shelves" = "Suppression automatique des étagères";
+"Never" = "Jamais";
+"After 1 day" = "Après 1 jour";
+"After 7 days" = "Après 7 jours";
+"After 10 days" = "Après 10 jours";
+"After 30 days" = "Après 30 jours";
+"settings.expiry.description" = "Seuls les fichiers stockés dans l'étagère sont supprimés. Les étagères épinglées n'expirent jamais.";
+"Park new shelves at the top-right corner" = "Parquer les nouvelles étagères en haut à droite";
+"settings.park.description" = "Après le premier dépôt sur une étagère récemment créée, l’étagère glisse vers le coin supérieur droit pour libérer la place. Les nouvelles étagères s’empilent verticalement en dessous.";
+"Collapse expanded shelf when clicking outside" = "Réduire l’étagère étendue lors d’un clic à l’extérieur";
+"settings.collapse.description" = "Lorsqu’une étagère est en vue détaillée et que vous cliquez ailleurs, elle se replie en petite pastille. La pastille reste — les étagères repliées ne sont pas affectées.";
+"Clear the shelf after dragging out" = "Vider l’étagère après un glisser-déposer";
+"settings.clear-after-drag.description" = "Quand vous faites glisser un élément hors d’une étagère et qu’une destination l’accepte, les cartes glissées quittent aussi l’étagère — et une étagère ainsi vidée se ferme d’elle-même. Vos fichiers ne sont pas touchés : seule la référence de l’étagère disparaît. Un glisser abandonné ne change rien.";
+/* Déclencheurs */
+"Triggers" = "Déclencheurs";
+"Shake while dragging" = "Secouer pendant le glissement";
+"settings.trigger.shake.description" = "Secouez la souris de gauche à droite pendant que vous faites glisser des fichiers et une étagère apparaît sous le curseur. La détection est peu fiable sur un trackpad, d’où les autres déclencheurs.";
+"Keyboard shortcut" = "Raccourci clavier";
+"settings.trigger.hotkey.description" = "Appuyez sur le raccourci pour ouvrir une étagère au curseur. Pendant un glissement, il agit comme la secousse ; utilisé seul, l’étagère reste jusqu’à ce que vous la fermiez. Aucune autorisation requise.";
+"Summon at the screen edge" = "Appeler au bord de l’écran";
+"settings.trigger.edge.description" = "Pendant un glissement, maintenez le curseur contre le bord choisi un instant et une étagère apparaît pour recevoir le dépôt. Si vous n’y déposez rien, elle disparaît d’elle-même.";
+"Click the menu bar icon" = "Cliquer sur l’icône de la barre des menus";
+"settings.trigger.menubar.description" = "Cliquez à gauche sur l’icône de la barre des menus pour afficher ou masquer l’étagère. Le clic droit ouvre toujours ce menu, que cette option soit activée ou non.";
+"edge.right" = "Bord droit";
+"edge.left" = "Bord gauche";
+"toast.hotkey-unavailable" = "Le raccourci %@ est indisponible —\nune autre app l’utilise peut-être déjà.";
+"Launch at login" = "Lancer à l’ouverture de session";
+"settings.launch.description" = "Lance Magpie automatiquement à l’ouverture de session. Nous installons un LaunchAgent dans ~/Library/LaunchAgents — fonctionne pour les versions packagées comme pour les versions de développement non signées.";
+"Couldn't Update Login Items" = "Impossible de mettre à jour les éléments d’ouverture de session";
+
+"Language" = "Langue";
+"language.system" = "Langue du système";
+"settings.language.description" = "Remplace la langue système de macOS pour cette app uniquement.";
+"Takes effect on next launch." = "Prend effet au prochain lancement.";
+"Quit & Reopen" = "Quitter et rouvrir";
+
+"Keep Mac Awake" = "Garder le Mac actif";
+"Activate for" = "Activer pendant";
+"Indefinitely" = "Indéfiniment";
+"5 minutes" = "5 minutes";
+"10 minutes" = "10 minutes";
+"15 minutes" = "15 minutes";
+"20 minutes" = "20 minutes";
+"1 hour" = "1 heure";
+"2 hours" = "2 heures";
+"3 hours" = "3 heures";
+"5 hours" = "5 heures";
+"New Shelf" = "Nouvelle étagère";
+"New Shelf From Clipboard" = "Nouvelle étagère depuis le presse-papiers";
+"Recent Shelves" = "Étagères récentes";
+"No Recent Shelves" = "Aucune étagère récente";
+"Clear Recent Shelves" = "Effacer les étagères récentes";
+"Settings…" = "Réglages…";
+"Quit" = "Quitter";
+
+/* Auto-update */
+"Check for Updates…" = "Rechercher les mises à jour…";
+"Updates" = "Mises à jour";
+"Automatically check for updates" = "Rechercher automatiquement les mises à jour";
+"settings.updates.description" = "Magpie recherche de nouvelles versions en arrière-plan une fois par jour. Les nouvelles versions sont téléchargées, vérifiées et installées lorsque vous cliquez sur « Installer et relancer ».";
+
+"Open With" = "Ouvrir avec";
+"Show in Finder" = "Afficher dans le Finder";
+"Quick Look" = "Coup d’œil";
+"AirDrop" = "AirDrop";
+"Messages" = "Messages";
+"Add From Clipboard" = "Ajouter depuis le presse-papiers";
+"Copy" = "Copier";
+"Copy %lld Files" = "Copier %lld fichiers";
+"All Actions" = "Toutes les actions";
+"Shelf" = "Étagère";
+"Undo" = "Annuler";
+"Clear Shelf" = "Vider l’étagère";
+"Rename Shelf…" = "Renommer l’étagère…";
+"Name Shelf…" = "Nommer l’étagère…";
+"Pin Shelf" = "Épingler l’étagère";
+"Unpin Shelf" = "Détacher l’étagère";
+"Accent" = "Accent";
+"None" = "Aucun";
+"Red" = "Rouge";
+"Orange" = "Orange";
+"Yellow" = "Jaune";
+"Green" = "Vert";
+"Blue" = "Bleu";
+"Purple" = "Violet";
+"Pick Emoji…" = "Choisir un emoji…";
+"Get Info" = "Lire les informations";
+"Batch Rename…" = "Renommer par lot…";
+"Create ZIP Archive…" = "Créer une archive ZIP…";
+"Copy Path" = "Copier le chemin";
+"Move to Trash" = "Mettre à la corbeille";
+"menu.trash-count" = "Mettre %lld fichiers à la corbeille";
+"menu.remove-count-from-shelf" = "Retirer %lld fichiers de l’étagère";
+"No Applications" = "Aucune application";
+"openwith.default.suffix" = " (par défaut)";
+
+"Share…" = "Partager…";
+"Rename…" = "Renommer…";
+"Open" = "Ouvrir";
+"Duplicate" = "Dupliquer";
+"Remove from Shelf" = "Retirer de l’étagère";
+"No File" = "Aucun fichier";
+"Convert to" = "Convertir en";
+"Convert %lld Items to" = "Convertir %lld éléments en";
+"Image Actions" = "Actions sur l’image";
+"General Actions" = "Actions générales";
+"Resize…" = "Redimensionner…";
+"Compress…" = "Compresser…";
+"Remove Metadata" = "Supprimer les métadonnées";
+"Create PDF" = "Créer un PDF";
+
+"OK" = "OK";
+"Cancel" = "Annuler";
+"Save" = "Enregistrer";
+"Set" = "Définir";
+"Resize" = "Redimensionner";
+"Compress" = "Compresser";
+"Rename" = "Renommer";
+"Rename Shelf" = "Renommer l’étagère";
+"Set Accent Emoji" = "Définir l’emoji d’accent";
+"Batch Rename" = "Renommer par lot";
+"Action Failed" = "Échec de l’action";
+"Couldn't rename" = "Renommage impossible";
+"Archive Failed" = "Échec de l’archivage";
+"Batch Rename Failed" = "Échec du renommage par lot";
+"Resize Image" = "Redimensionner l’image";
+"Compress Image" = "Compresser l’image";
+"alert.shelf-rename.body" = "Laissez vide pour supprimer le nom personnalisé.";
+"alert.emoji.body" = "Tapez ou collez un seul emoji.";
+"alert.batch-rename.body" = "Utilisez # comme espace réservé pour le numéro de séquence.";
+"alert.rename.body" = "Saisissez le nouveau nom de fichier (extension incluse).";
+"alert.action-failed.body" = "L’image n’a pas pu être traitée.";
+"alert.resize.body" = "Dimension maximale en pixels. Le ratio est conservé.";
+"alert.compress.body" = "Qualité JPEG (10 % – 100 %). Plus bas = fichier plus petit.";
+"alert.batch-renamed.title" = "%1$lld renommés, %2$lld en échec";
+"alert.zip.staging-failed" = "Impossible de créer un dossier de préparation : %@";
+"alert.zip.stage-failed" = "Impossible de préparer %1$@ : %2$@";
+"alert.zip.launch-failed" = "Impossible de lancer zip : %@";
+"alert.zip.exit-status" = "zip s’est terminé avec le code %lld.";
+
+"Make Searchable" = "Rendre cherchable";
+"Make %lld Searchable" = "Rendre %lld cherchables";
+"Extract Text" = "Extraire le texte";
+"Extract Text from %lld Items" = "Extraire le texte de %lld éléments";
+
+"Merge %lld PDFs…" = "Fusionner %lld PDF…";
+"merge.order.label" = "Pages dans cet ordre :";
+"alert.merge.unreadable" = "Impossible de lire « %@ », rien n’a été fusionné. Un PDF endommagé ou protégé par mot de passe doit d’abord être ouvert.";
+
+"ocr.error.source-missing" = "Échec de l’OCR : le fichier source n’existe plus.";
+"ocr.error.source-unreadable" = "Échec de l’OCR : impossible de lire la source.";
+"ocr.error.destination-unwritable" = "Échec de l’OCR : impossible d’écrire sur le disque.";
+"ocr.error.recognition-failed" = "Échec de l’OCR : %@";
+"ocr.error.no-text" = "L’OCR n’a trouvé aucun texte.";
+"ocr.error.cancelled" = "OCR annulé.";
+
+"conversion.error.source-missing" = "Échec de la conversion : le fichier source n’existe plus.";
+"conversion.error.source-unreadable" = "Échec de la conversion : impossible de lire la source.";
+"conversion.error.destination-unwritable" = "Échec de la conversion : impossible d’écrire sur le disque.";
+"conversion.error.encoding-failed" = "Échec de la conversion : %@";
+"conversion.error.cancelled" = "Conversion annulée.";
+
+"Drop files here" = "Déposez les fichiers ici";
+"Drop or shake here" = "Déposez ou secouez ici";
+"empty.summon-hint" = "%@ appelle une étagère";
+"Loading…" = "Chargement…";
+"Empty folder" = "Dossier vide";
+"Reveal in Finder" = "Afficher dans le Finder";
+"Select All" = "Tout sélectionner";
+"Deselect All" = "Tout désélectionner";
+"Folder" = "Dossier";
+"File" = "Fichier";
+"shelf.default-name" = "Étagère";
+"%lld Files" = "%lld fichiers";
+"1 file" = "1 fichier";
+"%lld files" = "%lld fichiers";
+"1 File" = "1 fichier";
+"selection.of-total" = "%1$lld sur %2$lld";
+"toast.duplicate" = "Au moins un élément est déjà\nprésent dans l’étagère";
+"toast.concealed-clipboard" = "Les éléments d’un gestionnaire de\nmots de passe ne sont pas ajoutés";
+
+"rename.error.item-not-found" = "Élément introuvable.";
+"rename.error.missing-url" = "L’élément n’a pas d’URL de fichier.";
+"rename.error.source-missing" = "La source n’existe plus : %@";
+"rename.error.destination-exists" = "Un fichier portant le nom %@ existe déjà.";
+"rename.error.no-effect" = "Le renommage a signalé une réussite, mais le fichier n’a pas été déplacé.";
+
+"undo.clear-shelf" = "Annuler le vidage de l’étagère";
+"undo.move-to-trash" = "Annuler la mise à la corbeille";
+"undo.move-to-trash-count" = "Annuler la mise à la corbeille (%lld)";
+
+"handoff.ingest" = "Envoyer à Claude pour classement";
+"handoff.staging-failed" = "Impossible de préparer le dossier de transfert.\nRien n’a été envoyé.";
+"handoff.nothing-to-send" = "Rien à envoyer —\naucun fichier dans l’étagère.";
+"handoff.no-claude" = "Impossible d’ouvrir Claude.\nLe chemin du dossier est dans le presse-papiers.";
+"handoff.no-receipt" = "Claude n’a pas confirmé le transfert.\nLe chemin du dossier est dans le presse-papiers.";
+
+/* Copy for chat — l’étagère sous forme de bloc à coller */
+"toast.chat-copied" = "Étagère copiée — ⌘V dans votre chat.";
+"toast.chat-copy-empty" = "Rien à copier —\nl’étagère est vide.";
+/* Accessibility labels, hints and tooltips */
+"a11y.close-shelf" = "Fermer l’étagère";
+"a11y.collapse-shelf" = "Réduire l’étagère";
+"a11y.back" = "Retour";
+"a11y.dock-shelf" = "Ancrer l’étagère";
+"a11y.expand-shelf" = "Déplier l’étagère";
+"a11y.open-shelf" = "Ouvrir l’étagère";
+"a11y.pinned" = "Épinglé";
+"a11y.grid-view" = "Vue en grille";
+"a11y.list-view" = "Vue en liste";
+"a11y.open-folder" = "Ouvrir le dossier";
+"a11y.kind.image" = "Image";
+"a11y.kind.text" = "Texte";
+"a11y.item.hint" = "Faites glisser hors de l’étagère pour copier ou déplacer cet élément.";
+"a11y.stack.hint" = "Faites glisser hors de l’étagère pour copier ou déplacer tout son contenu.";
+"a11y.shelf-actions" = "Actions de l'étagère";
+"a11y.action.show-menu" = "Afficher les actions";
+"a11y.action.toggle-selection" = "Basculer la sélection";
+
+/* Inbound magpie:// links */
+"toast.link-refused" = "Rien n’a été ajouté.\nMagpie n’a pas pu utiliser ce lien";
+"toast.link-rate-limited" = "Trop de liens à la fois.\nMagpie a ignoré le reste";
+
+/* Routes — les fichiers d'une étagère, confiés à une commande que vous avez écrite */
+"routes.menu" = "Routes";
+"routes.finished" = "%@ est terminée.";
+"routes.failed.title" = "Échec de la route";
+"routes.failed.exit" = "« %1$@ » s'est arrêtée avec le code de sortie %2$lld.";
+"routes.failed.timeout" = "« %1$@ » tournait encore après %2$lld secondes, Magpie l'a donc arrêtée.";
+"routes.failed.launch" = "Magpie n'a pas pu lancer « %1$@ ». Vérifiez que %2$@ existe et est exécutable.";
+"routes.failed.secret" = "« %1$@ » a besoin d'un secret nommé %2$@, qui n'est pas encore dans votre trousseau. Ajoutez-le dans les Réglages.";
+"routes.failed.no-detail" = "La commande n'a rien affiché pour expliquer pourquoi.";
+"routes.error.unreadable" = "Magpie n'a pas pu lire routes.json.";
+"routes.error.invalid-json" = "routes.json n'est pas du JSON valide — une virgule manquante ou un crochet non fermé est la cause habituelle.";
+"routes.error.shape" = "routes.json doit être un objet contenant une liste « routes ».";
+"routes.error.version" = "routes.json indique la version %1$lld ; cette version de Magpie lit la version %2$lld.";
+"routes.error.bad-field" = "La route « %1$@ » a besoin d'un « %2$@ » valide.";
+"routes.error.relative-command" = "La route « %1$@ » a besoin du chemin complet de sa commande, commençant par « / ». Elle indique « %2$@ ».";
+"routes.error.duplicate-id" = "Deux routes partagent l'id « %@ ». Chaque route a besoin du sien.";
+"routes.error.files-token" = "La route « %1$@ » met {files} à l'intérieur d'un argument plus long. Donnez à {files} un argument à lui seul.";
+"settings.routes.empty" = "Aucune route pour l'instant. Ouvrez le fichier : il commence par la liste des champs et deux exemples désactivés.";
+"settings.routes.reveal" = "Afficher le fichier des routes";
+"settings.routes.reload" = "Recharger les routes";
+"settings.routes.description" = "Une route confie les fichiers d'une étagère à une commande que vous avez écrite, et remet sur l'étagère ce qu'elle produit. Ajoutez les vôtres en modifiant routes.json. Une route ne déplace, ne renomme et ne supprime jamais vos fichiers, et ne démarre que depuis un menu sur lequel vous avez cliqué.";
+"settings.secrets.title" = "Secrets";
+"settings.secrets.empty" = "Aucun secret enregistré.";
+"settings.secrets.add" = "Ajouter un secret…";
+"settings.secrets.delete" = "Supprimer";
+"settings.secrets.failed" = "Impossible d'enregistrer dans le trousseau.";
+"settings.secrets.description" = "Les clés dont vos routes ont besoin restent dans le trousseau macOS. Magpie transmet chacune à la commande comme variable d'environnement du même nom, et n'affiche ni ne journalise jamais une valeur enregistrée.";
+"alert.secret.body" = "Nommez-le exactement comme la route le demande, par exemple GEMINI_API_KEY. La valeur va directement dans votre trousseau et n'est plus jamais affichée.";
+
+/* Envoyer à un agent — l’étagère, directement dans la conversation en cours */
+"agent.section" = "Envoyer à un agent";
+"agent.none-installed" = "Aucune app d’agent connue de Magpie n’est installée sur ce Mac.";
+"agent.auto-paste" = "Coller automatiquement dans la conversation ouverte";
+"agent.auto-paste.description" = "Met aussi l'app au premier plan et tape ⌘V. Nécessite l'autorisation d'Accessibilité.";
+"agent.toast.pasted" = "Collé dans %@.";
+"agent.toast.not-installed" = "%@ n’est pas sur ce Mac.\nL’étagère est dans le presse-papiers.";
+"agent.toast.no-accessibility" = "Magpie a besoin de l’autorisation d’Accessibilité pour coller.\nL’étagère est dans le presse-papiers.";
+"agent.toast.could-not-paste" = "Impossible de coller dans %@.\nL’étagère est dans le presse-papiers.";
+"agent.toast.modifiers-held" = "Relâchez les touches du raccourci et réessayez.\nL’étagère est dans le presse-papiers.";
+
+/* Clavier : la palette d’actions (⌘K) et l’annulation laissée par ⌫ */
+"palette.title" = "Actions";
+"palette.placeholder" = "Rechercher une action";
+"palette.no-matches" = "Aucune action correspondante.";
+"undo.remove-from-shelf" = "Annuler le retrait de l’étagère";
+"undo.remove-from-shelf-count" = "Annuler le retrait de l’étagère (%lld)";
+
+/* Appearance override — the shelf follows the system by default. */
+"Appearance" = "Apparence";
+"System" = "Système";
+"Light" = "Clair";
+"Dark" = "Sombre";
+"settings.appearance.description" = "L'étagère suit le réglage Clair ou Sombre de votre Mac. Fixez-la si vous préférez qu'elle reste identique quoi qu'il arrive.";
+
+
+/* Menu-bar visibility. Hiding is safe only because reopening the app opens Settings. */
+"Show Magpie in the menu bar" = "Afficher dans la barre des menus";
+"Quit Magpie" = "Quitter Magpie";
+"settings.menubar.description" = "Magpie continue de tourner et tous les déclencheurs restent actifs. Rouvrez-le depuis Applications pour revenir ici.";
+
+/* Settings search: lens field at the top of the pane, focused by Cmd-F. */
+"settings.search.placeholder" = "Rechercher dans les réglages";
+"settings.search.no-results" = "Aucun réglage ne correspond.";
+"settings.search.clear" = "Effacer la recherche";
+
+/* Shown when the bundle carries no Sparkle public key. */
+"updates.unavailable" = "Cette version n'a pas de clé de signature et ne peut donc pas rechercher de mises à jour.";
+
+
+/* The store finally speaks: what a load found, said once per event. */
+"store.alert.quarantined.title" = "Magpie n'a pas pu lire vos étagères";
+"store.alert.quarantined.body" = "Le fichier dans lequel Magpie enregistre vos étagères était endommagé : Magpie l'a mis de côté et en a créé un neuf. Rien n'a été supprimé — l'ancien fichier est toujours sur votre Mac, et vos propres fichiers n'ont jamais été touchés.";
+"store.alert.read-only.title" = "Magpie n'enregistre plus rien";
+"store.alert.read-only.body" = "Vos étagères ont été enregistrées par une version de Magpie plus récente que celle-ci. Cette version ne modifiera pas ce fichier : rien de ce que vous faites maintenant ne sera conservé. Installez la version plus récente pour reprendre où vous en étiez.";
+"store.alert.unreadable.title" = "Magpie n'a pas pu ouvrir vos étagères";
+"store.alert.unreadable.body" = "Magpie n'a pas pu lire le fichier de vos étagères, ni le mettre de côté. Vos étagères ne s'affichent pas et rien de ce que vous faites maintenant ne sera enregistré. Vos propres fichiers n'ont jamais été touchés.";
+
+/* Diagnostics: version, the data folder, and a blob to paste into an issue. */
+"settings.diagnostics" = "Diagnostic";
+"settings.diagnostics.version" = "Version";
+"settings.diagnostics.title" = "Assistance";
+"settings.diagnostics.reveal" = "Afficher le dossier de données";
+"settings.diagnostics.copy" = "Copier le diagnostic";
+"settings.diagnostics.copied" = "Copié";
+"settings.diagnostics.description" = "Copier le diagnostic place dans le presse-papiers un résumé de cette version et de ces réglages, à coller dans un rapport de bogue. Il ne contient aucun nom de fichier, aucun nom d'étagère et rien de ce que vous avez enregistré. Le dossier de données est là où Magpie range ses propres fichiers ; relisez ce que vous en sortez avant de l'envoyer.";
+"settings.cache.title" = "Cache géré";
+"settings.cache.clear" = "Vider le cache";
+"settings.cache.description" = "Les fichiers déposés depuis des emplacements temporaires sont copiés dans le dossier de données pour survivre au nettoyage du système. Vider le cache supprime les copies qu'aucune étagère n'affiche plus ; les copies encore présentes sur une étagère sont conservées, et vos propres fichiers ne sont jamais touchés.";
+"diagnostics.logs-hint" = "Pour voir ce que Magpie a fait récemment, lancez ceci dans Terminal :";
+"diagnostics.review-warning" = "Relisez ce texte avant de le coller où que ce soit.";
+
+/* Stale drag: the drag was refused because no source file is reachable. */
+"toast.drag-missing.one" = "Ce fichier n’est plus sur le disque,\nil n’y a donc rien à glisser.";
+"toast.drag-missing.many" = "Ces %lld fichiers ne sont plus sur le disque,\nil n’y a donc rien à glisser.";
+"toast.drag-unavailable.one" = "Ce fichier n’est pas disponible pour l’instant.\nSon disque est peut-être déconnecté.";
+"toast.drag-unavailable.many" = "Ces %lld fichiers ne sont pas disponibles pour l’instant.\nLeur disque est peut-être déconnecté.";
+
+/* Clear Recent Shelves: confirmation and its undo. */
+"alert.clear-all.title" = "Effacer les étagères récentes ?";
+"alert.clear-all.body" = "Cette action retire %1$@ contenant %2$@. Les étagères épinglées restent, rien n’est supprimé du disque, et Annuler (⌘Z) fait revenir les étagères.";
+"shelf-count.one" = "1 étagère";
+"shelf-count.many" = "%lld étagères";
+"undo.clear-all-shelves" = "Annuler l’effacement des étagères récentes";
+
+/* Edit menu: key equivalents for the text fields (palette query, Settings search). */
+"Redo" = "Rétablir";
+"Cut" = "Couper";
+"Paste" = "Coller";
+/* A drop that is still landing: the panel-level progress bar with its cancel. */
+"ingest.importing" = "Importation…";
+
+/* Drag out of the shelf: which way this drag will land, and how to change it. */
+"drag.mode.copying" = "Copie";
+"drag.mode.moving" = "Déplacement";
+"drag.mode.hold-command" = "Maintenez ⌘ pour déplacer";
+"drag.mode.release-command" = "Relâchez ⌘ pour copier";
+
+/* Drag out with ⌘ held: the destination took a copy and the original stayed put. */
+"toast.drag-copied-instead.one" = "La destination a copié ce fichier au lieu de le déplacer.";
+"toast.drag-copied-instead.many" = "La destination a copié ces %lld fichiers au lieu de les déplacer.";

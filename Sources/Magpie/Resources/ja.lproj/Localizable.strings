@@ -1,0 +1,347 @@
+/* Japanese (ja) translations */
+
+"Settings" = "設定";
+"Magpie Settings" = "Magpie の設定";
+"Auto-delete shelves" = "シェルフを自動削除";
+"Never" = "しない";
+"After 1 day" = "1日後";
+"After 7 days" = "7日後";
+"After 10 days" = "10日後";
+"After 30 days" = "30日後";
+"settings.expiry.description" = "削除されるのはシェルフ内に保存したファイルだけです。ピン留めしたシェルフは期限切れになりません。";
+"Park new shelves at the top-right corner" = "新しいシェルフを右上に格納する";
+"settings.park.description" = "新規シェルフに最初の項目が落ちると、シェルフは右上にスライドして退避します。新しいシェルフはその下に縦に積まれます。";
+"Collapse expanded shelf when clicking outside" = "外側をクリックしたら展開シェルフを折りたたむ";
+"settings.collapse.description" = "シェルフが展開表示中に別の場所をクリックすると、小さなピル状に折りたたまれます。ピルはその場に残ります — 折りたたみ済みのシェルフは影響を受けません。";
+"Clear the shelf after dragging out" = "ドラッグして出したらシェルフを空にする";
+"settings.clear-after-drag.description" = "シェルフから何かをドラッグして出し、ドロップ先が受け取ると、ドラッグしたカードもシェルフから消えます — そうして空になったシェルフは自動的に閉じます。ファイル自体はそのままで、消えるのはシェルフ側の参照だけです。途中でやめたドラッグでは何も変わりません。";
+/* 呼び出し方法 */
+"Triggers" = "呼び出し方法";
+"Shake while dragging" = "ドラッグ中に振る";
+"settings.trigger.shake.description" = "ファイルをドラッグしながらマウスを左右に振ると、カーソルの下にシェルフが表示されます。トラックパッドでは検出が不安定なため、他の呼び出し方法も用意しています。";
+"Keyboard shortcut" = "キーボードショートカット";
+"settings.trigger.hotkey.description" = "ショートカットを押すと、カーソルの位置にシェルフを開きます。ドラッグ中に押した場合は振る操作と同じ動作になり、単独で押した場合は閉じるまで残ります。権限は不要です。";
+"Summon at the screen edge" = "画面の端で呼び出す";
+"settings.trigger.edge.description" = "ドラッグ中にカーソルを選択した画面の端へ少しの間押し当てると、ドロップを受け取るシェルフが表示されます。何もドロップしなければ自動的に消えます。";
+"Click the menu bar icon" = "メニューバーアイコンをクリック";
+"settings.trigger.menubar.description" = "メニューバーアイコンを左クリックするとシェルフを表示/非表示にします。右クリックは、この設定に関わらず常にこのメニューを開きます。";
+"edge.right" = "右端";
+"edge.left" = "左端";
+"toast.hotkey-unavailable" = "ショートカット %@ は使用できません。\n他のアプリが使用している可能性があります。";
+"Launch at login" = "ログイン時に起動";
+"settings.launch.description" = "ログイン時に Magpie を自動起動します。~/Library/LaunchAgents に LaunchAgent をインストールします — パッケージ版でも未署名の開発ビルドでも動作します。";
+"Couldn't Update Login Items" = "ログイン項目を更新できませんでした";
+
+"Language" = "言語";
+"language.system" = "システムのデフォルト";
+"settings.language.description" = "このアプリでのみ macOS のシステム言語を上書きします。";
+"Takes effect on next launch." = "次回起動時に反映されます。";
+"Quit & Reopen" = "終了して再起動";
+
+"Keep Mac Awake" = "Mac をスリープさせない";
+"Activate for" = "有効にする時間";
+"Indefinitely" = "無期限";
+"5 minutes" = "5分";
+"10 minutes" = "10分";
+"15 minutes" = "15分";
+"20 minutes" = "20分";
+"1 hour" = "1時間";
+"2 hours" = "2時間";
+"3 hours" = "3時間";
+"5 hours" = "5時間";
+"New Shelf" = "新規シェルフ";
+"New Shelf From Clipboard" = "クリップボードから新規シェルフ";
+"Recent Shelves" = "最近のシェルフ";
+"No Recent Shelves" = "最近のシェルフなし";
+"Clear Recent Shelves" = "最近のシェルフをクリア";
+"Settings…" = "設定…";
+"Quit" = "終了";
+
+/* Auto-update */
+"Check for Updates…" = "アップデートを確認…";
+"Updates" = "アップデート";
+"Automatically check for updates" = "アップデートを自動的に確認";
+"settings.updates.description" = "Magpie は1日1回、バックグラウンドで新しいリリースを確認します。「インストールして再起動」をクリックすると、新バージョンがダウンロード、検証、インストールされます。";
+
+"Open With" = "このアプリケーションで開く";
+"Show in Finder" = "Finder で表示";
+"Quick Look" = "クイックルック";
+"AirDrop" = "AirDrop";
+"Messages" = "メッセージ";
+"Add From Clipboard" = "クリップボードから追加";
+"Copy" = "コピー";
+"Copy %lld Files" = "%lld 件のファイルをコピー";
+"All Actions" = "すべてのアクション";
+"Shelf" = "シェルフ";
+"Undo" = "取り消す";
+"Clear Shelf" = "シェルフをクリア";
+"Rename Shelf…" = "シェルフ名を変更…";
+"Name Shelf…" = "シェルフに名前を付ける…";
+"Pin Shelf" = "シェルフをピン留め";
+"Unpin Shelf" = "シェルフのピンを外す";
+"Accent" = "アクセント";
+"None" = "なし";
+"Red" = "レッド";
+"Orange" = "オレンジ";
+"Yellow" = "イエロー";
+"Green" = "グリーン";
+"Blue" = "ブルー";
+"Purple" = "パープル";
+"Pick Emoji…" = "絵文字を選択…";
+"Get Info" = "情報を見る";
+"Batch Rename…" = "一括リネーム…";
+"Create ZIP Archive…" = "ZIP アーカイブを作成…";
+"Copy Path" = "パスをコピー";
+"Move to Trash" = "ゴミ箱に入れる";
+"menu.trash-count" = "%lld 件のファイルをゴミ箱に入れる";
+"menu.remove-count-from-shelf" = "%lld 件のファイルをシェルフから削除";
+"No Applications" = "アプリケーションがありません";
+"openwith.default.suffix" = "(デフォルト)";
+
+"Share…" = "共有…";
+"Rename…" = "名前を変更…";
+"Open" = "開く";
+"Duplicate" = "複製";
+"Remove from Shelf" = "シェルフから削除";
+"No File" = "ファイルなし";
+"Convert to" = "変換";
+"Convert %lld Items to" = "%lld 件を変換";
+"Image Actions" = "画像アクション";
+"General Actions" = "一般アクション";
+"Resize…" = "サイズ変更…";
+"Compress…" = "圧縮…";
+"Remove Metadata" = "メタデータを削除";
+"Create PDF" = "PDF を作成";
+
+"OK" = "OK";
+"Cancel" = "キャンセル";
+"Save" = "保存";
+"Set" = "設定";
+"Resize" = "サイズ変更";
+"Compress" = "圧縮";
+"Rename" = "名前を変更";
+"Rename Shelf" = "シェルフ名を変更";
+"Set Accent Emoji" = "アクセント絵文字を設定";
+"Batch Rename" = "一括リネーム";
+"Action Failed" = "アクションに失敗しました";
+"Couldn't rename" = "名前を変更できません";
+"Archive Failed" = "アーカイブに失敗しました";
+"Batch Rename Failed" = "一括リネームに失敗しました";
+"Resize Image" = "画像のサイズ変更";
+"Compress Image" = "画像を圧縮";
+"alert.shelf-rename.body" = "空欄のままにするとカスタム名が解除されます。";
+"alert.emoji.body" = "絵文字を 1 つ入力または貼り付けてください。";
+"alert.batch-rename.body" = "通し番号のプレースホルダとして # を使用します。";
+"alert.rename.body" = "新しいファイル名(拡張子を含む)を入力してください。";
+"alert.action-failed.body" = "画像を処理できませんでした。";
+"alert.resize.body" = "最大寸法(ピクセル)。アスペクト比は保持されます。";
+"alert.compress.body" = "JPEG 品質(10% – 100%)。低いほどファイルが小さくなります。";
+"alert.batch-renamed.title" = "%1$lld 件をリネーム、%2$lld 件失敗";
+"alert.zip.staging-failed" = "ステージングディレクトリを作成できませんでした:%@";
+"alert.zip.stage-failed" = "%1$@ をステージングできませんでした:%2$@";
+"alert.zip.launch-failed" = "zip を起動できませんでした:%@";
+"alert.zip.exit-status" = "zip が終了コード %lld で終了しました。";
+
+"Make Searchable" = "検索可能にする";
+"Make %lld Searchable" = "%lld 件を検索可能にする";
+"Extract Text" = "テキストを抽出";
+"Extract Text from %lld Items" = "%lld 件からテキストを抽出";
+
+"Merge %lld PDFs…" = "%lld 件の PDF を結合…";
+"merge.order.label" = "この順序でページを結合します:";
+"alert.merge.unreadable" = "「%@」を読み込めなかったため、結合されませんでした。破損した PDF やパスワードで保護された PDF は先に開いてください。";
+
+"ocr.error.source-missing" = "OCR に失敗しました:ソースファイルが存在しません。";
+"ocr.error.source-unreadable" = "OCR に失敗しました:ソースを読み込めません。";
+"ocr.error.destination-unwritable" = "OCR に失敗しました:ディスクに書き込めません。";
+"ocr.error.recognition-failed" = "OCR に失敗しました:%@";
+"ocr.error.no-text" = "OCR でテキストが見つかりませんでした。";
+"ocr.error.cancelled" = "OCR をキャンセルしました。";
+
+"conversion.error.source-missing" = "変換に失敗しました:ソースファイルが存在しません。";
+"conversion.error.source-unreadable" = "変換に失敗しました:ソースを読み込めません。";
+"conversion.error.destination-unwritable" = "変換に失敗しました:ディスクに書き込めません。";
+"conversion.error.encoding-failed" = "変換に失敗しました:%@";
+"conversion.error.cancelled" = "変換をキャンセルしました。";
+
+"Drop files here" = "ここにファイルをドロップ";
+"Drop or shake here" = "ここにドロップまたは振る";
+"empty.summon-hint" = "%@ でシェルフを呼び出せます";
+"Loading…" = "読み込み中…";
+"Empty folder" = "空のフォルダ";
+"Reveal in Finder" = "Finder で表示";
+"Select All" = "すべてを選択";
+"Deselect All" = "選択を解除";
+"Folder" = "フォルダ";
+"File" = "ファイル";
+"shelf.default-name" = "シェルフ";
+"%lld Files" = "%lld 件のファイル";
+"1 file" = "1 件のファイル";
+"%lld files" = "%lld 件のファイル";
+"1 File" = "1 件のファイル";
+"selection.of-total" = "%2$lld 件中 %1$lld 件";
+"toast.duplicate" = "1 つ以上の項目はすでに\nシェルフに存在します";
+"toast.concealed-clipboard" = "パスワードマネージャの項目は\nシェルフに追加されません";
+
+"rename.error.item-not-found" = "項目が見つかりません。";
+"rename.error.missing-url" = "項目にファイル URL がありません。";
+"rename.error.source-missing" = "ソースが存在しません:%@";
+"rename.error.destination-exists" = "%@ にすでにファイルがあります。";
+"rename.error.no-effect" = "名前変更は成功と報告されましたが、ファイルは移動していません。";
+
+"undo.clear-shelf" = "シェルフのクリアを取り消す";
+"undo.move-to-trash" = "ゴミ箱への移動を取り消す";
+"undo.move-to-trash-count" = "ゴミ箱への移動を取り消す (%lld)";
+
+"handoff.ingest" = "Claude に送って整理";
+"handoff.staging-failed" = "受け渡しフォルダを準備できませんでした。\n何も送信されていません。";
+"handoff.nothing-to-send" = "送るものがありません —\nシェルフにファイルがありません。";
+"handoff.no-claude" = "Claude を開けませんでした。\nフォルダのパスをクリップボードにコピーしました。";
+"handoff.no-receipt" = "Claude が受け取りを確認しませんでした。\nフォルダのパスをクリップボードにコピーしました。";
+
+/* Copy for chat — シェルフを貼り付け可能なブロックとして */
+"toast.chat-copied" = "シェルフをコピーしました。\nチャットで ⌘V を押してください。";
+"toast.chat-copy-empty" = "コピーするものがありません。\nシェルフは空です。";
+/* Accessibility labels, hints and tooltips */
+"a11y.close-shelf" = "シェルフを閉じる";
+"a11y.collapse-shelf" = "シェルフを折りたたむ";
+"a11y.back" = "戻る";
+"a11y.dock-shelf" = "シェルフを画面端に格納";
+"a11y.expand-shelf" = "シェルフを展開";
+"a11y.open-shelf" = "シェルフを開く";
+"a11y.pinned" = "ピン留め済み";
+"a11y.grid-view" = "グリッド表示";
+"a11y.list-view" = "リスト表示";
+"a11y.open-folder" = "フォルダを開く";
+"a11y.kind.image" = "画像";
+"a11y.kind.text" = "テキスト";
+"a11y.item.hint" = "ドラッグして、この項目をコピーまたは移動します。";
+"a11y.stack.hint" = "ドラッグして、シェルフ内のすべてをコピーまたは移動します。";
+"a11y.shelf-actions" = "シェルフの操作";
+"a11y.action.show-menu" = "アクションを表示";
+"a11y.action.toggle-selection" = "選択を切り替え";
+
+/* Inbound magpie:// links */
+"toast.link-refused" = "何も追加されませんでした。\nこのリンクは使用できません";
+"toast.link-rate-limited" = "リンクが多すぎます。\n残りは無視されました";
+
+/* ルート — シェルフのファイルを、自分で書いたコマンドに渡す */
+"routes.menu" = "ルート";
+"routes.finished" = "%@ が完了しました。";
+"routes.failed.title" = "ルートが失敗しました";
+"routes.failed.exit" = "「%1$@」は終了コード %2$lld で停止しました。";
+"routes.failed.timeout" = "「%1$@」は %2$lld 秒たっても実行中だったため、Magpie が停止しました。";
+"routes.failed.launch" = "Magpie は「%1$@」を開始できませんでした。%2$@ が存在し、実行できるか確認してください。";
+"routes.failed.secret" = "「%1$@」には %2$@ という秘密情報が必要ですが、まだキーチェーンにありません。設定で追加してください。";
+"routes.failed.no-detail" = "コマンドは理由を何も出力しませんでした。";
+"routes.error.unreadable" = "Magpie は routes.json を読み込めませんでした。";
+"routes.error.invalid-json" = "routes.json が正しい JSON ではありません。カンマの抜けや閉じ忘れた括弧が原因のことがほとんどです。";
+"routes.error.shape" = "routes.json は「routes」リストを持つオブジェクトである必要があります。";
+"routes.error.version" = "routes.json はバージョン %1$lld と書かれていますが、この Magpie が読めるのはバージョン %2$lld です。";
+"routes.error.bad-field" = "ルート「%1$@」には正しい「%2$@」が必要です。";
+"routes.error.relative-command" = "ルート「%1$@」には「/」で始まるコマンドのフルパスが必要です。いまは「%2$@」になっています。";
+"routes.error.duplicate-id" = "2 つのルートが id「%@」を共有しています。ルートごとに固有の id が必要です。";
+"routes.error.files-token" = "ルート「%1$@」は {files} を長い引数の中に入れています。{files} は単独の引数にしてください。";
+"settings.routes.empty" = "まだルートがありません。ファイルを開いてください。すべての項目の説明と、無効にした例が 2 つ入っています。";
+"settings.routes.reveal" = "ルートファイルを表示";
+"settings.routes.reload" = "ルートを再読み込み";
+"settings.routes.description" = "ルートはシェルフのファイルを自分で書いたコマンドに渡し、そこで作られたものをシェルフに戻します。自分のルートは routes.json を編集して追加します。ルートがファイルを移動・改名・削除することは決してなく、自分でクリックしたメニューからしか実行されません。";
+"settings.secrets.title" = "秘密情報";
+"settings.secrets.empty" = "保存された秘密情報はありません。";
+"settings.secrets.add" = "秘密情報を追加…";
+"settings.secrets.delete" = "削除";
+"settings.secrets.failed" = "キーチェーンに保存できませんでした。";
+"settings.secrets.description" = "ルートが必要とするキーは macOS のキーチェーンに保存されます。Magpie は同じ名前の環境変数としてコマンドに渡すだけで、保存した値を表示することもログに残すこともありません。";
+"alert.secret.body" = "ルートが求めるとおりの名前を付けてください（例: GEMINI_API_KEY）。値はそのままキーチェーンに入り、二度と表示されません。";
+
+/* エージェントに送る — シェルフを、開いているチャットにそのまま */
+"agent.section" = "エージェントに送る";
+"agent.none-installed" = "この Mac には Magpie が対応するエージェントアプリがありません。";
+"agent.auto-paste" = "開いているチャットに自動で貼り付ける";
+"agent.auto-paste.description" = "アプリを前面に出して ⌘V を入力します。アクセシビリティ権限が必要です。";
+"agent.toast.pasted" = "%@ に貼り付けました。";
+"agent.toast.not-installed" = "%@ はこの Mac にありません。\nシェルフはクリップボードにあります。";
+"agent.toast.no-accessibility" = "貼り付けには「アクセシビリティ」の許可が必要です。\nシェルフはクリップボードにあります。";
+"agent.toast.could-not-paste" = "%@ に貼り付けられませんでした。\nシェルフはクリップボードにあります。";
+"agent.toast.modifiers-held" = "ショートカットのキーを離してからもう一度お試しください。\nシェルフはクリップボードにあります。";
+
+/* キーボード：⌘K のアクションパレットと、⌫ が残す取り消し */
+"palette.title" = "アクション";
+"palette.placeholder" = "アクションを検索";
+"palette.no-matches" = "一致するアクションがありません。";
+"undo.remove-from-shelf" = "シェルフから削除を取り消す";
+"undo.remove-from-shelf-count" = "シェルフから削除を取り消す (%lld)";
+
+/* Appearance override — the shelf follows the system by default. */
+"Appearance" = "外観";
+"System" = "システム";
+"Light" = "ライト";
+"Dark" = "ダーク";
+"settings.appearance.description" = "シェルフは Mac のライト/ダーク設定に従います。常に同じ外観にしたい場合は固定してください。";
+
+
+/* Menu-bar visibility. Hiding is safe only because reopening the app opens Settings. */
+"Show Magpie in the menu bar" = "メニューバーに表示";
+"Quit Magpie" = "Magpie を終了";
+"settings.menubar.description" = "Magpie は動作を続け、すべての呼び出し方法が使えます。ここに戻るには「アプリケーション」から開き直してください。";
+
+/* Settings search: lens field at the top of the pane, focused by Cmd-F. */
+"settings.search.placeholder" = "設定を検索";
+"settings.search.no-results" = "一致する設定はありません。";
+"settings.search.clear" = "検索をクリア";
+
+/* Shown when the bundle carries no Sparkle public key. */
+"updates.unavailable" = "このビルドには更新用の署名鍵がないため、アップデートを確認できません。";
+
+
+/* The store finally speaks: what a load found, said once per event. */
+"store.alert.quarantined.title" = "シェルフを読み込めませんでした";
+"store.alert.quarantined.body" = "シェルフを保存しているファイルが壊れていたため、別の場所に退避して新しく作り直しました。削除したものはありません。古いファイルは Mac に残っており、あなたのファイルには一切触れていません。";
+"store.alert.read-only.title" = "Magpie は今何も保存していません";
+"store.alert.read-only.body" = "シェルフはこの版より新しい Magpie で保存されています。この版はそのファイルを変更しないため、今行った操作は保存されません。続きから使うには新しい版をインストールしてください。";
+"store.alert.unreadable.title" = "シェルフを開けませんでした";
+"store.alert.unreadable.body" = "シェルフを保存しているファイルを読み込むことも、退避することもできませんでした。シェルフは表示されず、今行った操作も保存されません。あなたのファイルには一切触れていません。";
+
+/* Diagnostics: version, the data folder, and a blob to paste into an issue. */
+"settings.diagnostics" = "診断情報";
+"settings.diagnostics.version" = "バージョン";
+"settings.diagnostics.title" = "サポート";
+"settings.diagnostics.reveal" = "データフォルダを表示";
+"settings.diagnostics.copy" = "診断情報をコピー";
+"settings.diagnostics.copied" = "コピーしました";
+"settings.diagnostics.description" = "このビルドと設定の短い要約をクリップボードにコピーします。不具合の報告に貼り付けてください。ファイル名、シェルフ名、保存した内容は含まれません。データフォルダには Magpie 自身のファイルが入っています。そこから取り出したものは、送る前に必ず確認してください。";
+"settings.cache.title" = "管理キャッシュ";
+"settings.cache.clear" = "キャッシュを消去";
+"settings.cache.description" = "一時的な場所からドロップされたファイルは、システムの掃除で消えないようデータフォルダにコピーされます。「キャッシュを消去」は、どのシェルフにも表示されなくなったコピーだけを削除します。シェルフに残っているコピーは保持され、あなた自身のファイルには決して触れません。";
+"diagnostics.logs-hint" = "直近の動作を見るには、ターミナルで次を実行してください：";
+"diagnostics.review-warning" = "どこかに貼り付ける前に、内容を確認してください。";
+
+/* Stale drag: the drag was refused because no source file is reachable. */
+"toast.drag-missing.one" = "このファイルはもうディスク上にないため、\nドラッグできるものがありません。";
+"toast.drag-missing.many" = "これら %lld 件のファイルはもうディスク上にないため、\nドラッグできるものがありません。";
+"toast.drag-unavailable.one" = "このファイルは現在利用できません。\nディスクが接続されていない可能性があります。";
+"toast.drag-unavailable.many" = "これら %lld 件のファイルは現在利用できません。\nディスクが接続されていない可能性があります。";
+
+/* Clear Recent Shelves: confirmation and its undo. */
+"alert.clear-all.title" = "最近のシェルフをクリアしますか？";
+"alert.clear-all.body" = "%1$@（%2$@）を取り除きます。ピン留めされたシェルフは残り、ディスクからは何も削除されません。取り消す（⌘Z）でシェルフを戻せます。";
+"shelf-count.one" = "1 件のシェルフ";
+"shelf-count.many" = "%lld 件のシェルフ";
+"undo.clear-all-shelves" = "最近のシェルフのクリアを取り消す";
+
+/* Edit menu: key equivalents for the text fields (palette query, Settings search). */
+"Redo" = "やり直す";
+"Cut" = "カット";
+"Paste" = "ペースト";
+/* A drop that is still landing: the panel-level progress bar with its cancel. */
+"ingest.importing" = "読み込み中…";
+
+/* Drag out of the shelf: which way this drag will land, and how to change it. */
+"drag.mode.copying" = "コピー";
+"drag.mode.moving" = "移動";
+"drag.mode.hold-command" = "⌘ を押しながらで移動";
+"drag.mode.release-command" = "⌘ を放すとコピー";
+
+/* Drag out with ⌘ held: the destination took a copy and the original stayed put. */
+"toast.drag-copied-instead.one" = "移動先はこのファイルを移動せずにコピーしました。";
+"toast.drag-copied-instead.many" = "移動先はこれら %lld 個のファイルを移動せずにコピーしました。";
