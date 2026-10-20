@@ -9,18 +9,25 @@ import QuartzCore
 /// own transparent windows beside the panel instead. This is the arithmetic
 /// that ties the two together, kept pure so a test can hold it.
 enum MascotPlacement {
-    /// The box's left edge sits this far in from the shelf's right edge (the
-    /// page's `home`: `r.right - 74`), which puts the feet 45 points in.
-    static let inset: CGFloat = 74
+    /// The pet X, relative to the bird's box: 14 × 14, beside the box's
+    /// right edge and a little above it (the page's `right:-14px; top:-9px`).
+    static var petX: CGRect {
+        CGRect(x: MascotDrawing.size.width, y: -9, width: 14, height: 14)
+    }
+
+    /// How far inside the shelf's right edge the pet X ends. The feet are
+    /// placed so that the X lands just inside the edge, whatever the bird's
+    /// size: on the page that put the box's left edge 74 points in.
+    static let xClearance: CGFloat = 2
+
+    /// From the shelf's right edge to the box's left edge.
+    static var inset: CGFloat { xClearance + petX.maxX }
 
     /// The rest window around the feet: room for the box, the tail below the
     /// edge, the pet X above and to the right, and the hop and the lean.
     static let restWindowSize = CGSize(width: 98, height: 110)
     /// Where the feet are inside the rest window, from its top-left, y-down.
     static let restFeet = CGPoint(x: 41, y: 80)
-
-    /// The pet X, relative to the bird's box (`right:-14px; top:-9px`, 14 × 14).
-    static let petX = CGRect(x: 58, y: -9, width: 14, height: 14)
 
     /// Where the feet stand on a shelf, in screen coordinates (y-up).
     static func perchedFeet(onShelf frame: NSRect) -> NSPoint {
@@ -179,7 +186,10 @@ final class MascotRestView: MascotCanvasView {
         xLayer.frame = r.insetBy(dx: -2, dy: -2)
         xLayer.contentsScale = window?.backingScaleFactor ?? 2
         xLayer.foregroundColor = (dark ? NSColor(white: 1, alpha: 0.8) : NSColor(white: 0, alpha: 0.62)).cgColor
-        xHit.frame = r.insetBy(dx: -3, dy: -3)
+        // While the X shows, a near-invisible fill holds the whole hover box,
+        // so the window keeps the pointer in the gap between bird and X
+        // (a fully transparent pixel would let it fall through).
+        xHit.frame = hoverRect
         CATransaction.commit()
     }
 
@@ -209,28 +219,59 @@ final class MascotRestView: MascotCanvasView {
         tracking = area
     }
 
-    private func isOverBird(_ event: NSEvent) -> Bool {
-        let p = convert(event.locationInWindow, from: nil)
-        return boxRect.contains(p) || (!isDocked && hovering && xRect.insetBy(dx: -3, dy: -3).contains(p))
+    /// The area that counts as "on the bird": one generous box round the
+    /// bird and its X together, so the pointer can travel from one to the
+    /// other without the X vanishing on the way (it did, 2026-10-20).
+    var hoverRect: CGRect {
+        let b = boxRect
+        guard b != .zero else { return .zero }
+        if isDocked { return b }
+        return b.union(xRect).insetBy(dx: -Self.hoverSlop, dy: -Self.hoverSlop)
     }
 
+    /// The X's own click target, larger than the 14-point glyph.
+    var xHitRect: CGRect { xRect.insetBy(dx: -6, dy: -6) }
+
+    static let hoverSlop: CGFloat = 8
+    /// How long the X stays after the pointer leaves, so a pointer that
+    /// overshoots does not lose it.
+    static let hoverGrace: TimeInterval = 0.6
+
+    private var graceTimer: Timer?
+
     private func updateHover(_ event: NSEvent) {
-        let over = isOverBird(event)
-        guard over != hovering else { return }
-        hovering = over
-        onHover(over)
+        let p = convert(event.locationInWindow, from: nil)
+        setHovering(hoverRect.contains(p))
+    }
+
+    private func setHovering(_ over: Bool) {
+        if over {
+            graceTimer?.invalidate()
+            graceTimer = nil
+            guard !hovering else { return }
+            hovering = true
+            onHover(true)
+        } else {
+            guard hovering, graceTimer == nil else { return }
+            graceTimer = Timer.scheduledTimer(withTimeInterval: Self.hoverGrace, repeats: false) { [weak self] _ in
+                Task { @MainActor in
+                    guard let self else { return }
+                    self.graceTimer = nil
+                    self.hovering = false
+                    self.onHover(false)
+                }
+            }
+        }
     }
 
     override func mouseEntered(with event: NSEvent) { updateHover(event) }
     override func mouseMoved(with event: NSEvent) { updateHover(event) }
-    override func mouseExited(with event: NSEvent) {
-        if hovering { hovering = false; onHover(false) }
-    }
+    override func mouseExited(with event: NSEvent) { setHovering(false) }
 
     override func mouseDown(with event: NSEvent) {
         let p = convert(event.locationInWindow, from: nil)
         if isDocked { onDockedClick(); return }
-        if xHit.opacity > 0, xRect.insetBy(dx: -3, dy: -3).contains(p) {
+        if xHit.opacity > 0, xHitRect.contains(p) {
             onClickX()
         } else if boxRect.contains(p) {
             onClickBird()

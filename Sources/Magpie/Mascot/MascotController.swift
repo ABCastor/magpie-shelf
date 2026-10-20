@@ -1,18 +1,26 @@
 import AppKit
 import QuartzCore
 
-/// The magpie on every shelf, and what it does when the shelf does something.
+/// The magpie, and what it does when the shelves do something.
 ///
-/// One `MascotPerch` per shelf panel. The app tells this controller what the
-/// shelves are doing (appearing, docking, closing, working, being dragged
-/// onto); this decides what the bird does about it, from the approved
-/// reference: the Flutter flight for docking and for a shelf appearing, one
-/// continuous pass that bites the X for closing and for being sent away, and
-/// the five behaviours on the perch. Under Reduce Motion there is no flight
-/// and no behaviour: the bird is simply in place.
+/// **One bird, many shelves.** Each shelf panel has a `MascotPerch` (the
+/// windows the bird can stand and fly in), but the magpie stands on one shelf
+/// at a time: the one in use. When the user turns to another shelf it makes a
+/// short flight across to it. The app tells this controller what the shelves
+/// are doing (appearing, becoming key, docking, closing, working, being
+/// dragged onto); this decides what the bird does about it, from the approved
+/// reference: the Flutter flight, the bite in passing, and the five
+/// behaviours on the perch. Under Reduce Motion there is no flight and no
+/// behaviour: the bird is simply in place.
 @MainActor
 final class MascotController {
     private var perches: [UUID: MascotPerch] = [:]
+    /// The shelf the bird stands on, and the order shelves were last used in,
+    /// so it knows where to go when its shelf closes.
+    private(set) var active: UUID?
+    private var recency: [UUID] = []
+    private var keyObservers: [UUID: NSObjectProtocol] = [:]
+
     /// Called when the bird leaves or comes back, so the shelves can give
     /// back, or make, the strip of space it stands in.
     var onShownChanged: () -> Void = {}
@@ -20,6 +28,14 @@ final class MascotController {
     var dropView: (UUID) -> NSView? = { _ in nil }
     /// A click on the bird standing in a docked tab is a click on the tab.
     var onDockedClick: (UUID) -> Void = { _ in }
+    /// Asks, the first time only, whether the pet X should really send the
+    /// bird away. Injectable so tests never raise a modal alert.
+    var confirmFirstSendAway: () -> Bool = MascotController.askBeforeFirstSendAway
+
+    static let askedKey = "shelf.mascot.sendAwayConfirmed"
+
+    /// For tests: the perch of a shelf.
+    func perch(for shelfID: UUID) -> MascotPerch? { perches[shelfID] }
 
     var isShown: Bool { MascotPreference.isShown }
     private var reduceMotion: Bool { Design.Motion.isReduced }
@@ -31,49 +47,127 @@ final class MascotController {
         perch.dropForward = { [weak self] in self?.dropView(shelfID) }
         perch.onDockedClick = { [weak self] in self?.onDockedClick(shelfID) }
         perches[shelfID] = perch
+        // The shelf the user clicks into is the shelf in use.
+        keyObservers[shelfID] = NotificationCenter.default.addObserver(
+            forName: NSWindow.didBecomeKeyNotification, object: panel, queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in self?.use(shelfID) }
+        }
     }
 
     func detach(_ shelfID: UUID) {
+        if let observer = keyObservers.removeValue(forKey: shelfID) {
+            NotificationCenter.default.removeObserver(observer)
+        }
         perches.removeValue(forKey: shelfID)?.tearDown()
+        recency.removeAll { $0 == shelfID }
+        if active == shelfID {
+            active = nil
+            moveToNextShelf(excluding: shelfID)
+        }
+    }
+
+    private func touch(_ shelfID: UUID) {
+        recency.removeAll { $0 == shelfID }
+        recency.insert(shelfID, at: 0)
     }
 
     // MARK: - The shelf's life
 
-    /// A shelf has just come on screen.
-    func shelfShown(_ shelfID: UUID, island: Bool = false) {
+    /// A shelf has just come on screen. `from` is where the user summoned it
+    /// (the shake), in screen coordinates: the bird starts there.
+    func shelfShown(_ shelfID: UUID, island: Bool = false, from: NSPoint? = nil) {
         guard let perch = perches[shelfID] else { return }
         perch.island = island
+        touch(shelfID)
         guard isShown else { perch.hide(); return }
-        if reduceMotion { perch.stand(mode: .perched) } else { perch.flyIn() }
+        arrive(at: shelfID, from: from)
+    }
+
+    /// The user turned to this shelf (clicked into it, dropped onto it).
+    func use(_ shelfID: UUID) {
+        guard perches[shelfID]?.panelIsVisible == true else { return }
+        touch(shelfID)
+        guard isShown, active != shelfID else { return }
+        arrive(at: shelfID, from: nil)
+    }
+
+    /// Brings the bird to `shelfID`: from the summon point, or across from
+    /// the shelf it was on, or in from above when it was nowhere.
+    private func arrive(at shelfID: UUID, from point: NSPoint?) {
+        guard let perch = perches[shelfID] else { return }
+        let previous = active.flatMap { $0 == shelfID ? nil : perches[$0] }
+        active = shelfID
+        if reduceMotion {
+            previous?.hide()
+            perch.stand(mode: perch.mode)
+            return
+        }
+        if let point {
+            previous?.hide()
+            perch.flyIn(start: .point(point))
+        } else if let previous, previous.isStanding, let box = previous.restingBox {
+            previous.hide()
+            perch.flyIn(start: .box(box, scale: previous.restScale), duration: MascotFlight.crossDuration)
+        } else {
+            previous?.hide()
+            perch.flyIn(start: .above)
+        }
     }
 
     func shelfHidden(_ shelfID: UUID) {
         perches[shelfID]?.hide()
+        if active == shelfID {
+            active = nil
+            moveToNextShelf(excluding: shelfID)
+        }
     }
 
-    /// The panel is about to glide to `frame` (a resize, a park, a restore).
-    func panelWillMove(_ shelfID: UUID, to frame: NSRect, timing: Design.Motion.PanelTiming?) {
-        perches[shelfID]?.follow(panelTo: frame, timing: timing)
+    /// Its shelf went away: the bird goes to the shelf used most recently of
+    /// those still open, if any.
+    private func moveToNextShelf(excluding gone: UUID? = nil) {
+        // The closing shelf is excluded by id: the app tells the bird before
+        // it orders the panel out, so that panel still reads as visible.
+        guard isShown, let next = recency.first(where: { $0 != gone && perches[$0]?.panelIsVisible == true }) else { return }
+        arrive(at: next, from: nil)
+    }
+
+    /// The panel is about to glide to a new frame (a resize, a park, a
+    /// restore). The bird rides its live bottom edge for as long as that takes.
+    func panelWillMove(_ shelfID: UUID, timing: Design.Motion.PanelTiming?) {
+        perches[shelfID]?.ride(for: (timing?.duration ?? 0) + 0.2)
     }
 
     /// The shelf folds to the edge: the bird flies to the tab and lands in it.
-    func dock(_ shelfID: UUID, from shelf: NSRect, to tab: NSRect) {
-        guard let perch = perches[shelfID], isShown else { return }
-        if reduceMotion { perch.stand(mode: .docked, panelFrame: tab) } else { perch.flyToDock(from: shelf, tab: tab) }
+    func dock(_ shelfID: UUID) {
+        guard let perch = perches[shelfID], isShown, active == shelfID else {
+            perches[shelfID]?.setMode(.docked)
+            return
+        }
+        if reduceMotion { perch.setMode(.docked); perch.stand(mode: .docked) } else { perch.flyToDock() }
     }
 
     /// The tab opens back into a shelf: the bird flies back to its edge.
-    func undock(_ shelfID: UUID, to shelf: NSRect) {
-        guard let perch = perches[shelfID], isShown else { return }
-        if reduceMotion { perch.stand(mode: .perched, panelFrame: shelf) } else { perch.flyIn(panelFrame: shelf) }
+    func undock(_ shelfID: UUID) {
+        guard let perch = perches[shelfID] else { return }
+        let fromTab = perch.restingBox
+        perch.setMode(.perched)
+        guard isShown, active == shelfID else { return }
+        if reduceMotion {
+            perch.stand(mode: .perched)
+        } else if let fromTab {
+            perch.flyIn(start: .box(fromTab, scale: MascotFlight.dockScale))
+        } else {
+            perch.flyIn(start: .above)
+        }
     }
 
     /// The shelf's X was pressed. Returns false when there is nothing to fly
-    /// (no bird, Reduce Motion), so the caller closes the shelf at once.
-    /// Otherwise `fade` runs when the beak takes the X and `close` when the
-    /// pass is over.
+    /// (no bird on this shelf, Reduce Motion), so the caller closes the shelf
+    /// at once. Otherwise `fade` runs when the beak takes the X and `close`
+    /// when the pass is over.
     func closeWithX(_ shelfID: UUID, fade: @escaping () -> Void, close: @escaping () -> Void) -> Bool {
-        guard isShown, !reduceMotion, let perch = perches[shelfID], perch.canFly else { return false }
+        guard isShown, !reduceMotion, active == shelfID, let perch = perches[shelfID], perch.canFly else { return false }
         perch.biteShelfX(onGrab: fade, done: close)
         return true
     }
@@ -82,6 +176,7 @@ final class MascotController {
 
     func setCurious(_ shelfID: UUID, dragging: Bool) {
         perches[shelfID]?.dropCurious = dragging
+        if dragging { use(shelfID) }
     }
 
     func setWorking(_ shelfIDs: Set<UUID>) {
@@ -94,8 +189,14 @@ final class MascotController {
 
     // MARK: - The pet
 
-    /// The pet X: it bites the X and flies off with it, and stays away.
+    /// The pet X: it bites the X and flies off with it, and stays away. The
+    /// first time, it asks, so a stray click does not lose the bird.
     private func sendAway(from shelfID: UUID) {
+        let defaults = UserDefaults.standard
+        if !defaults.bool(forKey: Self.askedKey) {
+            guard confirmFirstSendAway() else { return }
+            defaults.set(true, forKey: Self.askedKey)
+        }
         MascotPreference.set(false)
         for (id, perch) in perches where id != shelfID { perch.hide() }
         guard let perch = perches[shelfID], !reduceMotion else {
@@ -104,6 +205,18 @@ final class MascotController {
             return
         }
         perch.biteOwnX { [weak self] in self?.onShownChanged() }
+    }
+
+    static func askBeforeFirstSendAway() -> Bool {
+        let alert = NSAlert()
+        alert.messageText = L("mascot.hide.title")
+        alert.informativeText = L("mascot.hide.body")
+        alert.icon = StatusIcon.image(dropping: false, awake: false)
+        // Return keeps the bird: the safe choice is the default.
+        alert.addButton(withTitle: L("Cancel"))
+        alert.addButton(withTitle: L("mascot.hide.confirm"))
+        NSApp.activate(ignoringOtherApps: true)
+        return alert.runModal() == .alertSecondButtonReturn
     }
 
     /// Settings or the menu brought it back.
@@ -116,13 +229,13 @@ final class MascotController {
 
     /// The preference changed somewhere (Settings): match it.
     func refreshShown() {
-        for perch in perches.values where perch.panelIsVisible {
-            if isShown {
-                guard !perch.isStanding else { continue }
-                if reduceMotion { perch.stand(mode: perch.mode) } else { perch.flyIn() }
-            } else {
-                perch.hide()
-            }
+        if isShown {
+            guard active.flatMap({ perches[$0]?.isStanding }) != true else { return }
+            active = nil
+            moveToNextShelf()
+        } else {
+            for perch in perches.values { perch.hide() }
+            active = nil
         }
     }
 
@@ -136,11 +249,21 @@ final class MascotController {
     }
 }
 
-/// One shelf's magpie: a rest window that stands on the panel's edge and
-/// moves with it, and a flight window it crosses the screen in.
+/// One shelf's place for the magpie: a rest window that stands on the
+/// panel's live bottom edge, and a flight window it crosses the screen in.
 @MainActor
 final class MascotPerch {
     enum Mode { case perched, docked }
+
+    /// Where an arriving flight starts.
+    enum Start {
+        /// Up and to the left of where it lands: the shelf appearing.
+        case above
+        /// Centred on a screen point (y-up): where the shelf was summoned.
+        case point(NSPoint)
+        /// From another shelf's perch: a box in y-down global points.
+        case box(CGPoint, scale: CGFloat)
+    }
 
     let shelfID: UUID
     weak var panel: NSPanel?
@@ -159,6 +282,9 @@ final class MascotPerch {
     private var restBird: MascotLayer
     private var flightBird: MascotLayer
     private var timer: Timer?
+    private var rideTimer: Timer?
+    private var rideUntil: CFTimeInterval = 0
+    private var frameObservers: [NSObjectProtocol] = []
     private var flying = false
     private var hovering = false
     private var flashing: MascotMood?
@@ -184,11 +310,22 @@ final class MascotPerch {
         restView.onClickBird = { [weak self] in self?.flash(.done) }
         restView.onClickX = { [weak self] in self?.onSendAway() }
         restView.onDockedClick = { [weak self] in self?.onDockedClick() }
+        // Any change to the panel's frame, however it happens, moves the bird
+        // with the panel's live bottom edge.
+        for name in [NSWindow.didResizeNotification, NSWindow.didMoveNotification] {
+            frameObservers.append(NotificationCenter.default.addObserver(
+                forName: name, object: panel, queue: .main
+            ) { [weak self] _ in
+                Task { @MainActor in self?.snapToPanel() }
+            })
+        }
     }
 
     func tearDown() {
         timer?.invalidate()
+        rideTimer?.invalidate()
         flashTimer?.invalidate()
+        for observer in frameObservers { NotificationCenter.default.removeObserver(observer) }
         detachFromPanel()
         restWindow.orderOut(nil)
         flightWindow.orderOut(nil)
@@ -204,6 +341,23 @@ final class MascotPerch {
     var panelIsVisible: Bool { panel?.isVisible == true }
     var isStanding: Bool { restWindow.isVisible || flying }
     var canFly: Bool { panel?.isVisible == true && !flying && restWindow.isVisible && mode == .perched }
+    var restScale: CGFloat { mode == .docked ? MascotFlight.dockScale : 1 }
+
+    /// For tests: where the windows are and what the flying bird is doing.
+    var restWindowFrame: NSRect { restWindow.frame }
+    var restWindowVisible: Bool { restWindow.isVisible }
+    var isFlying: Bool { flying }
+    var flightWindowFrame: NSRect { flightWindow.frame }
+    var flightPose: MascotPose { flightBird.pose }
+    func expectedRestFrame() -> NSRect? { panel.map { restFrame(for: $0.frame, mode: mode) } }
+
+    func setMode(_ mode: Mode) { self.mode = mode }
+
+    /// Where the resting bird's box is now, y-down global, if it is resting.
+    var restingBox: CGPoint? {
+        guard restWindow.isVisible, !flying, let panel else { return nil }
+        return homeBox(panel.frame, mode: mode)
+    }
 
     func redraw() {
         let d = dark
@@ -220,9 +374,7 @@ final class MascotPerch {
         updateCurious(animated: false)
     }
 
-    // MARK: Standing
-
-    private var restScale: CGFloat { mode == .docked ? MascotFlight.dockScale : 1 }
+    // MARK: Standing on the live edge
 
     private func feet(for frame: NSRect, mode: Mode) -> NSPoint {
         switch mode {
@@ -239,13 +391,12 @@ final class MascotPerch {
     }
 
     /// Puts the bird on its edge, at rest, with no flight.
-    func stand(mode: Mode, panelFrame: NSRect? = nil) {
+    func stand(mode: Mode) {
         guard let panel else { return }
         cancelFlight()
         self.mode = mode
-        let frame = panelFrame ?? panel.frame
         detachFromPanel()
-        restWindow.setFrame(restFrame(for: frame, mode: mode), display: false)
+        restWindow.setFrame(restFrame(for: panel.frame, mode: mode), display: false)
         var pose = MascotPose.rest
         let box = MascotPlacement.restBox
         pose.x = box.x; pose.y = box.y; pose.k = restScale
@@ -267,28 +418,42 @@ final class MascotPerch {
         flightWindow.orderOut(nil)
     }
 
-    /// Glide with the panel when it resizes or moves under the app's hand;
-    /// when the user drags the panel, the rest window rides along as a child.
-    func follow(panelTo frame: NSRect, timing: Design.Motion.PanelTiming?) {
+    /// Puts the rest window back on the panel's live bottom edge.
+    private func snapToPanel() {
+        guard let panel, restWindow.isVisible, !flying else { return }
+        let target = restFrame(for: panel.frame, mode: mode)
+        if restWindow.frame != target { restWindow.setFrame(target, display: false) }
+    }
+
+    /// Rides the panel's live bottom edge, every frame, for `seconds`: the
+    /// length of an animated resize. The rest window is a child of the panel
+    /// for the user's own drags; for the app's animated resizes it is let go
+    /// and moved to the live edge each frame instead, because a child only
+    /// follows its parent's origin, and a strip that grows downward moves its
+    /// bottom edge without that being a move of the window.
+    func ride(for seconds: TimeInterval) {
         guard restWindow.isVisible, !flying else { return }
-        let target = restFrame(for: frame, mode: mode)
+        rideUntil = max(rideUntil, CACurrentMediaTime() + seconds)
+        guard rideTimer == nil else { return }
         detachFromPanel()
-        guard let timing else {
-            restWindow.setFrame(target, display: false)
-            attachToPanel()
-            return
+        let step = Timer(timeInterval: 1.0 / 120, repeats: true) { [weak self] _ in
+            Task { @MainActor in
+                guard let self else { return }
+                self.snapToPanel()
+                if CACurrentMediaTime() >= self.rideUntil {
+                    self.rideTimer?.invalidate()
+                    self.rideTimer = nil
+                    self.snapToPanel()
+                    self.attachToPanel()
+                }
+            }
         }
-        NSAnimationContext.runAnimationGroup({ ctx in
-            ctx.duration = timing.duration
-            ctx.timingFunction = timing.mediaTimingFunction
-            restWindow.animator().setFrame(target, display: false)
-        }, completionHandler: { [weak self] in
-            Task { @MainActor in self?.attachToPanel() }
-        })
+        RunLoop.main.add(step, forMode: .common)
+        rideTimer = step
     }
 
     private func attachToPanel() {
-        guard let panel, restWindow.isVisible, restWindow.parent == nil else { return }
+        guard let panel, restWindow.isVisible, restWindow.parent == nil, rideTimer == nil else { return }
         panel.addChildWindow(restWindow, ordered: .above)
         restView.dropForward = dropForward()
     }
@@ -346,6 +511,14 @@ final class MascotPerch {
         space.box(feet: feet(for: frame, mode: mode))
     }
 
+    /// Where the bird lands, read from the panel's frame as it is right now:
+    /// never captured when the flight starts, because the shelf can grow,
+    /// shrink or move while the bird is in the air.
+    private func liveHome(_ mode: Mode) -> CGPoint {
+        guard let panel else { return .zero }
+        return homeBox(panel.frame, mode: mode)
+    }
+
     /// Runs a flight in the flight window. `pose` is in global y-down points.
     private func fly(
         over screen: NSRect,
@@ -399,29 +572,33 @@ final class MascotPerch {
         flightWindow.orderOut(nil)
     }
 
-    /// Lands at the rest spot: the 320 ms squash, in the rest window.
-    private func land(mode: Mode, panelFrame: NSRect) {
+    /// Lands at the rest spot on the live edge: the 320 ms squash, in the
+    /// rest window, which keeps riding the edge while it squashes.
+    private func land(mode: Mode) {
+        guard let panel else { return }
         self.mode = mode
-        restWindow.setFrame(restFrame(for: panelFrame, mode: mode), display: false)
+        restWindow.setFrame(restFrame(for: panel.frame, mode: mode), display: false)
         let box = MascotPlacement.restBox
         restBird.apply(MascotFlight.land(0, at: box, k: restScale))
         restView.isDocked = mode == .docked
         restView.layoutX(dark: dark)
         restWindow.orderFront(nil)
         flightWindow.orderOut(nil)
-        attachToPanel()
         let k = restScale
         let start = CACurrentMediaTime()
         flying = true
         let step = Timer(timeInterval: 1.0 / 120, repeats: true) { [weak self] _ in
             Task { @MainActor in
-                guard let self else { return }
+                guard let self, let panel = self.panel else { return }
+                let target = self.restFrame(for: panel.frame, mode: mode)
+                if self.restWindow.frame != target { self.restWindow.setFrame(target, display: false) }
                 let t = CGFloat(min(1, (CACurrentMediaTime() - start) / MascotFlight.landDuration))
                 self.restBird.apply(MascotFlight.land(t, at: box, k: k))
                 if t >= 1 {
                     self.timer?.invalidate()
                     self.timer = nil
                     self.flying = false
+                    self.attachToPanel()
                     self.updateMoods()
                     self.updateCurious(animated: false)
                 }
@@ -431,41 +608,67 @@ final class MascotPerch {
         timer = step
     }
 
-    /// The shelf appears (or the bird comes back): a short flight in from
-    /// above and to the left, landing on the bottom edge.
-    func flyIn(panelFrame: NSRect? = nil) {
+    /// Arrives on this shelf's edge: in from above when the shelf appears,
+    /// from the pointer when the shelf was summoned there, or across from the
+    /// shelf it was standing on.
+    func flyIn(start: Start, duration: TimeInterval = MascotFlight.appearDuration) {
         guard let panel else { return }
-        let frame = panelFrame ?? panel.frame
-        let to = homeBox(frame, mode: .perched)
-        let screen = screenFrame(around: frame)
-        var from = CGPoint(x: to.x + MascotFlight.appearOffset.x, y: to.y + MascotFlight.appearOffset.y)
+        mode = mode == .docked ? .docked : .perched
+        let landing = mode
+        let screen = screenFrame(around: panel.frame)
+        let bounds = space.down(screen)
+        let to = liveHome(landing)
+        var from: CGPoint
+        var startScale: CGFloat = 1
+        var fadeIn = false
+        var delay = MascotFlight.appearDelay
+        switch start {
+        case .above:
+            from = CGPoint(x: to.x + MascotFlight.appearOffset.x, y: to.y + MascotFlight.appearOffset.y)
+        case .point(let p):
+            let c = space.down(p)
+            from = CGPoint(x: c.x - MascotDrawing.size.width / 2, y: c.y - MascotDrawing.size.height * 0.6)
+            fadeIn = true
+            delay = 0
+        case .box(let box, let scale):
+            from = box
+            startScale = scale
+            delay = 0
+        }
         // The whole bird stays on screen: start it inside the screen it is
         // flying across, however near the edge the shelf was summoned.
-        let bounds = space.down(screen)
-        var probe = MascotPose.flying(x: from.x, y: from.y)
+        let probe = MascotPose.flying(x: from.x, y: from.y)
         from.x += MascotFlight.keepIn(probe, bounds: bounds)
-        probe = MascotPose.flying(x: from.x, y: from.y)
-        let drawn = MascotGeometry.drawnBounds(probe)
+        let drawn = MascotGeometry.drawnBounds(MascotPose.flying(x: from.x, y: from.y))
         if drawn.minY < bounds.minY + MascotFlight.screenMargin {
             from.y += bounds.minY + MascotFlight.screenMargin - drawn.minY
         }
-        let start = from
-        fly(over: screen, duration: MascotFlight.appearDuration, delay: MascotFlight.appearDelay,
-            before: .flying(x: start.x, y: start.y),
-            pose: { MascotFlight.flutter($0, from: start, to: to) },
-            done: { [weak self] in self?.land(mode: .perched, panelFrame: frame) })
+        let a = from
+        let endScale: CGFloat = landing == .docked ? MascotFlight.dockScale : 1
+        let fly: (CGFloat) -> MascotPose = { [weak self] t in
+            let target = self?.liveHome(landing) ?? to
+            let k = startScale + (endScale - startScale) * MascotEase.smooth(min(1, t / 0.55))
+            var p = MascotFlight.flutter(t, from: a, to: target, k: k)
+            if fadeIn { p.opacity = MascotEase.smooth(min(1, t / 0.12)) }
+            return p
+        }
+        var before = MascotPose.flying(x: a.x, y: a.y, k: startScale)
+        if fadeIn { before.opacity = 0 }
+        self.fly(over: screen, duration: duration, delay: delay, before: before, pose: fly,
+                 done: { [weak self] in self?.land(mode: landing) })
     }
 
     /// Docking: the shelf folds to the edge and the bird flies to the tab,
     /// shrinking as it lands so it fits inside, feet on the tab's bottom edge.
-    func flyToDock(from shelf: NSRect, tab: NSRect) {
-        let from = homeBox(shelf, mode: .perched)
-        let to = homeBox(tab, mode: .docked)
-        let screen = screenFrame(around: tab)
-        fly(over: screen, duration: MascotFlight.dockDuration, delay: MascotFlight.dockDelay,
+    func flyToDock() {
+        guard let panel else { return }
+        let from = restingBox ?? liveHome(.perched)
+        mode = .docked
+        let to = liveHome(.docked)
+        fly(over: screenFrame(around: panel.frame), duration: MascotFlight.dockDuration, delay: MascotFlight.dockDelay,
             before: MascotPose(x: from.x, y: from.y),
-            pose: { MascotFlight.dock($0, from: from, to: to) },
-            done: { [weak self] in self?.land(mode: .docked, panelFrame: tab) })
+            pose: { [weak self] t in MascotFlight.dock(t, from: from, to: self?.liveHome(.docked) ?? to) },
+            done: { [weak self] in self?.land(mode: .docked) })
     }
 
     /// Closing the shelf with its X: one continuous pass from slightly above,

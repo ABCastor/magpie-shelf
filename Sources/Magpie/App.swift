@@ -57,6 +57,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var lastWorkingShelfIDs: Set<UUID> = []
     /// Shelves open as an island under the notch, and how tall the notch is.
     private var islandInsets: [UUID: CGFloat] = [:]
+    /// Where a summon happened (the shake), so the magpie starts there.
+    private var pendingMascotOrigin: NSPoint?
 
     private var summonReleaseGlobalMonitor: Any?
     private var summonReleaseLocalMonitor: Any?
@@ -1214,6 +1216,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             pendingShelfID = shelfID
             itemCountOnSummon = 0
         }
+        // A shelf summoned mid-drag (the shake) brings the magpie from where
+        // the pointer is: it appears there and flies to the shelf.
+        if dragging { pendingMascotOrigin = NSEvent.mouseLocation }
         openPanel(for: shelfID, nearCursor: true)
         if dragging { armSummonReleaseWatcher(for: shelfID) }
     }
@@ -1375,8 +1380,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if !wasVisible {
             mascot.shelfShown(
                 shelfID,
-                island: islandInsets[shelfID] != nil && !dockedShelfIDs.contains(shelfID)
+                island: islandInsets[shelfID] != nil && !dockedShelfIDs.contains(shelfID),
+                from: pendingMascotOrigin
             )
+            pendingMascotOrigin = nil
         }
         updateMissingFileSweep()
     }
@@ -1406,7 +1413,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let flying = mascot.closeWithX(shelfID, fade: { [weak self] in
             self?.manager.shelvesBeingClosed.insert(shelfID)
             NSAnimationContext.runAnimationGroup { ctx in
-                ctx.duration = 0.5
+                // 0.4 s, from 0.5: closing a touch quicker, still a fade.
+                ctx.duration = 0.4
                 panel.animator().alphaValue = 0
             }
         }, close: { [weak self] in
@@ -1485,7 +1493,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             )
             dockedFrames[shelfID] = newFrame
             if islandInsets[shelfID] != nil { panel.isIsland = false; mascot.setIsland(shelfID, false) }
-            mascot.dock(shelfID, from: currentFrame, to: newFrame)
+            mascot.dock(shelfID)
             animate(panel: panel, to: newFrame)
         } else {
             dockedShelfIDs.remove(shelfID)
@@ -1515,7 +1523,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 panel.isIsland = true
                 mascot.setIsland(shelfID, true)
             }
-            mascot.undock(shelfID, to: restore)
+            mascot.undock(shelfID)
             animate(panel: panel, to: restore)
         }
     }
@@ -1652,7 +1660,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     ) {
         suppressMoveCheck = true
         if let shelfID = panels.first(where: { $0.value === panel })?.key {
-            mascot.panelWillMove(shelfID, to: frame, timing: timing)
+            mascot.panelWillMove(shelfID, timing: timing)
         }
         NSAnimationContext.runAnimationGroup({ ctx in
             guard let timing else {
@@ -1730,7 +1738,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             mascot.setIsland(shelfID, false)
             manager.islandInsets.removeValue(forKey: shelfID)
         }
-        mascot.undock(shelfID, to: newFrame)
+        mascot.undock(shelfID)
         animate(panel: panel, to: newFrame)
         manager.undockRequested.send(shelfID)
     }

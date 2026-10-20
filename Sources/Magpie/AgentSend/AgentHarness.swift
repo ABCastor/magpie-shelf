@@ -2,14 +2,20 @@ import AppKit
 
 /// The agent front-ends a shelf can be sent to.
 ///
-/// A flat enum, not a registry: these are five apps the owner actually runs,
-/// each a fixed fact about this Mac. Adding a sixth is a case and a bundle id,
+/// A flat enum, not a registry: these are six apps the owner actually runs,
+/// each a fixed fact about this Mac. Adding another is a case and a bundle id,
 /// which is cheaper than any plugin point would be.
 enum AgentHarness: String, CaseIterable, Identifiable {
     case claudeCode
     case codex
     case openCode
     case antigravity
+    /// Orca (Stably AI), a workspace that runs coding agents. It takes the
+    /// shelf the way the others do, on the clipboard with the app brought
+    /// forward: its `orca://` scheme only opens shared skills, and its CLI
+    /// starts an agent with a prompt only inside a repo already registered
+    /// in Orca, which a shelf of loose files is not.
+    case orca
     case terminal
 
     var id: String { rawValue }
@@ -22,6 +28,7 @@ enum AgentHarness: String, CaseIterable, Identifiable {
         case .codex: return "Codex"
         case .openCode: return "OpenCode"
         case .antigravity: return "Antigravity"
+        case .orca: return "Orca"
         case .terminal: return "Terminal"
         }
     }
@@ -40,6 +47,7 @@ enum AgentHarness: String, CaseIterable, Identifiable {
         case .codex: return ["com.openai.codex"]
         case .openCode: return ["ai.opencode.desktop"]
         case .antigravity: return ["com.google.antigravity"]
+        case .orca: return ["com.stablyai.orca"]
         case .terminal: return ["com.googlecode.iterm2", "com.apple.Terminal"]
         }
     }
@@ -55,6 +63,7 @@ enum AgentHarness: String, CaseIterable, Identifiable {
         case .codex: return "codex"
         case .openCode: return "opencode"
         case .antigravity: return "antigravity"
+        case .orca: return "orca"
         case .terminal: return nil
         }
     }

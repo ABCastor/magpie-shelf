@@ -358,3 +358,7 @@
 "settings.mascot.description" = "Una urraca se posa en cada estante y reacciona a lo que haces. Señálala y pulsa la × que tiene al lado para despedirla; vuelve a activarla aquí.";
 "settings.notch" = "Abrir los estantes bajo la muesca";
 "settings.notch.description" = "En un Mac con muesca, un estante nuevo se abre como una isla negra bajo la cámara.";
+"a11y.share-shelf" = "Compartir";
+"mascot.hide.title" = "¿Ocultar la urraca?";
+"mascot.hide.body" = "Se va volando y no vuelve. Puedes traerla de vuelta cuando quieras en Ajustes, en Apariencia, o desde el menú de la barra de menús.";
+"mascot.hide.confirm" = "Ocultar la urraca";

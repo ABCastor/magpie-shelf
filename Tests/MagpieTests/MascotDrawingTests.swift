@@ -24,6 +24,16 @@ final class MascotDrawingTests: XCTestCase {
 
     private var placed: MascotPose { MascotPose(x: 50, y: 40) }
 
+    /// "Slightly smaller" than the page's 58 × 75: smaller, but not by half.
+    func testTheBirdIsSlightlySmallerThanThePagesAndKeepsItsShape() {
+        let page = CGSize(width: 58, height: 75)
+        let ratio = MascotDrawing.size.height / page.height
+        XCTAssertLessThan(ratio, 0.86, "the bird is still the page's size, which the owner found too big on the shelf")
+        XCTAssertGreaterThan(ratio, 0.74, "the bird shrank by more than 'slightly'")
+        XCTAssertEqual(MascotDrawing.size.width / MascotDrawing.size.height, page.width / page.height, accuracy: 0.005,
+                       "the bird's box changed shape")
+    }
+
     func testThePathsParseToTheDrawingsOwnExtent() {
         let body = MascotDrawing.path(MascotDrawing.body).boundingBoxOfPath
         XCTAssertEqual(body.minY, 33, accuracy: 0.5, "the head is not where the drawing puts it")

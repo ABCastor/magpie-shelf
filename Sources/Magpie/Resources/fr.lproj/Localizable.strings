@@ -358,3 +358,7 @@
 "settings.mascot.description" = "Une pie se tient sur chaque étagère et réagit à ce que vous faites. Pointez-la et cliquez sur le × à côté pour la renvoyer ; réactivez-la ici.";
 "settings.notch" = "Ouvrir les étagères sous l’encoche";
 "settings.notch.description" = "Sur un Mac avec encoche, une nouvelle étagère s’ouvre comme une île noire sous la caméra.";
+"a11y.share-shelf" = "Partager";
+"mascot.hide.title" = "Masquer la pie ?";
+"mascot.hide.body" = "Elle s’envole et ne revient pas. Vous pouvez la faire revenir à tout moment dans les Réglages, sous Apparence, ou depuis le menu de la barre des menus.";
+"mascot.hide.confirm" = "Masquer la pie";

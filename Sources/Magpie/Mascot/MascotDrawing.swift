@@ -41,8 +41,10 @@ enum MascotDrawing {
     /// The tip of the bill, the point that bites the X.
     static let billTip = CGPoint(x: 441, y: 112)
 
-    /// The bird's box on the shelf, in points, as the approved page draws it.
-    static let size = CGSize(width: 58, height: 75)
+    /// The bird's box on the shelf, in points. The approved page drew it at
+    /// 58 × 75; on the real shelf the owner found that too big and asked for
+    /// it slightly smaller (2026-10-20), so it is 80% of that, same aspect.
+    static let size = CGSize(width: 46.4, height: 60)
     /// How far down the box the feet are: the pivot every scale and squash
     /// happens about, so the bird never leaves the line it stands on.
     static var feetFraction: CGFloat { (feetY - viewBox.minY) / viewBox.height }

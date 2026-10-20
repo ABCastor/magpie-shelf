@@ -359,3 +359,7 @@
 "settings.mascot.description" = "Na każdej półce stoi sroka i reaguje na to, co robisz. Wskaż ją i naciśnij × obok, aby ją odesłać; tutaj włączysz ją z powrotem.";
 "settings.notch" = "Otwieraj półki pod wcięciem";
 "settings.notch.description" = "Na Macu z wcięciem nowa półka otwiera się jako czarna wyspa pod kamerą.";
+"a11y.share-shelf" = "Udostępnij";
+"mascot.hide.title" = "Ukryć srokę?";
+"mascot.hide.body" = "Odleci i nie wróci. W każdej chwili przywołasz ją w Ustawieniach, w sekcji Wygląd, albo z menu na pasku menu.";
+"mascot.hide.confirm" = "Ukryj srokę";

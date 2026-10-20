@@ -156,7 +156,8 @@ final class MascotMotionTests: XCTestCase {
         let shelf = NSRect(x: 500, y: 300, width: 240, height: 200)
         let feet = MascotPlacement.perchedFeet(onShelf: shelf)
         XCTAssertEqual(feet.y, shelf.minY, "the feet are not on the shelf's bottom edge")
-        XCTAssertEqual(feet.x, shelf.maxX - 45, accuracy: 0.001)
+        XCTAssertEqual(feet.x + MascotDrawing.size.width / 2 + MascotPlacement.petX.width + MascotPlacement.xClearance, shelf.maxX, accuracy: 0.001,
+                       "the pet X is not just inside the shelf's right edge")
         // The rest window holds the bird, its tail, and the pet X.
         let window = MascotPlacement.restFrame(feet: feet)
         let space = MascotSpace(top: 1000)

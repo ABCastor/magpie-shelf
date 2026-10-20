@@ -386,6 +386,10 @@ enum MascotFlight {
     /// It starts up and to the left of where it lands.
     static let appearOffset = CGPoint(x: -150, y: -110)
 
+    /// Crossing to the shelf now in use: the same flight, a little shorter,
+    /// so the move reads as the bird following the user rather than a show.
+    static let crossDuration: TimeInterval = 0.9
+
     /// `keepIn`: how far to slide a pose horizontally so the drawn bird stays
     /// `screenMargin` inside `bounds`. Zero when it already is.
     static func keepIn(_ pose: MascotPose, bounds: CGRect) -> CGFloat {
@@ -412,14 +416,17 @@ struct MascotPass {
 
     /// Closing a shelf: swoops over from slightly above, mirrored.
     static func closing(from start: CGPoint, x: CGPoint) -> MascotPass {
+        // 1.0 s, down from the reference's 1.25: the owner asked for closing
+        // to be slightly quicker while staying smooth (2026-10-20).
         MascotPass(start: start, target: x, flip: true, lift: 46,
-                   exit: CGPoint(x: -170, y: -120), duration: 1.25)
+                   exit: CGPoint(x: -170, y: -120), duration: 1.0)
     }
 
     /// Sending the pet away: lifts off with minimal movement.
     static func dismissing(from start: CGPoint, x: CGPoint) -> MascotPass {
+        // 0.85 s, down from the reference's 1.1: "a little quicker".
         MascotPass(start: start, target: x, flip: false, lift: 10,
-                   exit: CGPoint(x: 150, y: -130), duration: 1.1)
+                   exit: CGPoint(x: 150, y: -130), duration: 0.85)
     }
 
     /// Eased time at which the beak is on the X.

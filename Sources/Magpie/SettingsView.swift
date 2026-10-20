@@ -479,8 +479,15 @@ struct SettingsView: View {
 
             formNote("settings.glass.description")
 
-            Toggle(L("settings.mascot"), isOn: $mascotShown)
-                .toggleStyle(.switch)
+            Toggle(isOn: $mascotShown) {
+                HStack(spacing: Design.Space.sm) {
+                    // The magpie itself, so the way back is found by sight.
+                    Image(nsImage: StatusIcon.image(dropping: false, awake: false))
+                        .accessibilityHidden(true)
+                    Text(L("settings.mascot"))
+                }
+            }
+            .toggleStyle(.switch)
 
             formNote("settings.mascot.description")
 

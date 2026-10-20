@@ -358,3 +358,7 @@
 "settings.mascot.description" = "Una gazza sta su ogni mensola e reagisce a ciò che fai. Puntala e premi la × accanto per mandarla via; riattivala da qui.";
 "settings.notch" = "Apri le mensole sotto il notch";
 "settings.notch.description" = "Su un Mac con il notch, una nuova mensola si apre come un’isola nera sotto la fotocamera.";
+"a11y.share-shelf" = "Condividi";
+"mascot.hide.title" = "Nascondere la gazza?";
+"mascot.hide.body" = "Vola via e resta lontana. Puoi richiamarla quando vuoi nelle Impostazioni, sotto Aspetto, o dal menu nella barra dei menu.";
+"mascot.hide.confirm" = "Nascondi la gazza";

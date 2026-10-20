@@ -358,3 +358,7 @@
 "settings.mascot.description" = "每个搁架上都站着一只喜鹊，会对你的操作做出反应。指向它并按旁边的 × 让它离开；在这里可以重新打开。";
 "settings.notch" = "在刘海下方打开搁架";
 "settings.notch.description" = "在带刘海的 Mac 上，新搁架会以黑色岛屿的形式在摄像头下方打开。";
+"a11y.share-shelf" = "共享";
+"mascot.hide.title" = "隐藏喜鹊？";
+"mascot.hide.body" = "它会飞走并且不再回来。你可以随时在“设置”的“外观”中或从菜单栏菜单中把它唤回。";
+"mascot.hide.confirm" = "隐藏喜鹊";

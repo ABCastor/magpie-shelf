@@ -364,3 +364,7 @@
 "settings.mascot.description" = "A magpie stands on each shelf and reacts to what you do. Point at it and press the × beside it to send it away; switch it back on here.";
 "settings.notch" = "Open shelves under the notch";
 "settings.notch.description" = "On a Mac with a notch, a new shelf opens as a black island under the camera.";
+"a11y.share-shelf" = "Share";
+"mascot.hide.title" = "Hide the magpie?";
+"mascot.hide.body" = "It flies off and stays away. You can bring it back any time in Settings, under Appearance, or from the menu-bar menu.";
+"mascot.hide.confirm" = "Hide the Magpie";

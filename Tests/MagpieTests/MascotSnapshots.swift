@@ -278,6 +278,38 @@ final class MascotSnapshots: XCTestCase {
             compose(dark: true, panel: island, at: islandOrigin, ground: .island, topInset: notchHeight,
                     content: stripRep(true), bird: islandBird, notch: notch)
         }
+        // The empty shelf: the drop well reaches down to the panel's bottom.
+        let emptyID = manager.createShelf()
+        let emptyStrip = ShelfLayout.collapsedSize(itemCount: 0)
+        let emptyPanel = ShelfLayout.collapsedSize(itemCount: 0, perch: true)
+        let emptyHome = home(emptyPanel)
+        var emptyBird = MascotPose(); emptyBird.x = emptyHome.x; emptyBird.y = emptyHome.y
+        try write("20-empty-shelf") { dark in
+            compose(dark: dark, panel: emptyPanel, content: content(
+                CollapsedShelfView(namespace: Namespace().wrappedValue, manager: manager, shelfID: emptyID,
+                                   items: [], showCloseWhenEmpty: true)
+                    .padding(ShelfLayout.margin)
+                    .frame(width: emptyStrip.width, height: emptyPanel.height, alignment: .top),
+                size: emptyPanel, dark: dark), bird: emptyBird)
+        }
+
+        // The question the first press of the pet X asks.
+        for dark in [false, true] {
+            let alert = NSAlert()
+            alert.messageText = L("mascot.hide.title")
+            alert.informativeText = L("mascot.hide.body")
+            alert.icon = StatusIcon.image(dropping: false, awake: false)
+            alert.addButton(withTitle: L("Cancel"))
+            alert.addButton(withTitle: L("mascot.hide.confirm"))
+            alert.window.appearance = NSAppearance(named: dark ? .darkAqua : .aqua)
+            alert.layout()
+            if let view = alert.window.contentView?.superview ?? alert.window.contentView,
+               let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) {
+                view.cacheDisplay(in: view.bounds, to: rep)
+                try rep.representation(using: .png, properties: [:])?
+                    .write(to: dir.appendingPathComponent("21-first-send-away-question-\(dark ? "dark" : "light").png"))
+            }
+        }
         print("magpie snapshots written to \(dir.path)")
     }
 }

@@ -117,3 +117,15 @@ final class AgentHarnessTests: XCTestCase {
         XCTAssertEqual(resolved.displayName, "iTerm")
     }
 }
+
+final class OrcaHarnessTests: XCTestCase {
+    /// Orca is offered, under its own bundle id, and resolves when installed.
+    func testOrcaIsAHarnessAndResolvesByItsBundleID() {
+        XCTAssertTrue(AgentHarness.allCases.contains(.orca), "Orca is missing from the send-to-agent picker")
+        XCTAssertEqual(AgentHarness.orca.bundleIdentifiers, ["com.stablyai.orca"])
+        let installed = HarnessResolver.resolve(.orca) { id in
+            id == "com.stablyai.orca" ? URL(fileURLWithPath: "/Applications/Orca.app") : nil
+        }
+        XCTAssertEqual(installed?.displayName, "Orca")
+    }
+}

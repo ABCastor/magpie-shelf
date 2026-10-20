@@ -151,6 +151,17 @@ struct CollapsedShelfView: View {
             Spacer(minLength: Design.Space.hair)
 
             if !items.isEmpty {
+                // Share: the system share sheet (AirDrop, Messages, Mail and
+                // the rest) for what a drag would take, the header's claim.
+                ShelfChromeButton(
+                    systemName: "square.and.arrow.up",
+                    label: L("a11y.share-shelf"),
+                    action: { [manager, shelfID, selection] in
+                        ShareCoordinator.shared.shareFromPointer(
+                            items: manager.carriedItems(of: shelfID, selection: selection)
+                        )
+                    }
+                )
                 ShelfChromeButton(
                     systemName: "arrow.right.to.line",
                     label: L("a11y.dock-shelf"),
@@ -209,8 +220,9 @@ struct CollapsedShelfView: View {
             }
         }
         .multilineTextAlignment(.center)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .frame(height: ShelfLayout.stripEmptyBodyHeight)
+        // At least its own height, and down to the bottom of the panel when
+        // the panel is taller (the magpie's band): the well is the shelf.
+        .frame(maxWidth: .infinity, minHeight: ShelfLayout.stripEmptyBodyHeight, maxHeight: .infinity)
         .background(
             RoundedRectangle(cornerRadius: Design.Radius.face, style: .continuous)
                 .strokeBorder(

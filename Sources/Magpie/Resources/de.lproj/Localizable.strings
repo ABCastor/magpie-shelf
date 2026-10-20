@@ -358,3 +358,7 @@
 "settings.mascot.description" = "Auf jedem Regal steht eine Elster und reagiert auf das, was du tust. Zeige auf sie und drücke das × daneben, um sie wegzuschicken; hier holst du sie zurück.";
 "settings.notch" = "Regale unter der Kerbe öffnen";
 "settings.notch.description" = "Auf einem Mac mit Kerbe öffnet sich ein neues Regal als schwarze Insel unter der Kamera.";
+"a11y.share-shelf" = "Teilen";
+"mascot.hide.title" = "Elster ausblenden?";
+"mascot.hide.body" = "Sie fliegt davon und bleibt weg. Du kannst sie jederzeit in den Einstellungen unter Erscheinungsbild oder über das Menüleistenmenü zurückholen.";
+"mascot.hide.confirm" = "Elster ausblenden";

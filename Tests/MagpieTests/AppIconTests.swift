@@ -30,4 +30,12 @@ final class AppIconTests: XCTestCase {
                       "without CFBundleIconName the system never reads the dark icon in Assets.car")
         XCTAssertTrue(FileManager.default.fileExists(atPath: root.appendingPathComponent("Sources/Magpie/Resources/Assets.car").path))
     }
+
+    /// Installing over an existing copy must refresh the bundle's own date,
+    /// or the system keeps showing the icon it cached for the old one.
+    func testInstallRefreshesTheIconCacheKey() throws {
+        let script = try String(contentsOf: root.appendingPathComponent("scripts/install-local.sh"), encoding: .utf8)
+        XCTAssertTrue(script.contains("touch \"${INSTALL_PATH}\""), "install-local.sh leaves the bundle dated as the old install, so the old icon stays cached")
+        XCTAssertTrue(script.contains("lsregister -f"), "install-local.sh does not re-register the installed app")
+    }
 }

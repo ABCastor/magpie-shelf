@@ -358,3 +358,7 @@
 "settings.mascot.description" = "各シェルフにカササギがとまり、操作に反応します。ポインタを合わせて横の × を押すと帰ります。ここでまた表示できます。";
 "settings.notch" = "シェルフをノッチの下に開く";
 "settings.notch.description" = "ノッチのある Mac では、新しいシェルフがカメラの下に黒いアイランドとして開きます。";
+"a11y.share-shelf" = "共有";
+"mascot.hide.title" = "カササギを隠しますか？";
+"mascot.hide.body" = "カササギは飛び去り、戻ってきません。設定の「外観」またはメニューバーのメニューから、いつでも呼び戻せます。";
+"mascot.hide.confirm" = "カササギを隠す";

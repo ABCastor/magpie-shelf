@@ -153,6 +153,12 @@ pkill -f "${INSTALL_PATH}/Contents/MacOS/${APP_NAME}" 2>/dev/null || true
 sleep 1
 ditto "${APP_DIR}" "${INSTALL_PATH}"
 xattr -dr com.apple.quarantine "${INSTALL_PATH}" 2>/dev/null || true
+# ditto copies INTO an existing bundle and leaves the bundle folder's own
+# date alone, and Finder, Spotlight and the Dock key their icon cache on that
+# date: the new icon sat inside a bundle dated July and the old one kept
+# showing (2026-10-20). Touch the bundle and re-register it so they re-read it.
+touch "${INSTALL_PATH}"
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "${INSTALL_PATH}" 2>/dev/null || true
 open -a "${INSTALL_PATH}"
 
 echo
