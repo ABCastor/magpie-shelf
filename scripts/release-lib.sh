@@ -14,7 +14,7 @@ BUNDLE_ID="com.anneo22.magpie"
 # VERSION drives both CFBundleShortVersionString and CFBundleVersion so the
 # value Sparkle compares (sparkle:version vs CFBundleVersion) lines up with
 # the same dotted form we publish in appcast.xml.
-VERSION="2.0.0"
+VERSION="2.0.1"
 MIN_OS="13.0"
 
 # Sparkle appcast feed — raw GitHub URL on main.
