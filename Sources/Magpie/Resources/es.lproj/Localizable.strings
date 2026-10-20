@@ -353,7 +353,7 @@
 "settings.glass" = "Cristal";
 "settings.glass.light" = "Esmerilado ligero";
 "settings.glass.solid" = "Opaco";
-"settings.glass.description" = "Cuánto de lo que hay detrás de un estante se ve a través de él. Los nombres de los archivos siguen siendo legibles incluso en el ajuste más ligero.";
+"settings.glass.description" = "Cuánto de lo que hay detrás de un estante se ve a través de él, desde el cristal del propio sistema hasta opaco.";
 "settings.mascot" = "Urraca en el estante";
 "settings.mascot.description" = "Una urraca se posa en cada estante y reacciona a lo que haces. Señálala y pulsa la × que tiene al lado para despedirla; vuelve a activarla aquí.";
 "settings.notch" = "Abrir los estantes bajo la muesca";

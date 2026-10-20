@@ -366,7 +366,9 @@ enum MascotFlight {
 
     // MARK: Dock
 
-    static let dockDuration: TimeInterval = 2.2
+    /// 1.85 s, down from the reference's 2.2: the owner asked for every
+    /// flight to be slightly faster again (2026-10-20, second try).
+    static let dockDuration: TimeInterval = 1.85
     static let dockDelay: TimeInterval = 0.12
     /// It shrinks as it lands so it fits inside the narrow tab: 0.44.
     static let dockScale: CGFloat = 0.44
@@ -381,14 +383,15 @@ enum MascotFlight {
 
     // MARK: Appear (the shelf appears; the bird is brought back)
 
-    static let appearDuration: TimeInterval = 1.3
+    /// 1.1 s, down from the reference's 1.3 (see `dockDuration`).
+    static let appearDuration: TimeInterval = 1.1
     static let appearDelay: TimeInterval = 0.1
     /// It starts up and to the left of where it lands.
     static let appearOffset = CGPoint(x: -150, y: -110)
 
     /// Crossing to the shelf now in use: the same flight, a little shorter,
     /// so the move reads as the bird following the user rather than a show.
-    static let crossDuration: TimeInterval = 0.9
+    static let crossDuration: TimeInterval = 0.75
 
     /// `keepIn`: how far to slide a pose horizontally so the drawn bird stays
     /// `screenMargin` inside `bounds`. Zero when it already is.
@@ -416,17 +419,17 @@ struct MascotPass {
 
     /// Closing a shelf: swoops over from slightly above, mirrored.
     static func closing(from start: CGPoint, x: CGPoint) -> MascotPass {
-        // 1.0 s, down from the reference's 1.25: the owner asked for closing
-        // to be slightly quicker while staying smooth (2026-10-20).
+        // 0.85 s, down from the reference's 1.25: the owner asked twice for
+        // closing to be quicker while staying smooth (2026-10-20).
         MascotPass(start: start, target: x, flip: true, lift: 46,
-                   exit: CGPoint(x: -170, y: -120), duration: 1.0)
+                   exit: CGPoint(x: -170, y: -120), duration: 0.85)
     }
 
     /// Sending the pet away: lifts off with minimal movement.
     static func dismissing(from start: CGPoint, x: CGPoint) -> MascotPass {
-        // 0.85 s, down from the reference's 1.1: "a little quicker".
+        // 0.72 s, down from the reference's 1.1: "a little quicker", twice.
         MascotPass(start: start, target: x, flip: false, lift: 10,
-                   exit: CGPoint(x: 150, y: -130), duration: 0.85)
+                   exit: CGPoint(x: 150, y: -130), duration: 0.72)
     }
 
     /// Eased time at which the beak is on the X.
@@ -480,5 +483,91 @@ struct MascotPass {
         pose.holdsX = grabbed
         pose.opacity = grabbed ? 1 - MascotEase.smooth(max(0, (u - 0.62) / 0.38)) : 1
         return pose
+    }
+}
+
+/// The magpie carrying a card in its beak: the one question it ever asks
+/// ("hide the magpie?") is brought by the bird itself, set down, and stood
+/// on, then carried back to the shelf or away with the bird. The bird's job
+/// in the app is fetching things and taking them elsewhere, and this is the
+/// one place it does that literally.
+///
+/// All positions are y-down global points, as for every flight; `card` is
+/// the card's final rectangle. The card hangs from the beak by its top
+/// edge near the right-hand corner, so it dangles below and behind the bill
+/// like a note held in the mouth, small at first and opening out as the
+/// bird comes down to set it in place. The bird stands on the card's right
+/// end, the same side of the shelf it perches on, so the trip is a short
+/// hop down rather than a flight across.
+enum MascotCarry {
+    static let bringDuration: TimeInterval = 0.9
+    static let returnDuration: TimeInterval = 0.75
+    static let awayDuration: TimeInterval = 0.7
+    /// Where the beak holds the card, from its top-left corner.
+    static func grip(_ size: CGSize) -> CGPoint { CGPoint(x: size.width - 14, y: 4) }
+    /// How small the card is when it leaves, or reaches, the shelf.
+    static let smallScale: CGFloat = 0.18
+    /// Where the bird stands on the card's top edge, from its right.
+    static let standInset: CGFloat = 40
+    /// Where it leaves to when it flies off with the card, from where it stood.
+    static let awayExit = CGPoint(x: 210, y: -190)
+
+    /// The box that stands the bird's feet on the card's top edge.
+    static func stand(on card: CGRect) -> CGPoint {
+        MascotGeometry.standing(feetAt: CGPoint(x: card.maxX - standInset, y: card.minY))
+    }
+
+    /// The card's rectangle hanging from the beak of `pose` at `scale`.
+    static func hanging(from pose: MascotPose, size: CGSize, scale: CGFloat) -> CGRect {
+        let beak = MascotGeometry.beak(pose)
+        let grip = grip(size)
+        return CGRect(x: beak.x - grip.x * scale, y: beak.y - grip.y * scale,
+                      width: size.width * scale, height: size.height * scale)
+    }
+
+    private static func mix(_ a: CGRect, _ b: CGRect, _ t: CGFloat) -> CGRect {
+        CGRect(x: a.minX + (b.minX - a.minX) * t, y: a.minY + (b.minY - a.minY) * t,
+               width: a.width + (b.width - a.width) * t, height: a.height + (b.height - a.height) * t)
+    }
+
+    /// Bringing the card: from the perch to the card's top edge, the card
+    /// growing in the beak, then let go so it drops into place as the bird
+    /// lands on it.
+    static func bring(_ t: CGFloat, from home: CGPoint, card: CGRect) -> (pose: MascotPose, card: CGRect, opacity: CGFloat) {
+        let pose = MascotFlight.flutter(t, from: home, to: stand(on: card))
+        // A small note for the first half; it opens out on the way down.
+        let grow = smallScale + (1 - smallScale) * MascotEase.smooth(min(1, max(0, (t - 0.4) / 0.42)))
+        let held = hanging(from: pose, size: card.size, scale: grow)
+        let letGo = MascotEase.smooth(max(0, (t - 0.72) / 0.28))
+        return (pose, mix(held, card, letGo), MascotEase.smooth(min(1, t / 0.12)))
+    }
+
+    /// Taking it back: picked up from where it lies, shrinking into the beak,
+    /// and gone as the bird lands on the shelf again.
+    static func takeBack(_ t: CGFloat, card: CGRect, to home: CGPoint) -> (pose: MascotPose, card: CGRect, opacity: CGFloat) {
+        let pose = MascotFlight.flutter(t, from: stand(on: card), to: home)
+        let shrink = 1 - (1 - smallScale) * MascotEase.smooth(min(1, t / 0.7))
+        let held = hanging(from: pose, size: card.size, scale: shrink)
+        let pickUp = MascotEase.smooth(min(1, t / 0.22))
+        return (pose, mix(card, held, pickUp), 1 - MascotEase.smooth(min(1, max(0, (t - 0.55) / 0.3))))
+    }
+
+    /// Flying off with it: up and away, the card shrinking, both fading.
+    static func away(_ t: CGFloat, card: CGRect) -> (pose: MascotPose, card: CGRect, opacity: CGFloat) {
+        let start = stand(on: card)
+        let e = MascotEase.inOut(t)
+        let f = sin(t * 2 * .pi * 9)
+        let settle = min(1, t * 5)
+        var pose = MascotPose.flying(
+            x: start.x + awayExit.x * e, y: start.y + awayExit.y * e - sin(.pi * e) * 30,
+            sx: 1 + 0.02 * f, sy: 1 - 0.02 * f,
+            pitch: 30 * settle, wing: -8 + 10 * f, tail: -8, legs: 1 - 0.65 * settle
+        )
+        let fade = 1 - MascotEase.smooth(max(0, (t - 0.55) / 0.45))
+        pose.opacity = fade
+        let shrink = 1 - (1 - smallScale) * MascotEase.smooth(min(1, t / 0.6))
+        let held = hanging(from: pose, size: card.size, scale: shrink)
+        let pickUp = MascotEase.smooth(min(1, t / 0.2))
+        return (pose, mix(card, held, pickUp), fade)
     }
 }

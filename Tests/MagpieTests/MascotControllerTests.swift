@@ -55,20 +55,23 @@ final class MascotControllerTests: XCTestCase {
         controller.shelfShown(id)
         let perch = try XCTUnwrap(controller.perch(for: id))
         XCTAssertTrue(perch.isFlying, "the shelf appeared and the bird did not fly in")
-        wait(0.4)
+        // Timed from the flight's own figures, so a faster flight keeps the
+        // same three moments: a quarter in, near the end, and landed.
+        let flight = MascotFlight.appearDelay + MascotFlight.appearDuration
+        wait(MascotFlight.appearDelay + MascotFlight.appearDuration * 0.25)
         // Mid-flight, the shelf grows downward by a row and a half.
         let grown = NSRect(x: start.minX, y: start.minY - 60, width: 240, height: 210)
         panel.setFrame(grown, display: false)
         // Late in the flight, the bird is already heading for the new edge:
         // it does not fly to the old one and then jump.
-        wait(0.92)
+        wait(flight * 0.88 - (MascotFlight.appearDelay + MascotFlight.appearDuration * 0.25))
         XCTAssertTrue(perch.isFlying)
         let pose = perch.flightPose, window = perch.flightWindowFrame
         let feetNow = NSPoint(x: window.minX + pose.x + MascotGeometry.origin.x,
                               y: window.maxY - (pose.y + MascotGeometry.origin.y))
         let target = MascotPlacement.perchedFeet(onShelf: grown)
         XCTAssertEqual(feetNow.y, target.y, accuracy: 4, "the flight is still aiming at the edge the shelf had when it started")
-        wait(1.1)
+        wait(flight * 0.12 + MascotFlight.landDuration + 0.4)
         XCTAssertFalse(perch.isFlying)
         XCTAssertTrue(perch.restWindowVisible)
         frameNear(perch.restWindowFrame, MascotPlacement.restFrame(feet: MascotPlacement.perchedFeet(onShelf: grown)),
@@ -148,7 +151,7 @@ final class MascotControllerTests: XCTestCase {
     func testTheFirstSendAwayAsksAndCanBeDeclined() throws {
         let controller = MascotController()
         var asked = 0
-        controller.confirmFirstSendAway = { asked += 1; return false }
+        controller.confirmFirstSendAway = { _, answer in asked += 1; answer(false) }
         let id = UUID()
         let panel = makePanel(NSRect(x: screen.midX, y: screen.midY, width: 240, height: 150))
         defer { panel.orderOut(nil); controller.detach(id) }
@@ -158,13 +161,45 @@ final class MascotControllerTests: XCTestCase {
         perch.onSendAway()
         XCTAssertEqual(asked, 1, "the first press of the X did not ask")
         XCTAssertTrue(MascotPreference.isShown, "declining still sent the bird away")
-        controller.confirmFirstSendAway = { asked += 1; return true }
+        controller.confirmFirstSendAway = { _, answer in asked += 1; answer(true) }
         perch.onSendAway()
         XCTAssertFalse(MascotPreference.isShown)
         MascotPreference.set(true)
         perch.stand(mode: .perched)
         perch.onSendAway()
         XCTAssertEqual(asked, 2, "it asked again after the user had already said yes")
+    }
+
+    /// The question is brought by the bird, not raised by the system: the
+    /// first press of the X puts a card on screen beside the shelf with the
+    /// real bird standing on it, and keeping the bird carries the card away
+    /// and lands the bird back on its shelf.
+    func testTheBirdBringsTheQuestionAndKeepingItLandsItBack() throws {
+        let controller = MascotController()
+        let id = UUID()
+        let shelf = NSRect(x: screen.midX - 120, y: screen.midY, width: 240, height: 150)
+        let panel = makePanel(shelf)
+        defer { panel.orderOut(nil); controller.detach(id) }
+        controller.attach(id, panel: panel)
+        let perch = try XCTUnwrap(controller.perch(for: id))
+        perch.stand(mode: .perched)
+        var answers: [Bool] = []
+        perch.carryQuestion { answers.append($0) }
+        wait(MascotCarry.bringDuration + 0.3)
+        let card = try XCTUnwrap(perch.openQuestion, "no question card is open after the bird brought it")
+        XCTAssertTrue(card.isVisible, "the card the bird brought is not on screen")
+        let expected = MascotQuestionCard.frame(size: card.size, shelf: shelf, visible: panel.screen?.visibleFrame ?? screen)
+        frameNear(card.frame, expected, "the card was not set down where the placement puts it")
+        XCTAssertFalse(card.frame.intersects(shelf), "the card covers the shelf it is asking about")
+        XCTAssertTrue(answers.isEmpty, "the question answered itself")
+        card.onKeep()
+        XCTAssertEqual(answers, [false])
+        XCTAssertFalse(card.isVisible, "the card stayed after the user answered")
+        wait(MascotCarry.returnDuration + MascotFlight.landDuration + 0.4)
+        XCTAssertTrue(perch.restWindowVisible, "keeping the bird did not bring it back to its shelf")
+        frameNear(perch.restWindowFrame, MascotPlacement.restFrame(feet: MascotPlacement.perchedFeet(onShelf: shelf)),
+                  "the bird came back to the wrong place")
+        XCTAssertNil(perch.openQuestion)
     }
 
     /// The pointer can travel from the bird to its X without losing it.

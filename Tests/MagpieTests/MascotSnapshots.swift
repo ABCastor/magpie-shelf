@@ -24,7 +24,7 @@ final class MascotSnapshots: XCTestCase {
             ?? FileManager.default.temporaryDirectory.appendingPathComponent("magpie-snapshots").path, isDirectory: true)
     }
     private let scale: CGFloat = 2
-    private let scene = CGSize(width: 440, height: 330)
+    private var scene = CGSize(width: 440, height: 330)
     private let panelOrigin = CGPoint(x: 170, y: 40)   // y-down, top-left of the panel in the scene
 
     // MARK: Fixture
@@ -102,7 +102,8 @@ final class MascotSnapshots: XCTestCase {
         petX: Bool = false,
         pinnedX: CGPoint? = nil,
         notch: CGRect? = nil,
-        panelAlpha: CGFloat = 1
+        panelAlpha: CGFloat = 1,
+        card: (rep: NSBitmapImageRep, frame: CGRect, opacity: CGFloat)? = nil
     ) -> NSImage {
         let o = origin ?? panelOrigin
         let back = backdrop(dark: dark)
@@ -151,6 +152,12 @@ final class MascotSnapshots: XCTestCase {
             stroke.setStroke(); shape.lineWidth = 1.5; shape.stroke()
             NSGraphicsContext.current?.cgContext.endTransparencyLayer()
             NSGraphicsContext.restoreGraphicsState()
+            if let card, card.opacity > 0 {
+                NSGraphicsContext.saveGraphicsState()
+                NSShadow().then { $0.shadowColor = NSColor(white: 0, alpha: 0.22); $0.shadowBlurRadius = 12; $0.shadowOffset = NSSize(width: 0, height: -6); $0.set() }
+                card.rep.draw(in: card.frame, from: .zero, operation: .sourceOver, fraction: card.opacity, respectFlipped: true, hints: nil)
+                NSGraphicsContext.restoreGraphicsState()
+            }
             if let notch {
                 NSColor.black.setFill()
                 NSBezierPath(roundedRect: notch, xRadius: 9, yRadius: 9).fill()
@@ -293,22 +300,41 @@ final class MascotSnapshots: XCTestCase {
                 size: emptyPanel, dark: dark), bird: emptyBird)
         }
 
-        // The question the first press of the pet X asks.
-        for dark in [false, true] {
-            let alert = NSAlert()
-            alert.messageText = L("mascot.hide.title")
-            alert.informativeText = L("mascot.hide.body")
-            alert.icon = StatusIcon.image(dropping: false, awake: false)
-            alert.addButton(withTitle: L("Cancel"))
-            alert.addButton(withTitle: L("mascot.hide.confirm"))
-            alert.window.appearance = NSAppearance(named: dark ? .darkAqua : .aqua)
-            alert.layout()
-            if let view = alert.window.contentView?.superview ?? alert.window.contentView,
-               let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) {
-                view.cacheDisplay(in: view.bounds, to: rep)
-                try rep.representation(using: .png, properties: [:])?
-                    .write(to: dir.appendingPathComponent("21-first-send-away-question-\(dark ? "dark" : "light").png"))
+        // The question the first press of the pet X asks: the bird brings it
+        // on a card, sets it down, stands on it; keeping it carries it home.
+        scene = CGSize(width: 560, height: 470)
+        defer { scene = CGSize(width: 440, height: 330) }
+        let qOrigin = CGPoint(x: 250, y: 24)
+        let qHome = home(panel, at: qOrigin)
+        let cardSize = NSHostingView(rootView: MascotQuestionView(keep: {}, hide: {})).fittingSize
+        let shelfUp = NSRect(x: qOrigin.x, y: scene.height - qOrigin.y - panel.height, width: panel.width, height: panel.height)
+        let cardUp = MascotQuestionCard.frame(size: cardSize, shelf: shelfUp, visible: NSRect(origin: .zero, size: scene))
+        let card = CGRect(x: cardUp.minX, y: scene.height - cardUp.maxY, width: cardUp.width, height: cardUp.height)
+        func cardRep(_ dark: Bool) -> NSBitmapImageRep? {
+            content(MascotQuestionView(keep: {}, hide: {}), size: cardSize, dark: dark)
+        }
+        for (name, t) in [("21-question-brought-in-the-beak", 0.45), ("22-question-let-go", 0.86)] {
+            let s = MascotCarry.bring(t, from: qHome, card: card)
+            try write(name) { dark in
+                compose(dark: dark, panel: panel, at: qOrigin, content: stripRep(dark), bird: s.pose,
+                        card: cardRep(dark).map { ($0, s.card, s.opacity) })
             }
+        }
+        let standing = MascotCarry.stand(on: card)
+        var onCard = MascotPose(); onCard.x = standing.x; onCard.y = standing.y
+        try write("23-question-asked-standing-on-it") { dark in
+            compose(dark: dark, panel: panel, at: qOrigin, content: stripRep(dark), bird: onCard, curious: true,
+                    card: cardRep(dark).map { ($0, card, 1) })
+        }
+        let kept = MascotCarry.takeBack(0.45, card: card, to: qHome)
+        try write("24-kept-carried-home") { dark in
+            compose(dark: dark, panel: panel, at: qOrigin, content: stripRep(dark), bird: kept.pose,
+                    card: cardRep(dark).map { ($0, kept.card, kept.opacity) })
+        }
+        let gone = MascotCarry.away(0.4, card: card)
+        try write("25-hidden-flies-off-with-it") { dark in
+            compose(dark: dark, panel: panel, at: qOrigin, content: stripRep(dark), bird: gone.pose,
+                    card: cardRep(dark).map { ($0, gone.card, gone.opacity) })
         }
         print("magpie snapshots written to \(dir.path)")
     }

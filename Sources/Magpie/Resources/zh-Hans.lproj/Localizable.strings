@@ -353,7 +353,7 @@
 "settings.glass" = "玻璃";
 "settings.glass.light" = "轻磨砂";
 "settings.glass.solid" = "不透明";
-"settings.glass.description" = "搁架后面的内容能透出多少。即使在最淡的设置下，文件名也保持清晰可读。";
+"settings.glass.description" = "搁架后面的内容能透出多少，从系统自带的玻璃效果到完全不透明。";
 "settings.mascot" = "搁架上的喜鹊";
 "settings.mascot.description" = "每个搁架上都站着一只喜鹊，会对你的操作做出反应。指向它并按旁边的 × 让它离开；在这里可以重新打开。";
 "settings.notch" = "在刘海下方打开搁架";

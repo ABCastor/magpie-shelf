@@ -353,7 +353,7 @@
 "settings.glass" = "Glas";
 "settings.glass.light" = "Leicht mattiert";
 "settings.glass.solid" = "Deckend";
-"settings.glass.description" = "Wie viel von dem, was hinter einem Regal liegt, durchscheint. Dateinamen bleiben auch bei der leichtesten Einstellung lesbar.";
+"settings.glass.description" = "Wie viel von dem, was hinter einem Regal liegt, durchscheint: vom Glas des Systems bis deckend.";
 "settings.mascot" = "Elster auf dem Regal";
 "settings.mascot.description" = "Auf jedem Regal steht eine Elster und reagiert auf das, was du tust. Zeige auf sie und drücke das × daneben, um sie wegzuschicken; hier holst du sie zurück.";
 "settings.notch" = "Regale unter der Kerbe öffnen";

@@ -257,6 +257,10 @@ enum Design {
         )
         /// The toast is the one surface that uses no material at all.
         static let toast = Color(nsColor: .controlBackgroundColor)
+        /// The card the magpie carries in to ask its one question. Solid, as
+        /// a system alert is, because the bird carries it as a picture and the
+        /// picture has to be the card it then sets down.
+        static let question = Color(nsColor: .windowBackgroundColor)
     }
 
     // MARK: - Line

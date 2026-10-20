@@ -353,7 +353,7 @@
 "settings.glass" = "Vetro";
 "settings.glass.light" = "Smerigliato leggero";
 "settings.glass.solid" = "Pieno";
-"settings.glass.description" = "Quanto si vede attraverso una mensola. I nomi dei file restano leggibili anche all’impostazione più leggera.";
+"settings.glass.description" = "Quanto si vede attraverso una mensola, dal vetro del sistema fino al pieno.";
 "settings.mascot" = "Gazza sulla mensola";
 "settings.mascot.description" = "Una gazza sta su ogni mensola e reagisce a ciò che fai. Puntala e premi la × accanto per mandarla via; riattivala da qui.";
 "settings.notch" = "Apri le mensole sotto il notch";

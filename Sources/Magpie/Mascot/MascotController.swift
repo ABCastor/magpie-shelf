@@ -29,8 +29,12 @@ final class MascotController {
     /// A click on the bird standing in a docked tab is a click on the tab.
     var onDockedClick: (UUID) -> Void = { _ in }
     /// Asks, the first time only, whether the pet X should really send the
-    /// bird away. Injectable so tests never raise a modal alert.
-    var confirmFirstSendAway: () -> Bool = MascotController.askBeforeFirstSendAway
+    /// bird away, and answers true to hide it. By default the bird carries
+    /// the question in on a card; injectable so tests never raise one.
+    var confirmFirstSendAway: (MascotPerch?, @escaping (Bool) -> Void) -> Void = { perch, answer in
+        guard let perch else { answer(false); return }
+        perch.carryQuestion(answered: answer)
+    }
 
     static let askedKey = "shelf.mascot.sendAwayConfirmed"
 
@@ -192,31 +196,29 @@ final class MascotController {
     /// The pet X: it bites the X and flies off with it, and stays away. The
     /// first time, it asks, so a stray click does not lose the bird.
     private func sendAway(from shelfID: UUID) {
-        let defaults = UserDefaults.standard
-        if !defaults.bool(forKey: Self.askedKey) {
-            guard confirmFirstSendAway() else { return }
-            defaults.set(true, forKey: Self.askedKey)
+        guard UserDefaults.standard.bool(forKey: Self.askedKey) else {
+            confirmFirstSendAway(perches[shelfID]) { [weak self] hide in
+                guard hide else { return }
+                UserDefaults.standard.set(true, forKey: Self.askedKey)
+                self?.goAway(from: shelfID)
+            }
+            return
         }
+        goAway(from: shelfID)
+    }
+
+    /// Hides the bird for good (until brought back). When it is still on its
+    /// perch it bites its X and flies off with it; when it has already flown
+    /// off with the question card, there is nothing left to fly.
+    private func goAway(from shelfID: UUID) {
         MascotPreference.set(false)
         for (id, perch) in perches where id != shelfID { perch.hide() }
-        guard let perch = perches[shelfID], !reduceMotion else {
+        guard let perch = perches[shelfID], !reduceMotion, perch.restWindowVisible else {
             perches[shelfID]?.hide()
             onShownChanged()
             return
         }
         perch.biteOwnX { [weak self] in self?.onShownChanged() }
-    }
-
-    static func askBeforeFirstSendAway() -> Bool {
-        let alert = NSAlert()
-        alert.messageText = L("mascot.hide.title")
-        alert.informativeText = L("mascot.hide.body")
-        alert.icon = StatusIcon.image(dropping: false, awake: false)
-        // Return keeps the bird: the safe choice is the default.
-        alert.addButton(withTitle: L("Cancel"))
-        alert.addButton(withTitle: L("mascot.hide.confirm"))
-        NSApp.activate(ignoringOtherApps: true)
-        return alert.runModal() == .alertSecondButtonReturn
     }
 
     /// Settings or the menu brought it back.
@@ -322,6 +324,7 @@ final class MascotPerch {
     }
 
     func tearDown() {
+        dropQuestion()
         timer?.invalidate()
         rideTimer?.invalidate()
         flashTimer?.invalidate()
@@ -411,6 +414,7 @@ final class MascotPerch {
     }
 
     func hide() {
+        dropQuestion()
         cancelFlight()
         hovering = false
         detachFromPanel()
@@ -689,6 +693,142 @@ final class MascotPerch {
                 done()
             })
     }
+
+    // MARK: The question
+
+    private var question: MascotQuestionCard?
+    private var questionLayer: CALayer?
+
+    /// A question card left open when the bird is hidden or its shelf goes
+    /// away: put away without an answer, which keeps the bird.
+    private func dropQuestion() {
+        question?.onKeep = {}
+        question?.onHide = {}
+        question?.orderOut(nil)
+        question = nil
+        questionLayer?.removeFromSuperlayer()
+        questionLayer = nil
+    }
+
+    /// Brings the hide question on a card in its beak, sets it down beside
+    /// the shelf and stands on it. Keep: it carries the card back and lands
+    /// on the shelf again. Hide: it flies off with the card. `answered` is
+    /// called with true once the bird has gone, false as it heads home.
+    func carryQuestion(answered: @escaping (Bool) -> Void) {
+        guard let panel, let screenVisible = (panel.screen ?? NSScreen.main)?.visibleFrame else { answered(false); return }
+        dropQuestion()
+        let card = MascotQuestionCard()
+        let frame = MascotQuestionCard.frame(size: card.size, shelf: panel.frame, visible: screenVisible)
+        let screen = screenFrame(around: frame)
+        let origin = space.down(screen).origin
+        let down = space.down(frame)
+        let home = restingBox ?? liveHome(.perched)
+        let reduced = Design.Motion.isReduced
+
+        let layer = CALayer()
+        layer.contents = card.snapshot()
+        layer.contentsGravity = .resize
+        layer.contentsScale = panel.backingScaleFactor
+        layer.shadowColor = NSColor.black.cgColor
+        layer.shadowOpacity = 0.22
+        layer.shadowRadius = 12
+        layer.shadowOffset = CGSize(width: 0, height: 6)
+        flightView.layer?.insertSublayer(layer, below: flightBird)
+        question = card
+        questionLayer = layer
+        func place(_ r: CGRect, _ opacity: CGFloat) {
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            layer.frame = r.offsetBy(dx: -origin.x, dy: -origin.y)
+            layer.opacity = Float(opacity)
+            CATransaction.commit()
+        }
+        place(down, reduced ? 1 : 0)
+
+        // Standing on the card, looking at the user, while they decide.
+        let standOnCard = { [weak self] in
+            guard let self else { return }
+            let box = MascotCarry.stand(on: down)
+            var pose = MascotPose.rest
+            pose.x = box.x - origin.x; pose.y = box.y - origin.y
+            self.flightWindow.setFrame(screen, display: false)
+            self.flightBird.apply(pose)
+            layer.isHidden = true
+            card.setFrame(frame, display: true)
+            card.orderFront(nil)
+            card.makeKey()
+            self.flightWindow.orderFront(nil)
+            if !reduced {
+                self.flightBird.play([.idle])
+                self.flightBird.setCurious(true, animated: true)
+            }
+        }
+
+        var settled = false
+        let settle: (Bool) -> Void = { [weak self] hide in
+            guard !settled else { return }
+            settled = true
+            card.onKeep = {}
+            card.onHide = {}
+            card.orderOut(nil)
+            guard let self else { answered(hide); return }
+            self.question = nil
+            self.flightBird.stopBehaviours()
+            self.flightBird.setCurious(false, animated: false)
+            layer.isHidden = false
+            place(down, 1)
+            let finish = {
+                layer.removeFromSuperlayer()
+                if self.questionLayer === layer { self.questionLayer = nil }
+            }
+            if reduced {
+                finish()
+                self.flightWindow.orderOut(nil)
+                if hide { self.hide(); answered(true) } else { self.stand(mode: .perched); answered(false) }
+                return
+            }
+            if hide {
+                self.fly(over: screen, duration: MascotCarry.awayDuration,
+                         pose: { MascotCarry.away($0, card: down).pose },
+                         tick: { t in let s = MascotCarry.away(t, card: down); place(s.card, s.opacity) },
+                         done: { [weak self] in
+                             finish()
+                             self?.flightWindow.orderOut(nil)
+                             answered(true)
+                         })
+            } else {
+                answered(false)
+                self.fly(over: screen, duration: MascotCarry.returnDuration,
+                         pose: { [weak self] t in MascotCarry.takeBack(t, card: down, to: self?.liveHome(.perched) ?? home).pose },
+                         tick: { [weak self] t in
+                             let s = MascotCarry.takeBack(t, card: down, to: self?.liveHome(.perched) ?? home)
+                             place(s.card, s.opacity)
+                         },
+                         done: { [weak self] in
+                             finish()
+                             self?.land(mode: .perched)
+                         })
+            }
+        }
+        card.onKeep = { settle(false) }
+        card.onHide = { settle(true) }
+
+        if reduced {
+            cancelFlight()
+            detachFromPanel()
+            restWindow.orderOut(nil)
+            standOnCard()
+            return
+        }
+        fly(over: screen, duration: MascotCarry.bringDuration,
+            before: MascotPose(x: home.x, y: home.y),
+            pose: { MascotCarry.bring($0, from: home, card: down).pose },
+            tick: { t in let s = MascotCarry.bring(t, from: home, card: down); place(s.card, s.opacity) },
+            done: { standOnCard() })
+    }
+
+    /// For tests: the question card, while it is open.
+    var openQuestion: MascotQuestionCard? { question }
 
     /// Sent away with its own X: it lifts off with minimal movement, bites
     /// the X in passing, and flies away carrying it.

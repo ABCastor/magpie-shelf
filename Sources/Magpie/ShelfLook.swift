@@ -1,27 +1,31 @@
 import AppKit
 
-/// How see-through the shelf is: one slider, from a light frost to fully
-/// solid, frosted by default.
+/// How see-through the shelf is: one slider, from the system's own glass to
+/// fully solid, frosted by default.
 ///
 /// The panel is the system's blur with a coat of the window ground over it,
-/// and the slider sets how thick that coat is. **The light end is not
-/// "transparent", it is the thinnest coat that keeps every file name
-/// readable over anything at all**, measured with no credit given to the
-/// blur: the worst case is a white page behind a dark shelf, or a black one
-/// behind a light shelf, and the floor is the coat at which a file's name
-/// still clears 4.5:1 and its size-and-kind line 3:1 over both.
-/// `GlassTests` re-derives that from the live colours.
+/// and the slider sets how thick that coat is. At the light end there is no
+/// coat at all: the shelf is exactly the material macOS draws for its own
+/// translucent surfaces, with the system's own legibility, which is what the
+/// owner asked for after finding a light end that was already 75% solid did
+/// nothing visible (2026-10-20: "really like Apple does"). The coat grows
+/// along a curve, `1 - (1 - v)^1.6`, faster at first and slower towards
+/// solid, so the travel is spent where the eye sees a difference, yet the
+/// last tenth still visibly closes the glass (a square curve left it 1%);
+/// the default sits at 0.7 and gives the frosted look approved on the
+/// design page (a coat of 0.85). Reduce Transparency still replaces all of it with
+/// an opaque ground. `GlassTests` holds these three facts.
 enum ShelfGlass {
     static let defaultsKey = "shelf.glass"
-    /// Frosted: a little under halfway along.
-    static let defaultValue: Double = 0.4
-    /// The coat at the slider's light end.
-    static let floor: CGFloat = 0.75
+    /// Frosted: about two thirds along.
+    static let defaultValue: Double = 0.7
+    /// How the coat bends along the slider.
+    static let curve: Double = 1.6
 
     /// The coat's opacity for a slider value in 0...1.
     static func groundAlpha(_ value: Double) -> CGFloat {
-        let v = CGFloat(min(1, max(0, value)))
-        return floor + (1 - floor) * v
+        let v = min(1, max(0, value))
+        return CGFloat(1 - pow(1 - v, curve))
     }
 
     static var current: Double {

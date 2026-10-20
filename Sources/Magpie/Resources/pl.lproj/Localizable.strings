@@ -354,7 +354,7 @@
 "settings.glass" = "Szkło";
 "settings.glass.light" = "Lekki szron";
 "settings.glass.solid" = "Pełne";
-"settings.glass.description" = "Jak bardzo prześwituje to, co jest za półką. Nazwy plików pozostają czytelne nawet przy najlżejszym ustawieniu.";
+"settings.glass.description" = "Jak bardzo prześwituje to, co jest za półką: od szkła systemu do pełnego krycia.";
 "settings.mascot" = "Sroka na półce";
 "settings.mascot.description" = "Na każdej półce stoi sroka i reaguje na to, co robisz. Wskaż ją i naciśnij × obok, aby ją odesłać; tutaj włączysz ją z powrotem.";
 "settings.notch" = "Otwieraj półki pod wcięciem";

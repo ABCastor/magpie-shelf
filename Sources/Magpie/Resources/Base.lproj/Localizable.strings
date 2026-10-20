@@ -359,7 +359,7 @@
 "settings.glass" = "Glass";
 "settings.glass.light" = "Light frost";
 "settings.glass.solid" = "Solid";
-"settings.glass.description" = "How much of what is behind a shelf shows through it. File names stay readable even at the lightest setting.";
+"settings.glass.description" = "How much of what is behind a shelf shows through it, from the system’s own glass to solid.";
 "settings.mascot" = "Magpie on the shelf";
 "settings.mascot.description" = "A magpie stands on each shelf and reacts to what you do. Point at it and press the × beside it to send it away; switch it back on here.";
 "settings.notch" = "Open shelves under the notch";
