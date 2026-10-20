@@ -36,6 +36,9 @@ struct SettingsView: View {
     @AppStorage(AppearancePreference.defaultsKey) private var appearancePreference: AppearancePreference = .system
     @AppStorage(MenuBarVisibility.defaultsKey) private var showMenuBarIcon: Bool = MenuBarVisibility.showsByDefault
     @AppStorage("SUEnableAutomaticChecks") private var autoCheckUpdates: Bool = true
+    @AppStorage(ShelfGlass.defaultsKey) private var glass: Double = ShelfGlass.defaultValue
+    @AppStorage(MascotPreference.defaultsKey) private var mascotShown: Bool = true
+    @AppStorage(ShelfNotch.defaultsKey) private var notchIsland: Bool = false
 
     /// Whether this build can check for updates at all. Read once from
     /// `UpdateAvailability` (a per-launch constant: the key is baked into
@@ -188,6 +191,10 @@ struct SettingsView: View {
     }
     private var appearanceTerms: [[String]] {
         [[L("Appearance"), "theme", "dark", "light", "system", "colour", "color"],
+         [L("settings.glass"), L("settings.glass.light"), L("settings.glass.solid"),
+          "glass", "transparency", "translucent", "frost", "blur", "opacity", "solid"],
+         [L("settings.mascot"), "magpie", "bird", "mascot", "pet", "animation", "bring back"],
+         [L("settings.notch"), "notch", "island", "camera", "top"],
          [L("Show Magpie in the menu bar"), "menu bar", "menubar", "hide", "icon", "status"],
          [L("Language"), "language", "locale", "translate"]]
     }
@@ -454,6 +461,30 @@ struct SettingsView: View {
 
             formNote("settings.appearance.description")
 
+            LabeledContent(L("settings.glass")) {
+                Slider(value: $glass, in: 0...1) {
+                    Text(L("settings.glass"))
+                } minimumValueLabel: {
+                    Text(L("settings.glass.light"))
+                } maximumValueLabel: {
+                    Text(L("settings.glass.solid"))
+                }
+                .labelsHidden()
+                .frame(maxWidth: 240)
+            }
+
+            formNote("settings.glass.description")
+
+            Toggle(L("settings.mascot"), isOn: $mascotShown)
+                .toggleStyle(.switch)
+
+            formNote("settings.mascot.description")
+
+            Toggle(L("settings.notch"), isOn: $notchIsland)
+                .toggleStyle(.switch)
+
+            formNote("settings.notch.description")
+
             Toggle(L("Show Magpie in the menu bar"), isOn: $showMenuBarIcon)
                 .toggleStyle(.switch)
 
@@ -554,6 +585,10 @@ struct SettingsView: View {
     /// the app and exactly the one a broken install needs.
     private var diagnosticsSection: some View {
         Section {
+            // The app's name as it is shown wherever it stands for itself:
+            // "Magpie" and Castor's terracotta asterisk.
+            AppNameMark()
+                .accessibilityLabel("Magpie")
             LabeledContent(L("settings.diagnostics.version")) {
                 Text(appVersionDisplay)
                     .foregroundStyle(.secondary)
@@ -836,5 +871,13 @@ enum LaunchAtLoginManager {
     private static func appBundleURL() -> URL? {
         let path = Bundle.main.bundlePath
         return path.hasSuffix(".app") ? URL(fileURLWithPath: path) : nil
+    }
+}
+
+/// "Magpie*": the name with the terracotta asterisk, as the app signs itself.
+struct AppNameMark: View {
+    var body: some View {
+        (Text("Magpie") + Text("*").foregroundColor(Design.Brand.terracotta))
+            .font(Design.Text.title)
     }
 }

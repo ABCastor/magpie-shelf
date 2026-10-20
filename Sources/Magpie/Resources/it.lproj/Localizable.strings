@@ -345,3 +345,16 @@
 /* Drag out with ⌘ held: the destination took a copy and the original stayed put. */
 "toast.drag-copied-instead.one" = "La destinazione ha copiato questo file invece di spostarlo.";
 "toast.drag-copied-instead.many" = "La destinazione ha copiato questi %lld file invece di spostarli.";
+
+/* The magpie, the glass slider and the notch island (2026-10 redesign). */
+"mascot.a11y.name" = "Gazza, la mascotte della mensola";
+"mascot.send-away" = "Manda via la gazza";
+"mascot.bring-back" = "Richiama la gazza";
+"settings.glass" = "Vetro";
+"settings.glass.light" = "Smerigliato leggero";
+"settings.glass.solid" = "Pieno";
+"settings.glass.description" = "Quanto si vede attraverso una mensola. I nomi dei file restano leggibili anche all’impostazione più leggera.";
+"settings.mascot" = "Gazza sulla mensola";
+"settings.mascot.description" = "Una gazza sta su ogni mensola e reagisce a ciò che fai. Puntala e premi la × accanto per mandarla via; riattivala da qui.";
+"settings.notch" = "Apri le mensole sotto il notch";
+"settings.notch.description" = "Su un Mac con il notch, una nuova mensola si apre come un’isola nera sotto la fotocamera.";

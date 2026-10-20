@@ -52,44 +52,37 @@ enum Design {
 
     // MARK: - Brand
 
-    /// The app's own two colours, and the only two it has.
+    /// The app's own two colours, and the only two it has: Castor's
+    /// terracotta and teal, the studio's pair (castor-identity, SIGNATURE.md).
     ///
     /// Everything else in this file is either an AppKit semantic or a neutral
     /// raise, deliberately: those follow the appearance, Increase Contrast and
     /// the user's own accent for free, and a brand colour follows nothing. So
     /// these are spent only where the app is saying something that is its own
-    /// rather than the system's — a hot coral on a card leaving the shelf
-    /// under ⌘, a Klein blue on the ring that says files are arriving. Two
-    /// colours, two directions, one use each. A third use wants a reason, not
-    /// a preference.
+    /// rather than the system's: terracotta on a card leaving the shelf under
+    /// the command key and on the magpie's spark, teal on the rows the user
+    /// picked and on the ring that says files are arriving. Warm goes out,
+    /// cool comes in.
     ///
-    /// **Neither raw value survives both appearances**, which is why each has
-    /// an adjusted twin. Measured over the panel ground the way
-    /// `AppearanceTests` measures everything else: raw coral is 2.80:1 on the
-    /// light panel and raw Klein is 1.69:1 on the dark one, against the 3:1 a
-    /// stroke carrying state has to clear. The adjustment is a straight
-    /// lightness move along the same hue — the brand colour dimmed for Light,
-    /// lifted for Dark — so it stays recognisably the same colour rather than
-    /// becoming a second one.
+    /// Terracotta survives both appearances as given (3.85:1 on the light
+    /// panel, 3.25:1 on the dark one, against the 3:1 a stroke carrying state
+    /// has to clear). Teal does not: it is a deep colour, 2.2:1 on the dark
+    /// panel, so it carries a twin lifted a quarter of the way to white for
+    /// Dark, a straight lightness move along the same hue, so it stays
+    /// recognisably the same colour rather than becoming a second one.
     enum Brand {
-        /// Hot coral, `#FD4E5A`, as given. Legible in Dark (4.46:1 over the
-        /// panel), not in Light.
-        static let coralValue = NSColor(srgbRed: 253 / 255, green: 78 / 255, blue: 90 / 255, alpha: 1)
-        /// Klein blue, `#2426E0`, as given. Legible in Light (7.40:1), not in
-        /// Dark — it is a genuinely dark blue on an already dark ground.
-        static let kleinValue = NSColor(srgbRed: 36 / 255, green: 38 / 255, blue: 224 / 255, alpha: 1)
+        /// Castor terracotta, `#C4552A`, as on the website.
+        static let terracottaValue = NSColor(srgbRed: 0xC4 / 255, green: 0x55 / 255, blue: 0x2A / 255, alpha: 1)
+        /// Castor teal, `#006770`, as on the website.
+        static let tealValue = NSColor(srgbRed: 0x00 / 255, green: 0x67 / 255, blue: 0x70 / 255, alpha: 1)
+        /// Teal lifted a quarter of the way to white, `#408D94`: 3.9:1 on the
+        /// dark panel.
+        static let tealOnDark = NSColor(srgbRed: 0x40 / 255, green: 0x8D / 255, blue: 0x94 / 255, alpha: 1)
 
-        /// Coral at 90% lightness, `#E44651` — 3.40:1 on the light panel.
-        static let coralOnLight = NSColor(srgbRed: 228 / 255, green: 70 / 255, blue: 81 / 255, alpha: 1)
-        /// Klein lifted a third of the way to white, `#6A6BEA` — 3.42:1 on the
-        /// dark panel. The largest adjustment in the file, and the honest cost
-        /// of a brand colour chosen for paper.
-        static let kleinOnDark = NSColor(srgbRed: 106 / 255, green: 107 / 255, blue: 234 / 255, alpha: 1)
-
-        /// Coral, legible in both appearances. Files going out.
-        static let coral = adaptive(light: coralOnLight, dark: coralValue)
-        /// Klein blue, legible in both appearances. Files coming in.
-        static let klein = adaptive(light: kleinValue, dark: kleinOnDark)
+        /// Terracotta, legible in both appearances. Files going out.
+        static let terracotta = Color(nsColor: terracottaValue)
+        /// Teal, legible in both appearances. Files coming in.
+        static let teal = adaptive(light: tealValue, dark: tealOnDark)
     }
 
     // MARK: - Radius
@@ -317,14 +310,14 @@ enum Design {
         /// colour rather than one borrowed from the system. Deliberately *not*
         /// `focusRing` any more, so a focused card and a moving one cannot be
         /// confused — those are different claims and now different colours.
-        static let moveRing = Design.Brand.coral
+        static let moveRing = Design.Brand.terracotta
 
         /// The ring drawn when files are being dropped *onto* the shelf, on
         /// the panel and on its docked tab. Was an inline `Color.accentColor`,
-        /// which ADR 0006 forbids and which no token named. Klein blue rather
-        /// than coral so the two directions never read alike: coral is a file
-        /// leaving, this is a file arriving.
-        static let dropTarget = Design.Brand.klein
+        /// which ADR 0006 forbids and which no token named. Teal rather than
+        /// terracotta so the two directions never read alike: terracotta is a
+        /// file leaving, this is a file arriving.
+        static let dropTarget = Design.Brand.teal
 
         static let hairlineWidth: CGFloat = 0.5
         static let panelWidth: CGFloat = 0.75

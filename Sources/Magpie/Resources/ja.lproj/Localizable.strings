@@ -345,3 +345,16 @@
 /* Drag out with ⌘ held: the destination took a copy and the original stayed put. */
 "toast.drag-copied-instead.one" = "移動先はこのファイルを移動せずにコピーしました。";
 "toast.drag-copied-instead.many" = "移動先はこれら %lld 個のファイルを移動せずにコピーしました。";
+
+/* The magpie, the glass slider and the notch island (2026-10 redesign). */
+"mascot.a11y.name" = "カササギ（シェルフのマスコット）";
+"mascot.send-away" = "カササギを帰す";
+"mascot.bring-back" = "カササギを呼び戻す";
+"settings.glass" = "ガラス";
+"settings.glass.light" = "薄いすりガラス";
+"settings.glass.solid" = "不透明";
+"settings.glass.description" = "シェルフの後ろにあるものがどれだけ透けて見えるか。最も薄い設定でもファイル名は読みやすいままです。";
+"settings.mascot" = "シェルフのカササギ";
+"settings.mascot.description" = "各シェルフにカササギがとまり、操作に反応します。ポインタを合わせて横の × を押すと帰ります。ここでまた表示できます。";
+"settings.notch" = "シェルフをノッチの下に開く";
+"settings.notch.description" = "ノッチのある Mac では、新しいシェルフがカメラの下に黒いアイランドとして開きます。";

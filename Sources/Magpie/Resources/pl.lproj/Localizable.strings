@@ -346,3 +346,16 @@
 /* Drag out with ⌘ held: the destination took a copy and the original stayed put. */
 "toast.drag-copied-instead.one" = "Miejsce docelowe skopiowało ten plik, zamiast go przenieść.";
 "toast.drag-copied-instead.many" = "Miejsce docelowe skopiowało te %lld plików, zamiast je przenieść.";
+
+/* The magpie, the glass slider and the notch island (2026-10 redesign). */
+"mascot.a11y.name" = "Sroka, maskotka półki";
+"mascot.send-away" = "Odeślij srokę";
+"mascot.bring-back" = "Przywołaj srokę";
+"settings.glass" = "Szkło";
+"settings.glass.light" = "Lekki szron";
+"settings.glass.solid" = "Pełne";
+"settings.glass.description" = "Jak bardzo prześwituje to, co jest za półką. Nazwy plików pozostają czytelne nawet przy najlżejszym ustawieniu.";
+"settings.mascot" = "Sroka na półce";
+"settings.mascot.description" = "Na każdej półce stoi sroka i reaguje na to, co robisz. Wskaż ją i naciśnij × obok, aby ją odesłać; tutaj włączysz ją z powrotem.";
+"settings.notch" = "Otwieraj półki pod wcięciem";
+"settings.notch.description" = "Na Macu z wcięciem nowa półka otwiera się jako czarna wyspa pod kamerą.";

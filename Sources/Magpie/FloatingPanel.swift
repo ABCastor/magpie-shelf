@@ -51,7 +51,22 @@ final class FloatingPanel<Content: View>: NSPanel {
     /// is live. Exactly one is visible at a time — see `applyReduceTransparency`.
     let materialView = NSVisualEffectView()
     let opaqueGround = OpaquePanelGroundView()
+    /// The glass: a coat of the window ground over the blur, as thick as the
+    /// Settings slider says (`ShelfGlass`). Hidden under Reduce Transparency,
+    /// where `opaqueGround` stands in for both.
+    let frostView = OpaquePanelGroundView()
     private var transparencyObserver: NSObjectProtocol?
+    private var glassObserver: NSObjectProtocol?
+
+    /// The notch island: black, flush with the top of the screen, rounded
+    /// only at the bottom. Whatever the appearance, so the island reads as the
+    /// notch grown down rather than as a window.
+    var isIsland = false {
+        didSet {
+            guard isIsland != oldValue else { return }
+            applyGround()
+        }
+    }
 
     init(contentRect: NSRect, @ViewBuilder content: () -> Content) {
         super.init(
@@ -113,8 +128,12 @@ final class FloatingPanel<Content: View>: NSPanel {
         )
         hosting.translatesAutoresizingMaskIntoConstraints = false
 
+        let frost = frostView
+        frost.translatesAutoresizingMaskIntoConstraints = false
+
         root.addSubview(opaque)
         root.addSubview(blur)
+        root.addSubview(frost)
         root.addSubview(hosting)
 
         NSLayoutConstraint.activate([
@@ -128,6 +147,11 @@ final class FloatingPanel<Content: View>: NSPanel {
             blur.trailingAnchor.constraint(equalTo: root.trailingAnchor),
             blur.bottomAnchor.constraint(equalTo: root.bottomAnchor),
 
+            frost.topAnchor.constraint(equalTo: root.topAnchor),
+            frost.leadingAnchor.constraint(equalTo: root.leadingAnchor),
+            frost.trailingAnchor.constraint(equalTo: root.trailingAnchor),
+            frost.bottomAnchor.constraint(equalTo: root.bottomAnchor),
+
             hosting.topAnchor.constraint(equalTo: root.topAnchor),
             hosting.leadingAnchor.constraint(equalTo: root.leadingAnchor),
             hosting.trailingAnchor.constraint(equalTo: root.trailingAnchor),
@@ -137,6 +161,15 @@ final class FloatingPanel<Content: View>: NSPanel {
         contentView = root
 
         applyReduceTransparency(Design.Transparency.isReduced)
+        // The glass slider writes to user defaults; every panel on screen
+        // follows it as it moves.
+        glassObserver = NotificationCenter.default.addObserver(
+            forName: UserDefaults.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in self?.applyGround() }
+        }
         // Same live-update contract as Reduce Motion: the user flips the
         // setting and every panel already on screen follows, no relaunch.
         transparencyObserver = NSWorkspace.shared.notificationCenter.addObserver(
@@ -154,6 +187,9 @@ final class FloatingPanel<Content: View>: NSPanel {
         if let transparencyObserver {
             NSWorkspace.shared.notificationCenter.removeObserver(transparencyObserver)
         }
+        if let glassObserver {
+            NotificationCenter.default.removeObserver(glassObserver)
+        }
     }
 
     /// When Reduce Transparency is on, the panel trades its material for an
@@ -163,7 +199,31 @@ final class FloatingPanel<Content: View>: NSPanel {
     func applyReduceTransparency(_ reduced: Bool) {
         materialView.isHidden = reduced
         opaqueGround.isHidden = !reduced
+        applyGround()
     }
+
+    /// The coat over the blur, from the glass slider; and the island's black.
+    func applyGround() {
+        let reduced = materialView.isHidden
+        frostView.isHidden = reduced && !isIsland
+        frostView.fill = isIsland ? .black : nil
+        frostView.alphaValue = isIsland ? 1 : ShelfGlass.groundAlpha(ShelfGlass.current)
+        if isIsland {
+            frostView.isHidden = false
+            appearance = NSAppearance(named: .darkAqua)
+        } else if appearance?.name == .darkAqua, islandForcedAppearance {
+            appearance = nil
+        }
+        islandForcedAppearance = isIsland
+        if let layer = contentView?.layer {
+            layer.maskedCorners = isIsland
+                ? [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+                : [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        }
+        frostView.needsDisplay = true
+    }
+
+    private var islandForcedAppearance = false
 
     override var canBecomeKey: Bool { true }
     override var canBecomeMain: Bool { false }
@@ -173,6 +233,9 @@ final class FloatingPanel<Content: View>: NSPanel {
 /// `updateLayer` runs with the view's effective appearance current, so the
 /// semantic colour resolves per appearance and re-resolves when it changes.
 final class OpaquePanelGroundView: NSView {
+    /// A fixed colour in place of the semantic ground (the notch island).
+    var fill: NSColor? { didSet { needsDisplay = true } }
+
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         wantsLayer = true
@@ -184,7 +247,7 @@ final class OpaquePanelGroundView: NSView {
     override var wantsUpdateLayer: Bool { true }
 
     override func updateLayer() {
-        layer?.backgroundColor = Design.Transparency.opaquePanelGround.cgColor
+        layer?.backgroundColor = (fill ?? Design.Transparency.opaquePanelGround).cgColor
     }
 }
 

@@ -21,14 +21,18 @@ import SwiftUI
 /// has no SwiftUI to hand. Deriving the `Color`s from the `NSColor`s is what
 /// keeps the badge and the rows from ever being two different blues.
 enum SelectionColor {
+    /// The picked rows wear Castor teal when the panel is key (the design's
+    /// "Castor teal for picked rows"), and AppKit's unemphasized grey when it
+    /// is not. Raw teal in both appearances: a fill is not a stroke over the
+    /// panel, it is the ground of its own white text, 6.6:1.
     static func fillColor(emphasized: Bool) -> NSColor {
         emphasized
-            ? .selectedContentBackgroundColor
+            ? Design.Brand.tealValue
             : .unemphasizedSelectedContentBackgroundColor
     }
 
     static func textColor(emphasized: Bool) -> NSColor {
-        emphasized ? .alternateSelectedControlTextColor : .labelColor
+        emphasized ? .white : .labelColor
     }
 
     static func fill(emphasized: Bool) -> Color {
@@ -160,6 +164,9 @@ struct ShelfContainerView: View {
     /// default.
     var copyPasteboard: NSPasteboard = .general
     var onClose: () -> Void = {}
+    /// The strip's own X, which the magpie bites on its way out. Every other
+    /// way of closing (⌘W, an emptied shelf) is `onClose`.
+    var onCloseWithX: (() -> Void)? = nil
     var onResize: (_ expanded: Bool) -> Void = { _ in }
     var onDockChanged: (_ docked: Bool) -> Void = { _ in }
 
@@ -241,9 +248,10 @@ struct ShelfContainerView: View {
                     isDragging: manager.isDragging,
                     dragIntent: dragMode.intent,
                     showCloseWhenEmpty: hasEverHadItems || !isEphemeral,
+                    hidesClose: manager.shelvesBeingClosed.contains(shelfID),
                     selection: selection,
                     focusedIndex: stripFocusedIndex,
-                    onClose: onClose,
+                    onClose: onCloseWithX ?? onClose,
                     onOpenDocuments: { toggle(to: true) },
                     onDock: { toggleDock(to: true) },
                     onSelectRow: { id, modifiers in
@@ -261,9 +269,16 @@ struct ShelfContainerView: View {
                     onClearSelection: clearStripSelection
                 )
                 .padding(ShelfLayout.margin)
+                // Top-aligned: when the magpie is on the shelf the panel is
+                // `perchClearance` taller than the strip, and the bird stands
+                // in that band under the last row.
+                .frame(maxHeight: .infinity, alignment: .top)
                 .transition(.opacity)
             }
         }
+        // The band under the notch's camera is left empty; the shelf starts
+        // below it.
+        .padding(.top, isDocked ? 0 : (manager.islandInsets[shelfID] ?? 0))
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .contentShape(Rectangle())
         .onHover { panelHovered = $0 }

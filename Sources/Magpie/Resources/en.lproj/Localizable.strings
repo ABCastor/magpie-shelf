@@ -357,3 +357,16 @@
 /* Drag out with ⌘ held: the destination took a copy and the original stayed put. */
 "toast.drag-copied-instead.one" = "The destination copied this file instead of moving it.";
 "toast.drag-copied-instead.many" = "The destination copied these %lld files instead of moving them.";
+
+/* The magpie, the glass slider and the notch island (2026-10 redesign). */
+"mascot.a11y.name" = "Magpie, the shelf’s mascot";
+"mascot.send-away" = "Send the magpie away";
+"mascot.bring-back" = "Bring Back the Magpie";
+"settings.glass" = "Glass";
+"settings.glass.light" = "Light frost";
+"settings.glass.solid" = "Solid";
+"settings.glass.description" = "How much of what is behind a shelf shows through it. File names stay readable even at the lightest setting.";
+"settings.mascot" = "Magpie on the shelf";
+"settings.mascot.description" = "A magpie stands on each shelf and reacts to what you do. Point at it and press the × beside it to send it away; switch it back on here.";
+"settings.notch" = "Open shelves under the notch";
+"settings.notch.description" = "On a Mac with a notch, a new shelf opens as a black island under the camera.";

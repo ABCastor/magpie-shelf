@@ -345,3 +345,16 @@
 /* Drag out with ⌘ held: the destination took a copy and the original stayed put. */
 "toast.drag-copied-instead.one" = "El destino copió este archivo en lugar de moverlo.";
 "toast.drag-copied-instead.many" = "El destino copió estos %lld archivos en lugar de moverlos.";
+
+/* The magpie, the glass slider and the notch island (2026-10 redesign). */
+"mascot.a11y.name" = "Urraca, la mascota del estante";
+"mascot.send-away" = "Despedir a la urraca";
+"mascot.bring-back" = "Traer de vuelta a la urraca";
+"settings.glass" = "Cristal";
+"settings.glass.light" = "Esmerilado ligero";
+"settings.glass.solid" = "Opaco";
+"settings.glass.description" = "Cuánto de lo que hay detrás de un estante se ve a través de él. Los nombres de los archivos siguen siendo legibles incluso en el ajuste más ligero.";
+"settings.mascot" = "Urraca en el estante";
+"settings.mascot.description" = "Una urraca se posa en cada estante y reacciona a lo que haces. Señálala y pulsa la × que tiene al lado para despedirla; vuelve a activarla aquí.";
+"settings.notch" = "Abrir los estantes bajo la muesca";
+"settings.notch.description" = "En un Mac con muesca, un estante nuevo se abre como una isla negra bajo la cámara.";

@@ -28,6 +28,8 @@ struct CollapsedShelfView: View {
     /// has emptied a shelf, while keeping it hidden during an in-flight
     /// shake gesture (shelf starts empty and items haven't landed yet).
     var showCloseWhenEmpty: Bool = false
+    /// The magpie has just bitten the X off this shelf on its way out.
+    var hidesClose: Bool = false
     /// The rows the user has explicitly picked out. **Empty is not "nothing":
     /// it is the whole shelf** — see `ShelfSelection`, which is where every
     /// rule about it lives. Held by the container so it survives the
@@ -126,6 +128,7 @@ struct CollapsedShelfView: View {
                     label: L("a11y.close-shelf"),
                     action: onClose
                 )
+                .opacity(hidesClose ? 0 : 1)
             }
 
             Text(headerTitle)

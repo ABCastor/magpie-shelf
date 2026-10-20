@@ -47,6 +47,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var panels: [UUID: FloatingPanel<ShelfContainerView>] = [:]
     private var expandedShelfIDs: Set<UUID> = []
 
+    /// The magpie on every shelf. See `MascotController`.
+    private let mascot = MascotController()
+    private var mascotShownLast = true
+    private var mascotCancellables: [AnyCancellable] = []
+    private var appearanceObservation: NSKeyValueObservation?
+    /// Shelves the magpie was working on, so a failure that names no shelf
+    /// can still shake the right bird.
+    private var lastWorkingShelfIDs: Set<UUID> = []
+    /// Shelves open as an island under the notch, and how tall the notch is.
+    private var islandInsets: [UUID: CGFloat] = [:]
+
     private var summonReleaseGlobalMonitor: Any?
     private var summonReleaseLocalMonitor: Any?
     private var pendingShelfID: UUID?
@@ -206,12 +217,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     /// The collapsed panel is a strip the height of its own contents, so its
     /// size is a question about a shelf rather than a constant.
     private func collapsedSize(for shelfID: UUID) -> NSSize {
-        ShelfLayout.collapsedSize(itemCount: manager.items(of: shelfID).count)
+        var size = ShelfLayout.collapsedSize(
+            itemCount: manager.items(of: shelfID).count,
+            perch: MascotPreference.isShown
+        )
+        size.height += islandInsets[shelfID] ?? 0
+        return size
     }
 
     /// The expanded panel size that hugs this shelf's contents.
     private func expandedSize(for shelfID: UUID) -> NSSize {
-        ShelfLayout.expandedSize(itemCount: manager.items(of: shelfID).count)
+        var size = ShelfLayout.expandedSize(itemCount: manager.items(of: shelfID).count)
+        size.height += islandInsets[shelfID] ?? 0
+        return size
     }
 
     /// The panel a shelf should be wearing right now, in whichever state it is
@@ -329,6 +347,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         installPasteShortcut()
+        installMascot()
 
         shelvesCancellable = manager.$shelves
             .sink { [weak self] shelves in
@@ -549,6 +568,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         Task { @MainActor in
             self.applyTriggerPreferences()
             self.applyMenuBarVisibility()
+            self.applyMascotPreference()
         }
     }
 
@@ -793,6 +813,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard days > 0 else { return }
         let removed = manager.pruneShelves(olderThanDays: days)
         for shelfID in removed {
+            mascot.detach(shelfID)
             panels[shelfID]?.orderOut(nil)
             panels.removeValue(forKey: shelfID)
             ephemeralShelfIDs.remove(shelfID)
@@ -859,6 +880,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let recent = NSMenuItem(title: L("Recent Shelves"), action: nil, keyEquivalent: "")
         recent.submenu = buildRecentShelvesMenu()
         menu.addItem(recent)
+
+        // The way back for a magpie sent away with its X. Shown only while it
+        // is away, so the menu says nothing about it the rest of the time.
+        if !MascotPreference.isShown {
+            let back = NSMenuItem(
+                title: L("mascot.bring-back"),
+                action: #selector(bringBackMagpieAction),
+                keyEquivalent: ""
+            )
+            back.target = self
+            menu.addItem(back)
+        }
 
         menu.addItem(.separator())
 
@@ -1121,6 +1154,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             itemCount: doomed.reduce(0) { $0 + $1.items.count }
         ) else { return }
         for id in manager.clearAllUnpinnedShelvesUndoably() {
+            mascot.detach(id)
             panels[id]?.orderOut(nil)
             panels.removeValue(forKey: id)
             ephemeralShelfIDs.remove(id)
@@ -1197,6 +1231,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 guard let self else { return }
                 if self.manager.items(of: shelfID).count == self.itemCountOnSummon,
                    let panel = self.panels[shelfID], panel.isVisible {
+                    self.mascot.detach(shelfID)
                     panel.orderOut(nil)
                     self.manager.removeShelf(id: shelfID)
                     self.panels.removeValue(forKey: shelfID)
@@ -1315,9 +1350,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             panels[shelfID] = panel
         }
 
+        let wasVisible = panel.isVisible
+        if !wasVisible { prepareIsland(for: shelfID, panel: panel) }
         let size = panelSize(for: shelfID)
 
-        if nearCursor {
+        if islandInsets[shelfID] != nil, !wasVisible, !dockedShelfIDs.contains(shelfID) {
+            positionIsland(panel, shelfID: shelfID, size: size)
+        } else if nearCursor {
             positionPanelNearCursor(panel, size: size)
         } else if panel.frame.size == .zero || !panel.isVisible {
             positionPanelBelowStatusItem(panel, size: size)
@@ -1333,26 +1372,53 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             // on screen without making this app active or the panel key.
             panel.orderFrontRegardless()
         }
+        if !wasVisible {
+            mascot.shelfShown(
+                shelfID,
+                island: islandInsets[shelfID] != nil && !dockedShelfIDs.contains(shelfID)
+            )
+        }
         updateMissingFileSweep()
     }
 
     private func hidePanel(for shelfID: UUID) {
+        mascot.shelfHidden(shelfID)
         panels[shelfID]?.orderOut(nil)
+        panels[shelfID]?.alphaValue = 1
+        manager.shelvesBeingClosed.remove(shelfID)
         // Empty shelves are invisible in Recent Shelves, so dismissing them
         // would otherwise leave a zombie behind. Tear them down completely
         // when the user clicks X on an empty shelf.
         if manager.items(of: shelfID).isEmpty {
             panels.removeValue(forKey: shelfID)
+            mascot.detach(shelfID)
             ephemeralShelfIDs.remove(shelfID)
             manager.removeShelf(id: shelfID)
         }
         updateMissingFileSweep()
     }
 
+    /// The strip's own X. The magpie swoops over, bites the X in passing, and
+    /// is gone as the shelf closes; with no magpie, or under Reduce Motion,
+    /// the shelf simply closes.
+    private func closeWithX(_ shelfID: UUID) {
+        guard let panel = panels[shelfID], !manager.shelvesBeingClosed.contains(shelfID) else { return }
+        let flying = mascot.closeWithX(shelfID, fade: { [weak self] in
+            self?.manager.shelvesBeingClosed.insert(shelfID)
+            NSAnimationContext.runAnimationGroup { ctx in
+                ctx.duration = 0.5
+                panel.animator().alphaValue = 0
+            }
+        }, close: { [weak self] in
+            self?.hidePanel(for: shelfID)
+        })
+        if !flying { hidePanel(for: shelfID) }
+    }
+
     private func makePanel(for shelfID: UUID) -> FloatingPanel<ShelfContainerView> {
         let rect = NSRect(origin: .zero, size: collapsedSize(for: shelfID))
         let isEphemeral = ephemeralShelfIDs.contains(shelfID)
-        return FloatingPanel(contentRect: rect) { [weak self, manager, conversionService, ocrService, routeService] in
+        let panel = FloatingPanel(contentRect: rect) { [weak self, manager, conversionService, ocrService, routeService] in
             ShelfContainerView(
                 manager: manager,
                 conversionService: conversionService,
@@ -1361,10 +1427,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 shelfID: shelfID,
                 isEphemeral: isEphemeral,
                 onClose: { self?.hidePanel(for: shelfID) },
+                onCloseWithX: { self?.closeWithX(shelfID) },
                 onResize: { expanded in self?.setPanelExpanded(shelfID, expanded: expanded) },
                 onDockChanged: { docked in self?.setPanelDocked(shelfID, docked: docked) }
             )
         }
+        mascot.attach(shelfID, panel: panel)
+        return panel
     }
 
     private func setPanelExpanded(_ shelfID: UUID, expanded: Bool) {
@@ -1415,6 +1484,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 width: dockedSize.width, height: dockedSize.height
             )
             dockedFrames[shelfID] = newFrame
+            if islandInsets[shelfID] != nil { panel.isIsland = false; mascot.setIsland(shelfID, false) }
+            mascot.dock(shelfID, from: currentFrame, to: newFrame)
             animate(panel: panel, to: newFrame)
         } else {
             dockedShelfIDs.remove(shelfID)
@@ -1440,6 +1511,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                                   currentFrame.midY - size.height / 2)
                 restore = NSRect(origin: NSPoint(x: originX, y: originY), size: size)
             }
+            if islandInsets[shelfID] != nil {
+                panel.isIsland = true
+                mascot.setIsland(shelfID, true)
+            }
+            mascot.undock(shelfID, to: restore)
             animate(panel: panel, to: restore)
         }
     }
@@ -1575,6 +1651,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         timing: Design.Motion.PanelTiming?
     ) {
         suppressMoveCheck = true
+        if let shelfID = panels.first(where: { $0.value === panel })?.key {
+            mascot.panelWillMove(shelfID, to: frame, timing: timing)
+        }
         NSAnimationContext.runAnimationGroup({ ctx in
             guard let timing else {
                 ctx.duration = 0
@@ -1645,6 +1724,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             width: size.width,
             height: size.height
         )
+        // Pulled off the edge by hand: no longer an island, wherever it was.
+        if islandInsets.removeValue(forKey: shelfID) != nil {
+            panel.isIsland = false
+            mascot.setIsland(shelfID, false)
+            manager.islandInsets.removeValue(forKey: shelfID)
+        }
+        mascot.undock(shelfID, to: newFrame)
         animate(panel: panel, to: newFrame)
         manager.undockRequested.send(shelfID)
     }
@@ -1738,6 +1824,129 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         panel.setFrame(NSRect(origin: NSPoint(x: originX, y: originY), size: size),
                        display: true)
+    }
+
+    // MARK: - The magpie
+
+    private func installMascot() {
+        mascotShownLast = MascotPreference.isShown
+        mascot.onShownChanged = { [weak self] in
+            guard let self else { return }
+            self.mascotShownLast = MascotPreference.isShown
+            self.syncCollapsedPanelSizes()
+        }
+        mascot.dropView = { [weak self] shelfID in
+            self?.panels[shelfID]?.contentView.flatMap(Self.findDropView)
+        }
+        mascot.onDockedClick = { [weak self] shelfID in
+            guard let self, self.dockedShelfIDs.contains(shelfID) else { return }
+            self.manager.undockRequested.send(shelfID)
+            self.setPanelDocked(shelfID, docked: false)
+        }
+
+        // Curious: files dragged onto a shelf.
+        manager.$dropTargetedShelfIDs
+            .removeDuplicates()
+            .sink { [weak self] targeted in
+                guard let self else { return }
+                for id in self.panels.keys {
+                    self.mascot.setCurious(id, dragging: targeted.contains(id))
+                }
+            }
+            .store(in: &mascotCancellables)
+
+        // Working: a conversion, an OCR job or a route is running on one of
+        // the shelf's files.
+        Publishers.CombineLatest3(conversionService.$progress, ocrService.$progress, routeService.$progress)
+            .map { a, b, c in Set(a.keys).union(b.keys).union(c.keys) }
+            .removeDuplicates()
+            .sink { [weak self] itemIDs in
+                guard let self else { return }
+                let shelves = Set(self.manager.shelves
+                    .filter { shelf in shelf.items.contains { itemIDs.contains($0.id) } }
+                    .map(\.id))
+                if !shelves.isEmpty { self.lastWorkingShelfIDs = shelves }
+                self.mascot.setWorking(shelves)
+            }
+            .store(in: &mascotCancellables)
+
+        // Done: the catch. Oops: the shake.
+        conversionService.completed.sink { [weak self] _, shelfID in self?.mascot.flash(shelfID, .done) }
+            .store(in: &mascotCancellables)
+        ocrService.completedSearchable.sink { [weak self] _, shelfID in self?.mascot.flash(shelfID, .done) }
+            .store(in: &mascotCancellables)
+        ocrService.completedExtracted.sink { [weak self] _, shelfID in self?.mascot.flash(shelfID, .done) }
+            .store(in: &mascotCancellables)
+        routeService.completed.sink { [weak self] _, shelfID in self?.mascot.flash(shelfID, .done) }
+            .store(in: &mascotCancellables)
+        conversionService.failed.filter { $0 != .cancelled }
+            .sink { [weak self] _ in self?.shakeWorkingMagpies() }
+            .store(in: &mascotCancellables)
+        ocrService.failed.filter { $0 != .cancelled }
+            .sink { [weak self] _ in self?.shakeWorkingMagpies() }
+            .store(in: &mascotCancellables)
+        routeService.failed
+            .filter { if case .cancelled = $0 { return false } else { return true } }
+            .sink { [weak self] _ in self?.shakeWorkingMagpies() }
+            .store(in: &mascotCancellables)
+
+        appearanceObservation = NSApp.observe(\.effectiveAppearance, options: [.new]) { [weak self] _, _ in
+            Task { @MainActor in self?.mascot.appearanceChanged() }
+        }
+    }
+
+    private func shakeWorkingMagpies() {
+        for id in lastWorkingShelfIDs { mascot.flash(id, .oops) }
+    }
+
+    /// The bird was sent away or brought back from Settings.
+    private func applyMascotPreference() {
+        let shown = MascotPreference.isShown
+        guard shown != mascotShownLast else { return }
+        mascotShownLast = shown
+        syncCollapsedPanelSizes()
+        mascot.refreshShown()
+    }
+
+    @objc func bringBackMagpieAction() {
+        mascot.bringBack()
+    }
+
+    private static func findDropView(in view: NSView) -> NSView? {
+        if view is ShelfDropView { return view }
+        for sub in view.subviews {
+            if let found = findDropView(in: sub) { return found }
+        }
+        return nil
+    }
+
+    // MARK: - The notch island
+
+    /// Decides, as a shelf comes on screen, whether it opens as the island
+    /// under the notch: only with the option on, and only on a screen that
+    /// has a notch.
+    private func prepareIsland(for shelfID: UUID, panel: FloatingPanel<ShelfContainerView>) {
+        let cursor = NSEvent.mouseLocation
+        let screen = NSScreen.screens.first { $0.frame.contains(cursor) } ?? NSScreen.main
+        if ShelfNotch.isEnabled, let screen, let notch = ShelfNotch.notchHeight(of: screen) {
+            islandInsets[shelfID] = notch
+            manager.islandInsets[shelfID] = notch
+            panel.isIsland = true
+        } else if islandInsets.removeValue(forKey: shelfID) != nil {
+            manager.islandInsets.removeValue(forKey: shelfID)
+            panel.isIsland = false
+        }
+    }
+
+    private func positionIsland(_ panel: NSPanel, shelfID: UUID, size: NSSize) {
+        let cursor = NSEvent.mouseLocation
+        guard let screen = NSScreen.screens.first(where: { $0.frame.contains(cursor) }) ?? NSScreen.main,
+              let notch = islandInsets[shelfID] else { return }
+        let content = NSSize(width: size.width, height: size.height - notch)
+        panel.setFrame(
+            ShelfNotch.islandFrame(size: content, screen: screen.frame, notchHeight: notch),
+            display: true
+        )
     }
 
     // MARK: - Duplicate toast

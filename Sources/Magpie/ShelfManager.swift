@@ -13,15 +13,25 @@ final class ShelfManager: ObservableObject {
     /// an in-flight drop. Used by the status item to swap its icon glyph.
     @Published private(set) var isAnyShelfDropTarget: Bool = false
 
-    private var dropTargetedShelves: Set<UUID> = []
+    /// Which shelves a drop is hovering over right now. Published so the
+    /// magpie on that shelf can lean in, curious.
+    @Published private(set) var dropTargetedShelfIDs: Set<UUID> = []
+
+    /// Shelves whose X was pressed and whose magpie is on its way to bite it:
+    /// the strip hides its X the moment the beak takes it.
+    @Published var shelvesBeingClosed: Set<UUID> = []
+
+    /// Shelves open as an island under the notch, with the height of the
+    /// notch band their content must stay below.
+    @Published var islandInsets: [UUID: CGFloat] = [:]
 
     func setDropTargeted(shelfID: UUID, _ targeted: Bool) {
         if targeted {
-            dropTargetedShelves.insert(shelfID)
+            dropTargetedShelfIDs.insert(shelfID)
         } else {
-            dropTargetedShelves.remove(shelfID)
+            dropTargetedShelfIDs.remove(shelfID)
         }
-        let any = !dropTargetedShelves.isEmpty
+        let any = !dropTargetedShelfIDs.isEmpty
         if isAnyShelfDropTarget != any { isAnyShelfDropTarget = any }
     }
 

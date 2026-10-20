@@ -345,3 +345,16 @@
 /* Drag out with ⌘ held: the destination took a copy and the original stayed put. */
 "toast.drag-copied-instead.one" = "目标位置复制了此文件，而不是移动它。";
 "toast.drag-copied-instead.many" = "目标位置复制了这 %lld 个文件，而不是移动它们。";
+
+/* The magpie, the glass slider and the notch island (2026-10 redesign). */
+"mascot.a11y.name" = "喜鹊，搁架的吉祥物";
+"mascot.send-away" = "让喜鹊离开";
+"mascot.bring-back" = "唤回喜鹊";
+"settings.glass" = "玻璃";
+"settings.glass.light" = "轻磨砂";
+"settings.glass.solid" = "不透明";
+"settings.glass.description" = "搁架后面的内容能透出多少。即使在最淡的设置下，文件名也保持清晰可读。";
+"settings.mascot" = "搁架上的喜鹊";
+"settings.mascot.description" = "每个搁架上都站着一只喜鹊，会对你的操作做出反应。指向它并按旁边的 × 让它离开；在这里可以重新打开。";
+"settings.notch" = "在刘海下方打开搁架";
+"settings.notch.description" = "在带刘海的 Mac 上，新搁架会以黑色岛屿的形式在摄像头下方打开。";

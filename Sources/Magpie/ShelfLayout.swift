@@ -64,14 +64,23 @@ enum ShelfLayout {
         return CGFloat(rows) * rowHeight + CGFloat(rows - 1) * rowSpacing
     }
 
-    /// The collapsed panel, sized to what is actually on the shelf.
-    static func collapsedSize(itemCount: Int) -> CGSize {
+    /// The strip of panel the magpie stands in, under the last row. The bird
+    /// stands on the bottom edge at the right, 58 points tall above it; the
+    /// margin plus this keeps its head clear of the last file's name, so the
+    /// bird never covers what the shelf is for. Given back when the bird is
+    /// sent away.
+    static let perchClearance: CGFloat = 50
+
+    /// The collapsed panel, sized to what is actually on the shelf, with room
+    /// for the magpie when it is on the shelf.
+    static func collapsedSize(itemCount: Int, perch: Bool = false) -> CGSize {
         CGSize(
             width: stripWidth,
             height: margin * 2
                 + stripHeaderHeight
                 + stripHeaderGap
                 + stripBodyHeight(itemCount: itemCount)
+                + (perch ? perchClearance : 0)
         )
     }
 

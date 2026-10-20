@@ -24,6 +24,10 @@ enum DefaultPreferences {
         "shelf.trigger.menuBarClick": true,
         "shelf.chatCopy.hotkey": true,
         ShelfExpiry.defaultsKey: ShelfExpiry.defaultValue.rawValue,
+        // The magpie is on the shelves until the user sends it away.
+        MascotPreference.defaultsKey: true,
+        // Frosted, between the light end and solid.
+        ShelfGlass.defaultsKey: ShelfGlass.defaultValue,
     ]
 
     /// Called once, at the top of `applicationDidFinishLaunching`, before any

@@ -345,3 +345,16 @@
 /* Drag out with ⌘ held: the destination took a copy and the original stayed put. */
 "toast.drag-copied-instead.one" = "La destination a copié ce fichier au lieu de le déplacer.";
 "toast.drag-copied-instead.many" = "La destination a copié ces %lld fichiers au lieu de les déplacer.";
+
+/* The magpie, the glass slider and the notch island (2026-10 redesign). */
+"mascot.a11y.name" = "Pie, la mascotte de l’étagère";
+"mascot.send-away" = "Renvoyer la pie";
+"mascot.bring-back" = "Faire revenir la pie";
+"settings.glass" = "Verre";
+"settings.glass.light" = "Dépoli léger";
+"settings.glass.solid" = "Opaque";
+"settings.glass.description" = "Ce qui se trouve derrière une étagère et transparaît à travers elle. Les noms de fichiers restent lisibles même au réglage le plus léger.";
+"settings.mascot" = "Pie sur l’étagère";
+"settings.mascot.description" = "Une pie se tient sur chaque étagère et réagit à ce que vous faites. Pointez-la et cliquez sur le × à côté pour la renvoyer ; réactivez-la ici.";
+"settings.notch" = "Ouvrir les étagères sous l’encoche";
+"settings.notch.description" = "Sur un Mac avec encoche, une nouvelle étagère s’ouvre comme une île noire sous la caméra.";

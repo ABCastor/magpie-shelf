@@ -365,7 +365,7 @@ final class RenderSnapshots: XCTestCase {
     }
 
     /// The other half of the brand: the ring the panel wears while files are
-    /// being dropped onto it. Coral says a card is leaving under ⌘, Klein blue
+    /// being dropped onto it. Terracotta says a card is leaving under ⌘, teal
     /// says a file is arriving, and the only way to check that those two read
     /// as opposites rather than as a matched pair is to look at them.
     func testDropTargetRingInBothAppearances() throws {

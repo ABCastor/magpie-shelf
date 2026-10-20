@@ -244,13 +244,13 @@ final class AppearanceTests: XCTestCase {
     /// is standing on.
     ///
     /// **Neither raw brand value passes this on its own**, which is the whole
-    /// reason `Brand` carries an adjusted twin for each. Raw coral measures
-    /// 2.80:1 on the light panel and raw Klein 1.69:1 on the dark one. The
-    /// floor is not negotiable; the colour was moved instead.
+    /// reason `Brand` carries an adjusted twin for teal: raw teal measures
+    /// 2.2:1 on the dark panel. The floor is not negotiable; the colour was
+    /// moved instead.
     func testTheBrandStrokesClearTheNonTextFloorInBothAppearances() throws {
         let strokes: [(String, Color)] = [
-            ("Line.moveRing (brand coral)", Design.Line.moveRing),
-            ("Line.dropTarget (brand Klein)", Design.Line.dropTarget),
+            ("Line.moveRing (brand terracotta)", Design.Line.moveRing),
+            ("Line.dropTarget (brand teal)", Design.Line.dropTarget),
         ]
         for name in appearances {
             for (groundLabel, ground) in [
@@ -274,24 +274,25 @@ final class AppearanceTests: XCTestCase {
     /// and silently reintroduces the illegibility the floor above measures —
     /// in the *one* appearance the person doing the tidying is not looking at.
     func testEachBrandColourIsAdjustedInTheAppearanceThatNeededIt() throws {
-        let raw = try resolve(Color(nsColor: Design.Brand.coralValue), in: .aqua)
-        let light = try resolve(Design.Line.moveRing, in: .aqua)
-        XCTAssertGreaterThan(
-            abs(raw.redComponent - light.redComponent)
-                + abs(raw.greenComponent - light.greenComponent)
-                + abs(raw.blueComponent - light.blueComponent),
-            0.01,
-            "the move ring uses raw brand coral in Light, where it measures 2.80:1 against the panel and is under the 3:1 floor"
-        )
-
-        let kleinRaw = try resolve(Color(nsColor: Design.Brand.kleinValue), in: .darkAqua)
+        let tealRaw = try resolve(Color(nsColor: Design.Brand.tealValue), in: .darkAqua)
         let dark = try resolve(Design.Line.dropTarget, in: .darkAqua)
         XCTAssertGreaterThan(
-            abs(kleinRaw.redComponent - dark.redComponent)
-                + abs(kleinRaw.greenComponent - dark.greenComponent)
-                + abs(kleinRaw.blueComponent - dark.blueComponent),
+            abs(tealRaw.redComponent - dark.redComponent)
+                + abs(tealRaw.greenComponent - dark.greenComponent)
+                + abs(tealRaw.blueComponent - dark.blueComponent),
             0.01,
-            "the drop-target ring uses raw Klein blue in Dark, where it measures 1.69:1 against the panel — a dark blue on a dark ground"
+            "the drop-target ring uses raw Castor teal in Dark, where it measures 2.2:1 against the panel: a deep colour on a dark ground"
+        )
+        // And the adjustment is spent only where it is needed: in Light the
+        // ring is the studio's teal exactly.
+        let light = try resolve(Design.Line.dropTarget, in: .aqua)
+        let lightRaw = try resolve(Color(nsColor: Design.Brand.tealValue), in: .aqua)
+        XCTAssertLessThan(
+            abs(lightRaw.redComponent - light.redComponent)
+                + abs(lightRaw.greenComponent - light.greenComponent)
+                + abs(lightRaw.blueComponent - light.blueComponent),
+            0.01,
+            "the drop-target ring is not Castor teal in Light, where the raw value already clears the floor"
         )
     }
 
@@ -303,7 +304,7 @@ final class AppearanceTests: XCTestCase {
     /// file. That ratio is a *lightness* comparison, and these two are close
     /// in lightness on purpose — both have to clear the same floor over the
     /// same ground. What tells them apart is that one is warm and one is cool,
-    /// so that is what gets asserted: coral is red-dominant, Klein is
+    /// so that is what gets asserted: terracotta is red-dominant, teal is
     /// blue-dominant, and the gap between the channels is wide enough to
     /// survive a glance at a 2.5pt stroke.
     func testTheTwoBrandColoursAreTellableApart() throws {
@@ -313,11 +314,11 @@ final class AppearanceTests: XCTestCase {
 
             XCTAssertGreaterThan(
                 out.redComponent - out.blueComponent, 0.3,
-                "the move ring has stopped reading as warm in \(name.rawValue) — it is no longer the brand's coral"
+                "the move ring has stopped reading as warm in \(name.rawValue) — it is no longer Castor terracotta"
             )
             XCTAssertGreaterThan(
                 into.blueComponent - into.redComponent, 0.3,
-                "the drop-target ring has stopped reading as cool in \(name.rawValue) — it is no longer the brand's Klein blue"
+                "the drop-target ring has stopped reading as cool in \(name.rawValue) — it is no longer Castor teal"
             )
             let distance = abs(out.redComponent - into.redComponent)
                 + abs(out.greenComponent - into.greenComponent)

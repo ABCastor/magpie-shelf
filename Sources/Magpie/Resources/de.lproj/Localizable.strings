@@ -345,3 +345,16 @@
 /* Drag out with ⌘ held: the destination took a copy and the original stayed put. */
 "toast.drag-copied-instead.one" = "Das Ziel hat diese Datei kopiert, statt sie zu verschieben.";
 "toast.drag-copied-instead.many" = "Das Ziel hat diese %lld Dateien kopiert, statt sie zu verschieben.";
+
+/* The magpie, the glass slider and the notch island (2026-10 redesign). */
+"mascot.a11y.name" = "Elster, das Maskottchen des Regals";
+"mascot.send-away" = "Elster wegschicken";
+"mascot.bring-back" = "Elster zurückholen";
+"settings.glass" = "Glas";
+"settings.glass.light" = "Leicht mattiert";
+"settings.glass.solid" = "Deckend";
+"settings.glass.description" = "Wie viel von dem, was hinter einem Regal liegt, durchscheint. Dateinamen bleiben auch bei der leichtesten Einstellung lesbar.";
+"settings.mascot" = "Elster auf dem Regal";
+"settings.mascot.description" = "Auf jedem Regal steht eine Elster und reagiert auf das, was du tust. Zeige auf sie und drücke das × daneben, um sie wegzuschicken; hier holst du sie zurück.";
+"settings.notch" = "Regale unter der Kerbe öffnen";
+"settings.notch.description" = "Auf einem Mac mit Kerbe öffnet sich ein neues Regal als schwarze Insel unter der Kamera.";
