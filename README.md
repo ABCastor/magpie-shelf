@@ -74,7 +74,7 @@ The optional `magpie` CLI is a script that ships in the repo, not in the DMG. Se
 
 ### Build from source
 
-Requires macOS 13 or later and the Swift toolchain from [Xcode](https://developer.apple.com/xcode/) 15+ (Swift 5.9). The test suite needs full Xcode, not the command-line tools alone.
+Requires macOS 13 or later to run, and the Swift toolchain from [Xcode](https://developer.apple.com/xcode/) 16 or later to build (Swift 5.10 rejects some of its concurrency code). The test suite needs full Xcode, not the command-line tools alone.
 
 ```sh
 git clone https://github.com/ABCastor/magpie-shelf.git
