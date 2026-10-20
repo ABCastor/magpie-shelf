@@ -27,11 +27,12 @@ jobs:
       # Matches on ": warning:" rather than anchoring to the start of the
       # line. The first version anchored with ^\S+ and could never fire on a
       # checkout whose path contains a space, which is exactly where it was
-      # written. Deprecations are excluded by tag, not by wording.
+      # written. Deprecations are excluded by tag where the compiler prints
+      # one, and by wording where it does not (Swift 6.1 prints no tag).
       - name: Fail on a Swift warning we introduced
         run: |
           grep -E ': warning: ' build.log \
-            | grep -v 'DeprecatedDeclaration' > new-warnings.txt || true
+            | grep -v 'DeprecatedDeclaration' | grep -v 'was deprecated' > new-warnings.txt || true
           if [ -s new-warnings.txt ]; then
             echo "::error::new compiler warning, fix it or justify it in the diff"
             cat new-warnings.txt

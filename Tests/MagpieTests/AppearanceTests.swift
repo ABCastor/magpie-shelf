@@ -247,6 +247,21 @@ final class AppearanceTests: XCTestCase {
     /// reason `Brand` carries an adjusted twin for teal: raw teal measures
     /// 2.2:1 on the dark panel. The floor is not negotiable; the colour was
     /// moved instead.
+    /// The ground the running Mac draws is only one Mac. macOS 15 draws its
+    /// dark window ground at #323232, lighter than later releases, and the
+    /// raw terracotta measured 2.86:1 there (CI, 2026-10-20). Checked here
+    /// against that value so it fails on any Mac, not only on an old one.
+    func testTheBrandStrokesClearTheOldestDarkGroundWeSupport() throws {
+        let macOS15DarkGround = NSColor(srgbRed: 0x32 / 255, green: 0x32 / 255, blue: 0x32 / 255, alpha: 1)
+        for (label, token) in [("Line.moveRing (brand terracotta)", Design.Line.moveRing),
+                               ("Line.dropTarget (brand teal)", Design.Line.dropTarget)] {
+            let stroke = composite(try resolve(token, in: .darkAqua), over: macOS15DarkGround)
+            let ratio = contrast(stroke, macOS15DarkGround)
+            XCTAssertGreaterThanOrEqual(ratio, 3.0,
+                "\(label) is \(String(format: "%.2f", ratio)):1 over macOS 15's dark window ground; a stroke that carries state needs 3:1")
+        }
+    }
+
     func testTheBrandStrokesClearTheNonTextFloorInBothAppearances() throws {
         let strokes: [(String, Color)] = [
             ("Line.moveRing (brand terracotta)", Design.Line.moveRing),

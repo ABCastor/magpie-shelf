@@ -64,23 +64,28 @@ enum Design {
     /// picked and on the ring that says files are arriving. Warm goes out,
     /// cool comes in.
     ///
-    /// Terracotta survives both appearances as given (3.85:1 on the light
-    /// panel, 3.25:1 on the dark one, against the 3:1 a stroke carrying state
-    /// has to clear). Teal does not: it is a deep colour, 2.2:1 on the dark
-    /// panel, so it carries a twin lifted a quarter of the way to white for
-    /// Dark, a straight lightness move along the same hue, so it stays
-    /// recognisably the same colour rather than becoming a second one.
+    /// Neither survives every dark ground as given, against the 3:1 a stroke
+    /// carrying state has to clear. Teal is a deep colour, 2.2:1 on the dark
+    /// panel. Terracotta clears the dark panel on current macOS but measured
+    /// 2.86:1 on macOS 15's lighter dark window ground (#323232; found by CI
+    /// on the first public run, 2026-10-20). So each carries a twin lifted a
+    /// quarter of the way to white for Dark, a straight lightness move along
+    /// the same hue, so it stays recognisably the same colour rather than
+    /// becoming a second one.
     enum Brand {
         /// Castor terracotta, `#C4552A`, as on the website.
         static let terracottaValue = NSColor(srgbRed: 0xC4 / 255, green: 0x55 / 255, blue: 0x2A / 255, alpha: 1)
         /// Castor teal, `#006770`, as on the website.
         static let tealValue = NSColor(srgbRed: 0x00 / 255, green: 0x67 / 255, blue: 0x70 / 255, alpha: 1)
+        /// Terracotta lifted a quarter of the way to white, `#D3805F`: 4.3:1
+        /// on macOS 15's dark window ground.
+        static let terracottaOnDark = NSColor(srgbRed: 0xD3 / 255, green: 0x80 / 255, blue: 0x5F / 255, alpha: 1)
         /// Teal lifted a quarter of the way to white, `#408D94`: 3.9:1 on the
         /// dark panel.
         static let tealOnDark = NSColor(srgbRed: 0x40 / 255, green: 0x8D / 255, blue: 0x94 / 255, alpha: 1)
 
         /// Terracotta, legible in both appearances. Files going out.
-        static let terracotta = Color(nsColor: terracottaValue)
+        static let terracotta = adaptive(light: terracottaValue, dark: terracottaOnDark)
         /// Teal, legible in both appearances. Files coming in.
         static let teal = adaptive(light: tealValue, dark: tealOnDark)
     }
