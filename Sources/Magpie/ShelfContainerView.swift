@@ -698,7 +698,7 @@ struct ShelfContainerView: View {
     }
 }
 
-private struct DockedTabView: View {
+struct DockedTabView: View {
     let onExpand: () -> Void
     let dropTargeted: Bool
 

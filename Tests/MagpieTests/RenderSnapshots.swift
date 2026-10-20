@@ -493,7 +493,7 @@ private struct DraggingShelfHost: View {
     }
 }
 
-private struct CollapsedShelfHost: View {
+struct CollapsedShelfHost: View {
     @ObservedObject var manager: ShelfManager
     let shelfID: UUID
     /// Empty is the default and means the whole shelf, so this renders the
@@ -577,10 +577,12 @@ final class SettingsSnapshots: XCTestCase {
         )
         try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
 
-        for (name, label) in [(NSAppearance.Name.darkAqua, "dark"), (NSAppearance.Name.aqua, "light")] {
+        for (query, (name, label)) in ["", "glass", "version"].flatMap({ q in
+            [(NSAppearance.Name.darkAqua, "dark"), (NSAppearance.Name.aqua, "light")].map { (q, $0) }
+        }) {
             let appearance = try XCTUnwrap(NSAppearance(named: name))
             let size = NSSize(width: 620, height: 900)
-            let host = NSHostingView(rootView: SettingsView().frame(width: size.width, height: size.height))
+            let host = NSHostingView(rootView: SettingsView(initialSearch: query).frame(width: size.width, height: size.height))
             host.frame = NSRect(origin: .zero, size: size)
             host.appearance = appearance
             let container = NSView(frame: host.frame)
@@ -596,7 +598,7 @@ final class SettingsSnapshots: XCTestCase {
             let rep = try XCTUnwrap(container.bitmapImageRepForCachingDisplay(in: container.bounds))
             container.cacheDisplay(in: container.bounds, to: rep)
             let png = try XCTUnwrap(rep.representation(using: .png, properties: [:]))
-            try png.write(to: dir.appendingPathComponent("settings-\(label).png"))
+            try png.write(to: dir.appendingPathComponent("settings\(query.isEmpty ? "" : "-" + query)-\(label).png"))
         }
         print("settings snapshots written to \(dir.path)")
     }

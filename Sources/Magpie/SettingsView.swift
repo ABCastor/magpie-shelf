@@ -99,6 +99,9 @@ struct SettingsView: View {
     /// Settings search. Matching lives in `SettingsSearch` so it is testable
     /// without a window; this holds only the query and the focus.
     @State private var search = SettingsSearch()
+    /// A query to open with. Empty in the app; the snapshots use it to show
+    /// one section without scrolling.
+    var initialSearch: String = ""
     @FocusState private var searchFocused: Bool
 
     /// The three numbers only the shelf model knows, read when the diagnostics
@@ -152,6 +155,7 @@ struct SettingsView: View {
                 .accessibilityHidden(true)
         }
         .onAppear {
+            if !initialSearch.isEmpty { search.query = initialSearch }
             launchAtLogin = LaunchAtLoginManager.isEnabled
             pickedLanguage = LanguagePreference.current
             secretNames = SecretStore.names()
