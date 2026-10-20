@@ -35,14 +35,14 @@ DMG_NAME="$(basename "${DMG}")"
 cat <<XML
         <item>
             <title>Magpie ${VERSION}</title>
-            <link>https://github.com/ABCastor/Magpie/releases/tag/v${VERSION}</link>
+            <link>https://github.com/ABCastor/magpie-shelf/releases/tag/v${VERSION}</link>
             <sparkle:version>${VERSION}</sparkle:version>
             <sparkle:shortVersionString>${VERSION}</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
             <pubDate>${PUBDATE}</pubDate>
-            <description><![CDATA[See release notes at https://github.com/ABCastor/Magpie/releases/tag/v${VERSION}]]></description>
+            <description><![CDATA[See release notes at https://github.com/ABCastor/magpie-shelf/releases/tag/v${VERSION}]]></description>
             <enclosure
-                url="https://github.com/ABCastor/Magpie/releases/download/v${VERSION}/${DMG_NAME}"
+                url="https://github.com/ABCastor/magpie-shelf/releases/download/v${VERSION}/${DMG_NAME}"
                 ${SIG_LINE}
                 type="application/octet-stream" />
         </item>

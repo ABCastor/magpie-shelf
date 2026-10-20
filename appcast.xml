@@ -8,21 +8,21 @@
 -->
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
     <channel>
-        <title>Magpie</title>
-        <link>https://raw.githubusercontent.com/ABCastor/Magpie/main/appcast.xml</link>
-        <description>Latest Magpie releases.</description>
+        <title>Magpie Shelf</title>
+        <link>https://raw.githubusercontent.com/ABCastor/magpie-shelf/main/appcast.xml</link>
+        <description>Latest Magpie Shelf releases.</description>
         <language>en</language>
         <item>
-            <title>Magpie 1.7.0</title>
-            <link>https://github.com/ABCastor/Magpie/releases/tag/v1.7.0</link>
-            <sparkle:version>1.7.0</sparkle:version>
-            <sparkle:shortVersionString>1.7.0</sparkle:shortVersionString>
+            <title>Magpie Shelf 2.0.0</title>
+            <link>https://github.com/ABCastor/magpie-shelf/releases/tag/v2.0.0</link>
+            <sparkle:version>2.0.0</sparkle:version>
+            <sparkle:shortVersionString>2.0.0</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
-            <pubDate>Tue, 20 Oct 2026 08:48:32 +0000</pubDate>
-            <description><![CDATA[See release notes at https://github.com/ABCastor/Magpie/releases/tag/v1.7.0]]></description>
+            <pubDate>Tue, 20 Oct 2026 21:00:49 +0000</pubDate>
+            <description><![CDATA[See release notes at https://github.com/ABCastor/magpie-shelf/releases/tag/v2.0.0]]></description>
             <enclosure
-                url="https://github.com/ABCastor/Magpie/releases/download/v1.7.0/Magpie.dmg"
-                sparkle:edSignature="mP7PmeIAuLMJaa76mConoIlHtw0d0SL+PuzJa5i4i/Tk7//iFWKL/iHKNOW9KRiu0THHi0jb9akpk8Ol0uBwCg==" length="3043727"
+                url="https://github.com/ABCastor/magpie-shelf/releases/download/v2.0.0/Magpie.dmg"
+                sparkle:edSignature="s+uIGfl2jmBMXI0HvDzqe7qFsScbC434HbDqVBtcJNmwYQOD3NHEwdYPiAkCropRnbyOJSK+1Pf6C1cCP2UmAA==" length="3189143"
                 type="application/octet-stream" />
         </item>
     </channel>

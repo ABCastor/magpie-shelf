@@ -1,19 +1,32 @@
-# Magpie
+# Magpie Shelf
 
-[![checks](https://github.com/ABCastor/Magpie/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/ABCastor/Magpie/actions/workflows/checks.yml)
+[![checks](https://github.com/ABCastor/magpie-shelf/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/ABCastor/magpie-shelf/actions/workflows/checks.yml)
 
-Magpie is a file shelf for macOS. You drag files onto a small floating panel, go wherever you need to, and drag them back out: the second hand you do not have when a drag has to cross two windows, a Space, or an app that is not open yet.
+Magpie Shelf (Magpie, for short) is a file shelf for macOS. You drag files onto a small floating panel, go wherever you need to, and drag them back out: the second hand you do not have when a drag has to cross two windows, a Space, or an app that is not open yet.
+
+A magpie lives on the shelf's bottom edge, because fetching things and carrying them somewhere else is what magpies do. It leans in when you point at it, hops while a conversion runs, catches a spark when one finishes, flies to whichever shelf you are using, and folds into the tab when you dock a shelf to the screen edge. Close a shelf with its × and the bird takes the × in its beak on the way out. If you would rather work without it, its own small × sends it away, and Settings brings it back. The first time, it asks: the bird brings the question on a card in its beak and waits on it for your answer.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/magpie-asks-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/magpie-asks-light.png">
+  <img src="docs/images/magpie-asks-light.png" alt="The magpie standing on a card under the shelf that asks Hide the magpie, with Hide the Magpie and Cancel buttons" width="560">
+</picture>
+
+<p>
+  <img src="docs/images/magpie-light.png" alt="A shelf holding three files with the magpie standing on its bottom edge, light appearance" width="440">
+  <img src="docs/images/magpie-dark.png" alt="The same shelf and magpie in dark appearance" width="440">
+</p>
 
 It asks for no macOS permissions out of the box.
 
 It began as a fork of an MIT-licensed upstream project and has diverged substantially since; the upstream copyright notice travels in [LICENSE](LICENSE).
 
 <p>
-  <img src="docs/images/shelf-dark.png" alt="A Magpie shelf holding three files, in dark appearance" width="330">
-  <img src="docs/images/shelf-light.png" alt="The same shelf in light appearance" width="330">
+  <img src="docs/images/shelf-dark.png" alt="A Magpie shelf holding three files, in dark appearance" width="240">
+  <img src="docs/images/shelf-light.png" alt="The same shelf in light appearance" width="240">
 </p>
 
-The shelf follows the system appearance, with a System, Light or Dark override in Settings. Every picture in this README is an offscreen render of the real views, produced by `./scripts/make-images.sh`, so they change when the app does.
+The shelf follows the system appearance, with a System, Light or Dark override in Settings, and a Glass slider that runs from macOS's own translucent material to fully solid. Every picture in this README is an offscreen render of the real views at its true size, so they change when the app does; the busy text behind the magpie pictures is a stand-in desktop, there so the glass has something to show.
 
 ## Why
 
@@ -39,11 +52,11 @@ None of these is worth its own app. That is the point: they are small enough tha
 
 ### Pre-built DMG
 
-Latest release: <https://github.com/ABCastor/Magpie/releases/latest>
+Latest release: <https://github.com/ABCastor/magpie-shelf/releases/latest>
 
 ```sh
 curl -L -o ~/Downloads/Magpie.dmg \
-  https://github.com/ABCastor/Magpie/releases/latest/download/Magpie.dmg
+  https://github.com/ABCastor/magpie-shelf/releases/latest/download/Magpie.dmg
 open ~/Downloads/Magpie.dmg
 # Drag Magpie.app to /Applications, eject the DMG, then:
 open /Applications/Magpie.app
@@ -64,8 +77,8 @@ The optional `magpie` CLI is a script that ships in the repo, not in the DMG. Se
 Requires macOS 13 or later and the Swift toolchain from [Xcode](https://developer.apple.com/xcode/) 15+ (Swift 5.9). The test suite needs full Xcode, not the command-line tools alone.
 
 ```sh
-git clone https://github.com/ABCastor/Magpie.git
-cd Magpie
+git clone https://github.com/ABCastor/magpie-shelf.git
+cd magpie-shelf
 
 # Run for development:
 swift run Magpie
@@ -122,6 +135,8 @@ Every shortcut below works while a shelf panel is focused, and nowhere else, so 
 The header is the whole of the design here. You never have to guess what a drag will carry, because the shelf says so before you start one.
 
 ## Handing a shelf to something else
+
+**Share** sits in the shelf's header and opens the standard macOS share sheet (AirDrop, Mail, Messages and the rest) for whatever a drag would take.
 
 **Copy for chat** (⌥⇧C by default) puts the shelf on the clipboard twice over in one go: as the files themselves, and as a plain text list of their full paths with any pasted text snippets inlined.
 
@@ -205,7 +220,7 @@ Step 3 is not optional: `build-dmg.sh` refuses to run without `scripts/.sparkle-
 2. `bash scripts/build-dmg.sh` produces `Magpie.dmg` with Sparkle embedded and the feed URL and public key baked into Info.plist.
 3. `bash scripts/sign-appcast.sh Magpie.dmg <version>` prints an appcast `<item>` snippet with the signed enclosure to stdout.
 4. Prepend that snippet inside the `<channel>` block in `appcast.xml`.
-5. `gh release create v<version> Magpie.dmg --title "Magpie v<version>" --notes "..."`
+5. `gh release create v<version> Magpie.dmg --title "Magpie Shelf v<version>" --notes "..."`
 6. Commit `appcast.xml` and push.
 
 `build-dmg.sh` regenerates the app icon, builds in release mode, embeds Sparkle together with its licence, signs the bundle inner-out, and packages a DMG with an `/Applications` symlink for drag-install. A build made without a signing key never starts its updater at all, so it neither checks nor complains.

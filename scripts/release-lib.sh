@@ -14,11 +14,11 @@ BUNDLE_ID="com.anneo22.magpie"
 # VERSION drives both CFBundleShortVersionString and CFBundleVersion so the
 # value Sparkle compares (sparkle:version vs CFBundleVersion) lines up with
 # the same dotted form we publish in appcast.xml.
-VERSION="1.7.0"
+VERSION="2.0.0"
 MIN_OS="13.0"
 
 # Sparkle appcast feed — raw GitHub URL on main.
-SPARKLE_FEED_URL="https://raw.githubusercontent.com/ABCastor/Magpie/main/appcast.xml"
+SPARKLE_FEED_URL="https://raw.githubusercontent.com/ABCastor/magpie-shelf/main/appcast.xml"
 
 # Copy Sparkle's licence text into the embedded framework's Resources.
 # MIT's notice condition applies to binary redistribution too: shipping
